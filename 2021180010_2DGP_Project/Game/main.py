@@ -1,3 +1,5 @@
+from os import closerange
+
 from pico2d import*
 
 from CupHeadBanging.cupheadBanging import CupheadBainging
@@ -24,13 +26,24 @@ def initialize():
     pass
 
 def update():
+    for object in world_all:
+        object.update()
+
     pass
 
 def late_update():
+    for object in world_all:
+        object.late_update()
     pass
 
 
 def render_world():
+    clear_canvas()
+
+    for object in world_all:
+        object.render()
+
+    update_canvas()
     pass
 
 
@@ -44,7 +57,12 @@ running = True
 
 # Game Loop~
 while running:
+
     handle_events()
     update()
     late_update()
     render_world()
+
+    delay(0.1)
+
+close_canvas()
