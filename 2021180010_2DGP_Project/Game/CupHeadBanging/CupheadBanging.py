@@ -2,7 +2,7 @@ from pico2d import*
 
 class CupheadBainging:
     def __init__(self):
-        Path = 'PlayerResoures/Idle/cuphead_idle_000'
+        Path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000' # main.py 기준임
         self.image_Idle = []
         for a in range(1,5+1):
             FinalPath = Path + str(a)
