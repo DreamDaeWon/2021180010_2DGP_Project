@@ -1,6 +1,8 @@
 from pico2d import*
 
+from CupHeadBanging.cupheadBanging import CupheadBainging
 
+from Game.CupHeadBanging.cupheadBanging import CupheadBainging
 
 
 def handle_events():
@@ -15,6 +17,10 @@ def handle_events():
 
 
 def initialize():
+    global world_all
+    world_all = []
+    world_all.append(CupheadBainging());
+
     pass
 
 def update():
@@ -24,7 +30,7 @@ def late_update():
     pass
 
 
-def rander_world():
+def render_world():
     pass
 
 
@@ -41,4 +47,4 @@ while running:
     handle_events()
     update()
     late_update()
-    rander_world()
+    render_world()
