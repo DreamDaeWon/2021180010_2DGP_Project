@@ -1,5 +1,6 @@
-from dw_define import*
+from os import closerange
 
+from dw_define import*
 
 from CupHeadBanging.cupheadBanging import CupheadBainging
 
@@ -11,8 +12,16 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            running = False
+
+        if event.type == SDL_KEYDOWN:
+            if event.key == SDLK_ESCAPE:
+                running = False
+            elif event.key == SDLK_RIGHT:
+                key_input(SDLK_RIGHT)
+                pass
+
+
+
     pass
 
 
@@ -20,6 +29,12 @@ def initialize():
     global world_all
     world_all = []
     world_all.append(CupheadBainging());
+
+    pass
+
+def key_input(Key):
+    for object in world_all:
+        object.key_input(Key)
 
     pass
 
