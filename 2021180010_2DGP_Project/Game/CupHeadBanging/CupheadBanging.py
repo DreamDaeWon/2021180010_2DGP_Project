@@ -19,17 +19,29 @@ class CupheadBainging:
         self.Right = True # 플레이어 방향 오른쪽인지?
 
         self.frame = 0
+
+        self.in_put_resources()
+
+        # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
+        self.idle = [5,0.15,self.image_Idle]
+        self.hit = [6,0.2,self.image_Hit]
+        self.jump = [8,0.5,self.image_Jump]
+
+        # 현재 상태 배열
+        self.now_state_tuple = self.idle
+
+    def in_put_resources(self):
         # 리소스 기본상태
-        path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000' # main.py 기준임
+        path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000'  # main.py 기준임
         self.image_Idle = []
-        for a in range(1,5+1):
+        for a in range(1, 5 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Idle.append(load_image(finalPath))
 
         # 리소스 맞는상태
         path = 'CupHeadBanging/PlayerResoures/Hit/cuphead_hit_air_000'  # main.py 기준임
         self.image_Hit = []
-        for a in range(1, 6+1):
+        for a in range(1, 6 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Hit.append(load_image(finalPath))
 
@@ -39,16 +51,6 @@ class CupheadBainging:
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Jump.append(load_image(finalPath))
-
-
-        # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.idle = [5,0.1,self.image_Idle]
-        self.hit = [6,0.1,self.image_Hit]
-        self.jump = [8,0.5,self.image_Jump]
-
-        # 현재 상태 배열
-        self.now_state_tuple = self.idle
-
 
 
     def key_input(self, key):
@@ -89,6 +91,7 @@ class CupheadBainging:
         pass
 
     def render(self):
+
         self.now_state_tuple[2][int(self.frame)].draw(100,100)
 
         pass
