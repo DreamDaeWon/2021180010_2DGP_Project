@@ -1,10 +1,8 @@
-from os import closerange
+from dw_define import*
 
-from pico2d import*
 
 from CupHeadBanging.cupheadBanging import CupheadBainging
 
-from Game.CupHeadBanging.cupheadBanging import CupheadBainging
 
 
 def handle_events():
@@ -44,6 +42,10 @@ def render_world():
         object.render()
 
     update_canvas()
+    pass
+
+def level_changer(): # level change
+
     pass
 
 
