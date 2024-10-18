@@ -38,28 +38,36 @@ class CupheadBainging:
         self.image_Jump = []
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
-            self.image_Hit.append(load_image(finalPath))
+            self.image_Jump.append(load_image(finalPath))
 
 
-        self.idle_maxFrame = 5
-        self.hit_maxFrame = 6
-        self.jump_maxFrame = 8
+        # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
+        self.idle = [5,0.1,self.image_Idle]
+        self.hit = [6,0.1,self.image_Hit]
+        self.jump = [8,0.5,self.image_Jump]
+
+        # 현재 상태 배열
+        self.now_state_tuple = self.idle
+
+
 
     def key_input(self, key):
         if key == SDLK_RIGHT:
-            self.PlayerState = PlayerState.MOVE
+            self.Right += 1
+            self.now_state_tuple = self.hit
             frame = 0
             pass
         elif key == SDLK_LEFT:
-            self.PlayerState = PlayerState.MOVE
+            self.Right -= 1
+            self.now_state_tuple = self.hit
             frame = 0
             pass
         elif key == SDLK_SPACE:
-            self.PlayerState = PlayerState.JUMP
+            self.now_state_tuple = self.jump
             frame = 0
             pass
         else:
-            self.PlayerState = PlayerState.IDLE
+            self.now_state_tuple = self.idle
             frame = 0
             pass
 
@@ -68,21 +76,11 @@ class CupheadBainging:
 
 
     def update(self):
-        self.frame += 1
 
-        if self.PlayerState == PlayerState.HIT:
-            if self.frame >= self.hit_maxFrame:
-                self.frame = 0
+        self.frame += 1 * self.now_state_tuple[1]
 
-        elif self.PlayerState == PlayerState.JUMP:
-            if self.frame >= self.jump_maxFrame:
-                self.frame = 0
-
-        elif self.PlayerState == PlayerState.IDLE:
-            if self.frame >= self.idle_maxFrame:
-                self.frame = 0
-
-
+        if self.frame >= self.now_state_tuple[0]:
+            self.frame = 0
 
         pass
 
@@ -91,5 +89,6 @@ class CupheadBainging:
         pass
 
     def render(self):
-        self.image_Hit[self.frame].draw(100,100)
+        self.now_state_tuple[2][int(self.frame)].draw(100,100)
+
         pass
