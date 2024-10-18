@@ -46,8 +46,13 @@ class CupheadBainging:
         if key == SDLK_RIGHT:
             self.PlayerState = PlayerState.MOVE
             pass
-        elif key == SDLK_SPACE:
+        elif key == SDLK_LEFT:
+            self.PlayerState = PlayerState.MOVE
             pass
+        elif key == SDLK_SPACE:
+            self.PlayerState = PlayerState.JUMP
+            pass
+
         pass
 
 

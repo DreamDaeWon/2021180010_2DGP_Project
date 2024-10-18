@@ -19,7 +19,12 @@ def handle_events():
             elif event.key == SDLK_RIGHT:
                 key_input(SDLK_RIGHT)
                 pass
-
+            elif event.key == SDLK_LEFT:
+                key_input(SDLK_LEFT)
+                pass
+            elif event.key == SDLK_SPACE:
+                key_input(SDLK_SPACE)
+                pass
 
 
     pass
