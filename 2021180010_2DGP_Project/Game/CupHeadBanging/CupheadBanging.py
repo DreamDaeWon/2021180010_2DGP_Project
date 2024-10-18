@@ -16,6 +16,8 @@ class CupheadBainging:
     def __init__(self):
         self.PlayerState = PlayerState.IDLE # Player State
 
+        self.Right = True # 플레이어 방향 오른쪽인지?
+
         self.frame = 0
         # 리소스 기본상태
         path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000' # main.py 기준임
@@ -41,25 +43,46 @@ class CupheadBainging:
 
         self.idle_maxFrame = 5
         self.hit_maxFrame = 6
+        self.jump_maxFrame = 8
 
     def key_input(self, key):
         if key == SDLK_RIGHT:
             self.PlayerState = PlayerState.MOVE
+            frame = 0
             pass
         elif key == SDLK_LEFT:
             self.PlayerState = PlayerState.MOVE
+            frame = 0
             pass
         elif key == SDLK_SPACE:
             self.PlayerState = PlayerState.JUMP
+            frame = 0
             pass
+        else:
+            self.PlayerState = PlayerState.IDLE
+            frame = 0
+            pass
+
 
         pass
 
 
     def update(self):
         self.frame += 1
-        if self.frame >= self.hit_maxFrame:
-            self.frame = 0
+
+        if self.PlayerState == PlayerState.HIT:
+            if self.frame >= self.hit_maxFrame:
+                self.frame = 0
+
+        elif self.PlayerState == PlayerState.JUMP:
+            if self.frame >= self.jump_maxFrame:
+                self.frame = 0
+
+        elif self.PlayerState == PlayerState.IDLE:
+            if self.frame >= self.idle_maxFrame:
+                self.frame = 0
+
+
 
         pass
 
