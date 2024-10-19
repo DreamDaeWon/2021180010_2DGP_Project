@@ -45,10 +45,17 @@ class CupheadBainging:
             finalPath = path + str(a) + '.png'
             self.image_Hit.append(load_image(finalPath))
 
-        # 리소스 맞는상태
+        # 리소스 점프상태
         path = 'CupHeadBanging/PlayerResoures/Jump/cuphead_jump_000'  # main.py 기준임
         self.image_Jump = []
         for a in range(1, 8 + 1):
+            finalPath = path + str(a) + '.png'
+            self.image_Jump.append(load_image(finalPath))
+
+        # 리소스 클리어 상태
+        path = 'CupHeadBanging/PlayerResoures/Clear/player_ch_powerup_'  # main.py 기준임
+        self.image_Clear = []
+        for a in range(1, 36 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Jump.append(load_image(finalPath))
 
