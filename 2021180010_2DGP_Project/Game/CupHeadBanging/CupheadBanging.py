@@ -26,6 +26,7 @@ class CupheadBainging:
         self.idle = [5,0.15,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.5,self.image_Jump]
+        self.clear = [36,0.3,self.image_Clear]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -57,7 +58,7 @@ class CupheadBainging:
         self.image_Clear = []
         for a in range(1, 36 + 1):
             finalPath = path + str(a) + '.png'
-            self.image_Jump.append(load_image(finalPath))
+            self.image_Clear.append(load_image(finalPath))
 
 
     def key_input(self, key):
@@ -66,13 +67,18 @@ class CupheadBainging:
             self.now_state_tuple = self.hit
             frame = 0
             pass
-        elif key == SDLK_LEFT:
-            self.Right -= 1
-            self.now_state_tuple = self.hit
-            frame = 0
-            pass
+        #elif key == SDLK_LEFT:
+        #    self.Right -= 1
+        #    self.now_state_tuple = self.hit
+        #    frame = 0
+        #    pass
         elif key == SDLK_SPACE:
             self.now_state_tuple = self.jump
+            frame = 0
+            pass
+
+        elif key == SDLK_LEFT:
+            self.now_state_tuple = self.clear
             frame = 0
             pass
         else:
