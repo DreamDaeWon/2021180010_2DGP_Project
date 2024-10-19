@@ -23,7 +23,7 @@ class CupheadBainging:
         self.in_put_resources()
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.idle = [5,0.15,self.image_Idle]
+        self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.5,self.image_Jump]
         self.clear = [36,0.3,self.image_Clear]
@@ -35,7 +35,7 @@ class CupheadBainging:
         # 리소스 기본상태
         path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000'  # main.py 기준임
         self.image_Idle = []
-        for a in range(1, 5 + 1):
+        for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Idle.append(load_image(finalPath))
 
