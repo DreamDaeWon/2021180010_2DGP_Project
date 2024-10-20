@@ -60,6 +60,11 @@ class CupheadBainging:
             finalPath = path + str(a) + '.png'
             self.image_Clear.append(load_image(finalPath))
 
+    def player_move(self):
+
+        pass
+
+
 
     def key_input(self, key):
         if key == SDLK_RIGHT:
@@ -93,9 +98,10 @@ class CupheadBainging:
     def update(self):
 
         self.frame += 1 * self.now_state_tuple[1]
-
         if self.frame >= self.now_state_tuple[0]:
             self.frame = 0
+
+        self.player_move()
 
         pass
 
