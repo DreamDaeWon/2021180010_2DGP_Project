@@ -16,17 +16,11 @@ def handle_events():
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 running = False
-            elif event.key == SDLK_RIGHT:
-                key_input(SDLK_RIGHT)
-                pass
-            elif event.key == SDLK_LEFT:
-                key_input(SDLK_LEFT)
-                pass
-            elif event.key == SDLK_SPACE:
-                key_input(SDLK_SPACE)
-        elif event.type == SDL_KEYUP:
-
+            else:
+                key_input_down(event.key)
             pass
+        elif event.type == SDL_KEYUP:
+            key_input_up(event.key)
 
 
     pass
@@ -39,9 +33,15 @@ def initialize():
 
     pass
 
-def key_input(Key):
+def key_input_down(Key):
     for object in world_all:
-        object.key_input(Key)
+        object.key_input_down(Key)
+
+    pass
+
+def key_input_up(Key):
+    for object in world_all:
+        object.key_input_up(Key)
 
     pass
 
