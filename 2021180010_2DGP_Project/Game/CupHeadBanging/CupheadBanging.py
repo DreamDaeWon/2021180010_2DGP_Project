@@ -1,4 +1,5 @@
 import enum
+from unittest.mock import right
 
 from pico2d import*
 
@@ -20,12 +21,14 @@ class CupheadBainging:
 
         self.frame = 0
 
+        self.LR = 0 # -1 이면 왼쪽 1 이면 오른쪽
+
         self.in_put_resources()
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
-        self.jump = [8,0.5,self.image_Jump]
+        self.jump = [8,0.5,self.image_Jump,150]
         self.clear = [36,0.3,self.image_Clear]
 
         # 현재 상태 배열
@@ -60,6 +63,36 @@ class CupheadBainging:
             finalPath = path + str(a) + '.png'
             self.image_Clear.append(load_image(finalPath))
 
+    def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
+
+        frame = 0
+
+        pass
+
+
+    def player_left_right(self,key):
+
+
+
+        pass
+
+    def player_move_rum(self, key):
+
+        pass
+
+
+    def player_move_jump(self):
+
+        pass
+
+    def player_move_skill(self):
+
+        pass
+
+    def player_move_clear(self):
+
+        pass
+
     def player_move(self):
 
         pass
@@ -70,7 +103,7 @@ class CupheadBainging:
         if key == SDLK_RIGHT:
             self.Right += 1
             self.now_state_tuple = self.hit
-            frame = 0
+            self.player_state_updete()
             pass
         #elif key == SDLK_LEFT:
         #    self.Right -= 1
@@ -79,16 +112,16 @@ class CupheadBainging:
         #    pass
         elif key == SDLK_SPACE:
             self.now_state_tuple = self.jump
-            frame = 0
+            self.player_state_updete()
             pass
 
         elif key == SDLK_LEFT:
             self.now_state_tuple = self.clear
-            frame = 0
+            self.player_state_updete()
             pass
         else:
             self.now_state_tuple = self.idle
-            frame = 0
+            self.player_state_updete()
             pass
 
 

@@ -24,7 +24,9 @@ def handle_events():
                 pass
             elif event.key == SDLK_SPACE:
                 key_input(SDLK_SPACE)
-                pass
+        elif event.type == SDL_KEYUP:
+
+            pass
 
 
     pass
