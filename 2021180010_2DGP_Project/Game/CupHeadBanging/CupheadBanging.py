@@ -1,5 +1,7 @@
 import enum
 
+import math
+
 from pico2d import*
 
 class PlayerState(enum.Enum):
@@ -28,12 +30,21 @@ class CupheadBainging:
 
         self.in_put_resources()
 
+    # 움직임 관련 변수
+        # 달리기
         self.running = False
+        self.rundir = 0
+        self.run_speed = 5
+        # 점프
+        self.jump_high = 150
+        self.jump_angle = 0
+        self.jumping = False
+
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
-        self.jump = [8,0.5,self.image_Jump,150]
+        self.jump = [8,0.5,self.image_Jump]
         self.clear = [36,0.3,self.image_Clear]
         self.run = [16,0.4,self.image_Run]
 
@@ -104,16 +115,32 @@ class CupheadBainging:
 
         pass
 
-    def player_move_rum(self, key):
+    # 움직임 관련 함수
+    def player_move_run(self, key):
+        if self.rundir < 0:
+            self.running = True
+            self.CX -= self.run_speed
+
+        elif self.rundir > 0:
+            self.running = True
+            self.CX += self.run_speed
+        else:
+            self.running = False
 
         pass
 
 
     def player_move_jump(self):
-
+        if self.jumping and self.jump_angle:
+            self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high
         pass
 
     def player_move_skill(self):
+
+        pass
+
+
+    def player_move_hit(self):
 
         pass
 
@@ -130,8 +157,7 @@ class CupheadBainging:
     def key_input_down(self, key):
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
-            self.Right += 1
-            self.now_state_tuple = self.hit
+            self.rundir = +1
             self.player_state_updete()
             pass
         elif key == SDLK_SPACE:
@@ -140,7 +166,7 @@ class CupheadBainging:
             pass
 
         elif key == SDLK_LEFT:
-            self.now_state_tuple = self.run
+            self.rundir = -1
             self.player_state_updete()
             pass
         else:
@@ -154,7 +180,7 @@ class CupheadBainging:
     def key_input_up(self, key):
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
-
+            self.rundir = -1
             pass
 
         elif key == SDLK_SPACE:
@@ -162,6 +188,7 @@ class CupheadBainging:
             pass
 
         elif key == SDLK_LEFT:
+            self.rundir = +1
 
             pass
         else:
@@ -173,11 +200,11 @@ class CupheadBainging:
 
     def update(self):
 
+        self.player_move()
+
         self.frame += 1 * self.now_state_tuple[1]
         if self.frame >= self.now_state_tuple[0]:
             self.frame = 0
-
-        self.player_move()
 
         pass
 
