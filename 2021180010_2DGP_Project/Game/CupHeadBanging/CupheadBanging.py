@@ -18,6 +18,10 @@ class CupheadBainging:
 
         self.Right = True # 플레이어 방향 오른쪽인지?
 
+        self.CX = 100
+
+        self.CY = 100
+
         self.frame = 0
 
         self.LR = 0 # -1 이면 왼쪽 1 이면 오른쪽
