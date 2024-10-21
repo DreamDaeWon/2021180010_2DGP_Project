@@ -28,12 +28,14 @@ class CupheadBainging:
 
         self.in_put_resources()
 
+        self.running = False
+
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.5,self.image_Jump,150]
         self.clear = [36,0.3,self.image_Clear]
-        self.run = []
+        self.run = [16,0.4,self.image_Run]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -66,6 +68,14 @@ class CupheadBainging:
         for a in range(1, 36 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Clear.append(load_image(finalPath))
+
+        # 리소스 달리기 상태
+        path = 'CupHeadBanging/PlayerResoures/Run/cuphead_run_'  # main.py 기준임
+        self.image_Run = []
+        for a in range(1, 16 + 1):
+            finalPath = path + str(a) + '.png'
+            self.image_Run.append(load_image(finalPath))
+
 
     def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
 
@@ -118,23 +128,19 @@ class CupheadBainging:
 
 
     def key_input_down(self, key):
+        self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
             self.Right += 1
             self.now_state_tuple = self.hit
             self.player_state_updete()
             pass
-        #elif key == SDLK_LEFT:
-        #    self.Right -= 1
-        #    self.now_state_tuple = self.hit
-        #    frame = 0
-        #    pass
         elif key == SDLK_SPACE:
             self.now_state_tuple = self.jump
             self.player_state_updete()
             pass
 
         elif key == SDLK_LEFT:
-            self.now_state_tuple = self.clear
+            self.now_state_tuple = self.run
             self.player_state_updete()
             pass
         else:
@@ -146,24 +152,17 @@ class CupheadBainging:
         pass
 
     def key_input_up(self, key):
+        self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
-            self.Right += 1
-            self.now_state_tuple = self.hit
-            self.player_state_updete()
+
             pass
-        # elif key == SDLK_LEFT:
-        #    self.Right -= 1
-        #    self.now_state_tuple = self.hit
-        #    frame = 0
-        #    pass
+
         elif key == SDLK_SPACE:
-            self.now_state_tuple = self.jump
-            self.player_state_updete()
+
             pass
 
         elif key == SDLK_LEFT:
-            self.now_state_tuple = self.clear
-            self.player_state_updete()
+
             pass
         else:
             self.now_state_tuple = self.idle
