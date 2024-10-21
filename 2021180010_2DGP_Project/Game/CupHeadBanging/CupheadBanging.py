@@ -101,17 +101,17 @@ class CupheadBainging:
             self.LR += 1
 
         elif key == SDLK_LEFT:
-                self.LR -= 1
+            self.LR -= 1
 
         pass
 
     def player_left_right_key_up(self, key):
 
         if key == SDLK_RIGHT:
-            self.LR += 1
+            self.LR -= 1
 
         elif key == SDLK_LEFT:
-            self.LR -= 1
+            self.LR += 1
 
         pass
 
@@ -155,9 +155,9 @@ class CupheadBainging:
 
 
     def key_input_down(self, key):
-        self.player_left_right_key_up(key)
+        self.player_left_right_key_down(key)
         if key == SDLK_RIGHT:
-            self.rundir = +1
+            self.rundir += 1
             self.player_state_updete()
             pass
         elif key == SDLK_SPACE:
@@ -166,7 +166,7 @@ class CupheadBainging:
             pass
 
         elif key == SDLK_LEFT:
-            self.rundir = -1
+            self.rundir -= 1
             self.player_state_updete()
             pass
         else:
@@ -180,7 +180,7 @@ class CupheadBainging:
     def key_input_up(self, key):
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
-            self.rundir = -1
+            self.rundir -= 1
             pass
 
         elif key == SDLK_SPACE:
@@ -188,7 +188,7 @@ class CupheadBainging:
             pass
 
         elif key == SDLK_LEFT:
-            self.rundir = +1
+            self.rundir += 1
 
             pass
         else:
