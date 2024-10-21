@@ -33,6 +33,7 @@ class CupheadBainging:
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.5,self.image_Jump,150]
         self.clear = [36,0.3,self.image_Clear]
+        self.run = []
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -186,7 +187,8 @@ class CupheadBainging:
         pass
 
     def render(self):
-
-        self.now_state_tuple[2][int(self.frame)].draw(100,100)
-
+        if self.LR < 0:
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY)
+        else:
+            self.now_state_tuple[2][int(self.frame)].draw(self.CX,self.CY)
         pass
