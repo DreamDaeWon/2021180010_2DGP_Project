@@ -27,12 +27,12 @@ class Collision:
 
 
     def all_collision(self): # 모든 객체에 대한 충돌 검사
-
+        self.player_collision()
         pass
 
     def player_collision(self):
 
-        if self.player.CY <= 20:
-            self.player.CY = 20
+        if self.player.CY <= 100:
+            self.player.CY = 100
 
         pass

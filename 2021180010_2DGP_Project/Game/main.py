@@ -2,7 +2,7 @@ from os import closerange
 
 from dw_define import*
 
-
+from collision import *
 
 
 
@@ -28,8 +28,11 @@ def handle_events():
 
 def initialize():
     global world_all
+    global collision
+    collision = Collision()
     world_all = []
     world_all.append(CupheadBainging());
+    collision.get_player(world_all[0])
 
     pass
 
@@ -52,8 +55,12 @@ def update():
     pass
 
 def late_update():
+    global collision
+
     for object in world_all:
         object.late_update()
+
+    collision.all_collision()
     pass
 
 
@@ -72,11 +79,13 @@ def level_changer(): # level change
 
 
 
-
 open_canvas()
 initialize()
 
 running = True
+
+
+
 
 
 # Game Loop~

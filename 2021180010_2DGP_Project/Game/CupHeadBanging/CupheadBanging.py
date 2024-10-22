@@ -22,7 +22,7 @@ class CupheadBainging:
 
         self.CX = 100
 
-        self.CY = 100
+        self.CY = 300
 
         self.frame = 0
 
@@ -201,6 +201,7 @@ class CupheadBainging:
     def update(self):
 
         self.player_move()
+        self.CY -= 1
 
         self.frame += 1 * self.now_state_tuple[1]
         if self.frame >= self.now_state_tuple[0]:
