@@ -21,9 +21,18 @@ class Collision:
         self.player = player
         pass
 
-    def get_ground(self, ground):  # 플레이어 받아오기
+    def get_ground(self, ground):  # 땅 받아오기
         self.ground = ground
         pass
 
 
+    def all_collision(self): # 모든 객체에 대한 충돌 검사
 
+        pass
+
+    def player_collision(self):
+
+        if self.player.CY <= 20:
+            self.player.CY = 20
+
+        pass
