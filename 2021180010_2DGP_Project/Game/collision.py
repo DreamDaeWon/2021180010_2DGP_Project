@@ -12,6 +12,18 @@ class Collision:
 
         self.boss_bullet = 0 # 보스의 총알 객체 리스트를 받아올 것임
 
+        self.ground = 0 # 땅 받아오기
+
         pass
-    
+
+
+    def get_player(self, player): # 플레이어 받아오기
+        self.player = player
+        pass
+
+    def get_ground(self, ground):  # 플레이어 받아오기
+        self.ground = ground
+        pass
+
+
 
