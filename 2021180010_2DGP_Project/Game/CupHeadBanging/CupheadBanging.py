@@ -24,7 +24,7 @@ class CupheadBainging:
 
         self.gravity_time = 0.0 # 중력 시간 값
 
-        self.gravity_speed = 4 # 중력 값
+        self.gravity_speed = 3.5 # 중력 값
 
         self.CX = 100
 
