@@ -20,9 +20,11 @@ class CupheadBainging:
 
         self.Right = True # 플레이어 방향 오른쪽인지?
 
-        self.gravity = 9.8 # 중력 값
+        self.gravity = True # 중력을 현재 적용 하는지?
 
         self.gravity_time = 0.0 # 중력 시간 값
+
+        self.gravity_speed = 9.8 # 중력 값
 
         self.CX = 100
 
@@ -205,7 +207,7 @@ class CupheadBainging:
     def update(self):
 
         self.player_move()
-        self.CY -= 1
+
 
         self.frame += 1 * self.now_state_tuple[1]
         if self.frame >= self.now_state_tuple[0]:
