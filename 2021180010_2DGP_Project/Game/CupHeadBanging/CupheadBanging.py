@@ -158,6 +158,13 @@ class CupheadBainging:
 
         pass
 
+    def player_gravity(self):
+
+        if self.gravity:
+            pass
+
+        pass
+
 
 
     def key_input_down(self, key):
@@ -207,6 +214,8 @@ class CupheadBainging:
     def update(self):
 
         self.player_move()
+
+
 
 
         self.frame += 1 * self.now_state_tuple[1]
