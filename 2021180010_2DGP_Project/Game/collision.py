@@ -34,5 +34,6 @@ class Collision:
 
         if self.player.CY <= 100:
             self.player.CY = 100
+            self.player.gravity = False
 
         pass

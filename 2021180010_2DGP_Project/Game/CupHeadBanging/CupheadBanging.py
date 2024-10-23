@@ -24,7 +24,7 @@ class CupheadBainging:
 
         self.gravity_time = 0.0 # 중력 시간 값
 
-        self.gravity_speed = 9.8 # 중력 값
+        self.gravity_speed = 4 # 중력 값
 
         self.CX = 100
 
@@ -161,7 +161,10 @@ class CupheadBainging:
     def player_gravity(self):
 
         if self.gravity:
-            pass
+            self.gravity_time += 0.1
+            self.CY -= self.gravity_speed * self.gravity_time
+        else:
+            self.gravity_time = 0.0
 
         pass
 
@@ -181,6 +184,12 @@ class CupheadBainging:
         elif key == SDLK_LEFT:
             self.rundir -= 1
             self.player_state_updete()
+            pass
+
+        elif key == SDLK_t:
+            self.CY = 400
+            self.gravity = True
+
             pass
         else:
             self.now_state_tuple = self.idle
@@ -214,7 +223,7 @@ class CupheadBainging:
     def update(self):
 
         self.player_move()
-
+        self.player_gravity()
 
 
 
