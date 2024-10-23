@@ -20,6 +20,10 @@ class CupheadBainging:
 
         self.Right = True # 플레이어 방향 오른쪽인지?
 
+        self.gravity = 9.8 # 중력 값
+
+        self.gravity_time = 0.0 # 중력 시간 값
+
         self.CX = 100
 
         self.CY = 300
