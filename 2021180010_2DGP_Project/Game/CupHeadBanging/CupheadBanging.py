@@ -40,7 +40,7 @@ class CupheadBainging:
         # 달리기
         self.running = False
         self.rundir = 0
-        self.run_speed = 5
+        self.run_speed = 10
         # 점프
         self.jump_high = 150
         self.jump_angle = 0
@@ -155,6 +155,10 @@ class CupheadBainging:
         pass
 
     def player_move(self):
+        if self.rundir == -1:
+            self.CX -= self.run_speed
+        elif self.rundir == 1:
+            self.CX += self.run_speed
 
         pass
 
@@ -176,6 +180,7 @@ class CupheadBainging:
             self.rundir += 1
             self.player_state_updete()
             pass
+
         elif key == SDLK_SPACE:
             self.now_state_tuple = self.jump
             self.player_state_updete()
