@@ -32,8 +32,9 @@ class Collision:
 
     def player_collision(self):
 
-        if self.player.CY <= 100:
+        if self.player.CY < 100:
             self.player.CY = 100
             self.player.gravity = False
+            self.player.jumping = False
 
         pass

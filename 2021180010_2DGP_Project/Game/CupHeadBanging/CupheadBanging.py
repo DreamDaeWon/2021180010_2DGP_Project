@@ -42,7 +42,7 @@ class CupheadBainging:
         self.rundir = 0
         self.run_speed = 10
         # 점프
-        self.jump_high = 150
+        self.jump_high = 25
         self.jump_angle = 0
         self.jumping = False
 
@@ -50,7 +50,7 @@ class CupheadBainging:
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
-        self.jump = [8,0.5,self.image_Jump]
+        self.jump = [8,0.4,self.image_Jump]
         self.clear = [36,0.3,self.image_Clear]
         self.run = [16,0.4,self.image_Run]
 
@@ -109,6 +109,9 @@ class CupheadBainging:
         elif key == SDLK_LEFT:
             self.LR = True
 
+        elif key == SDLK_SPACE:
+            self.jumping = True
+
         pass
 
     def player_left_right_key_up(self, key):
@@ -137,8 +140,10 @@ class CupheadBainging:
 
     def player_move_jump(self):
         if self.jumping:
-            self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high
+            self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8*(self.jump_angle/180)
             self.now_state_tuple = self.jump
+            if self.jump_angle < 350:
+                self.jump_angle += 7
         else:
             self.jump_angle = 0
         pass
@@ -158,7 +163,9 @@ class CupheadBainging:
 
     def player_move(self):
         self.player_move_run()
+        self.player_move_jump()
 
+        self.player_gravity()
         pass
 
     def player_gravity(self):
@@ -229,7 +236,7 @@ class CupheadBainging:
     def update(self):
 
         self.player_move()
-        self.player_gravity()
+
 
 
 
