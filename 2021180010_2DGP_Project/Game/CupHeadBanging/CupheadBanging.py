@@ -32,7 +32,7 @@ class CupheadBainging:
 
         self.frame = 0
 
-        self.LR = 0 # -1 이면 왼쪽 1 이면 오른쪽
+        self.LR = False # True 이면 왼쪽 False 이면 오른쪽
 
         self.in_put_resources()
 
@@ -104,41 +104,43 @@ class CupheadBainging:
     def player_left_right_key_down(self,key):
 
         if key == SDLK_RIGHT:
-            self.LR += 1
+            self.LR = False
 
         elif key == SDLK_LEFT:
-            self.LR -= 1
+            self.LR = True
 
         pass
 
     def player_left_right_key_up(self, key):
 
-        if key == SDLK_RIGHT:
-            self.LR -= 1
 
-        elif key == SDLK_LEFT:
-            self.LR += 1
 
         pass
 
     # 움직임 관련 함수
-    def player_move_run(self, key):
+    def player_move_run(self):
         if self.rundir < 0:
             self.running = True
             self.CX -= self.run_speed
+            self.now_state_tuple = self.run
 
         elif self.rundir > 0:
             self.running = True
             self.CX += self.run_speed
+            self.now_state_tuple = self.run
         else:
             self.running = False
+            self.now_state_tuple = self.idle
 
         pass
 
 
     def player_move_jump(self):
-        if self.jumping and self.jump_angle:
+        if self.jumping:
             self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high
+            self.now_state_tuple = self.jump
+        else:
+            self.jump_angle = 0
         pass
 
     def player_move_skill(self):
@@ -155,10 +157,7 @@ class CupheadBainging:
         pass
 
     def player_move(self):
-        if self.rundir == -1:
-            self.CX -= self.run_speed
-        elif self.rundir == 1:
-            self.CX += self.run_speed
+        self.player_move_run()
 
         pass
 
@@ -177,6 +176,7 @@ class CupheadBainging:
     def key_input_down(self, key):
         self.player_left_right_key_down(key)
         if key == SDLK_RIGHT:
+
             self.rundir += 1
             self.player_state_updete()
             pass
@@ -187,6 +187,7 @@ class CupheadBainging:
             pass
 
         elif key == SDLK_LEFT:
+
             self.rundir -= 1
             self.player_state_updete()
             pass
@@ -243,7 +244,7 @@ class CupheadBainging:
         pass
 
     def render(self):
-        if self.LR < 0:
+        if self.LR == True:
             self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY)
         else:
             self.now_state_tuple[2][int(self.frame)].draw(self.CX,self.CY)
