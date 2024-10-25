@@ -31,7 +31,15 @@ def initialize():
     global collision
     collision = Collision()
     world_all = []
-    world_all.append(CupheadBainging());
+# 추가 순서는 배경->보스->플레이어 순
+    #배경 추가
+
+
+    #보스 추가
+
+
+    #Player 추가
+    world_all.append(CupheadBainging())
     collision.get_player(world_all[0])
 
     pass
