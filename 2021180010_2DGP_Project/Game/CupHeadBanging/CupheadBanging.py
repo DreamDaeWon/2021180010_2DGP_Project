@@ -46,11 +46,16 @@ class CupheadBainging:
         self.jump_angle = 0
         self.jumping = False
 
+        # 기본 공격
+        self.normal_attaking = False
+        self.normal_attaking_angle = 0
+        self.normal_attaking_high = 10
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.4,self.image_Jump]
+        self.nomal_attak = [8,0.4,self.image_Nomal_Attak]
         self.clear = [36,0.3,self.image_Clear]
         self.run = [16,0.4,self.image_Run]
 
@@ -78,6 +83,13 @@ class CupheadBainging:
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Jump.append(load_image(finalPath))
+
+        # 리소스 점프공격 상태
+        path = 'CupHeadBanging/PlayerResoures/Attak/Hand/cuphead_parry_000'  # main.py 기준임
+        self.image_Nomal_Attak = []
+        for a in range(1, 8 + 1):
+            finalPath = path + str(a) + '.png'
+            self.image_Nomal_Attak.append(load_image(finalPath))
 
         # 리소스 클리어 상태
         path = 'CupHeadBanging/PlayerResoures/Clear/player_ch_powerup_'  # main.py 기준임
@@ -110,6 +122,9 @@ class CupheadBainging:
             self.LR = True
 
         elif key == SDLK_SPACE:
+            if self.jumping:
+                self.normal_attaking = True
+
             self.jumping = True
 
         pass
@@ -140,13 +155,19 @@ class CupheadBainging:
 
     def player_move_jump(self):
         if self.jumping:
-            self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8*(self.jump_angle/180)
-            self.now_state_tuple = self.jump
-            if self.jump_angle < 350:
-                self.jump_angle += 7
-        else:
-            self.jump_angle = 0
-        pass
+            if self.normal_attaking == True:
+                pass
+            else:
+                self.normal_attaking_angle = 0
+                if self.jumping:
+                    self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8 * (self.jump_angle / 180)
+                    self.now_state_tuple = self.jump
+                    if self.jump_angle < 350:
+                        self.jump_angle += 7  # 사실상 점프 속도
+                else:
+                    self.jump_angle = 0
+                    self.normal_attaking_angle = 0
+            pass
 
     def player_move_skill(self):
 
