@@ -36,5 +36,8 @@ class Collision:
             self.player.CY = 100
             self.player.gravity = False
             self.player.jumping = False
+            self.player.normal_attaking = False
+            self.player.jump_angle = 0
+            self.player.normal_attaking_angle = 0
 
         pass
