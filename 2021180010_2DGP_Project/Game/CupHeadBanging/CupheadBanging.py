@@ -156,6 +156,14 @@ class CupheadBainging:
     def player_move_jump(self):
         if self.jumping:
             if self.normal_attaking == True:
+                self.jump_angle = 0
+                self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 9.8 * (
+                            self.normal_attaking_angle / 180)
+                self.now_state_tuple = self.nomal_attak
+                if self.normal_attaking_angle < 350:
+                    self.normal_attaking_angle += 7  # 사실상 점프 속도
+                else:
+                    self.normal_attaking_angle = 0
                 pass
             else:
                 self.normal_attaking_angle = 0
