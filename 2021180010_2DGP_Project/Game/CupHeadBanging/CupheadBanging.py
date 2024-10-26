@@ -185,7 +185,6 @@ class CupheadBainging:
 
 
     def player_move_hit(self):
-
         pass
 
     def player_move_clear(self):
@@ -237,7 +236,7 @@ class CupheadBainging:
 
             pass
         elif key == SDLK_k:
-            self.now_state_tuple = self.hit
+            self.hit_bool = True
             self.player_state_updete()
 
         else:
@@ -279,7 +278,7 @@ class CupheadBainging:
         self.frame += 1 * self.now_state_tuple[1]
         if self.frame >= self.now_state_tuple[0]:
             if self.now_state_tuple == self.hit:
-                self.now_state_tuple = self.idle
+                self.hit_bool = False # 맞은 상태 끝!
             self.frame = 0
 
         pass
