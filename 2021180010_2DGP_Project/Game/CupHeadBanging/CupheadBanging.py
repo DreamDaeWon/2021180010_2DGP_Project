@@ -57,12 +57,13 @@ class CupheadBainging:
         self.idle = [8,0.2,self.image_Idle]
         self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.4,self.image_Jump]
-        self.nomal_attak = [8,0.4,self.image_Nomal_Attak]
+        self.normal_attak = [8,0.4,self.image_Nomal_Attak]
         self.clear = [36,0.3,self.image_Clear]
         self.run = [16,0.4,self.image_Run]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
+        self.before_state_tuple = self.idle
 
     def in_put_resources(self):
         # 리소스 기본상태
@@ -161,7 +162,7 @@ class CupheadBainging:
                 self.jump_angle = 0
                 self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 9.8 * (
                             self.normal_attaking_angle / 180)
-                self.now_state_tuple = self.nomal_attak
+                self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
                     self.normal_attaking_angle += 7  # 사실상 점프 속도
                 else:
@@ -202,6 +203,25 @@ class CupheadBainging:
 
 
     def player_resource_state(self):
+
+        self.now_state_tuple = self.idle
+
+        if self.running:
+            self.now_state_tuple = self.run
+
+        if self.jumping:
+            self.now_state_tuple = self.jump
+
+        if self.normal_attaking:
+            self.now_state_tuple = self.normal_attak
+
+        if self.hit_bool:
+            self.now_state_tuple = self.hit
+
+
+
+
+
         pass
 
 
@@ -301,6 +321,15 @@ class CupheadBainging:
 
 
     def late_update(self):
+
+
+
+
+
+
+
+
+        self.player_resource_state()
         pass
 
     def render(self):
