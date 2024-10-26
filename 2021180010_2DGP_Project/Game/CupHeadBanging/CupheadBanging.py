@@ -200,6 +200,12 @@ class CupheadBainging:
         self.player_gravity()
         pass
 
+
+    def player_resource_state(self):
+        pass
+
+
+
     def player_gravity(self):
 
         if self.gravity:
@@ -295,7 +301,6 @@ class CupheadBainging:
 
 
     def late_update(self):
-
         pass
 
     def render(self):
