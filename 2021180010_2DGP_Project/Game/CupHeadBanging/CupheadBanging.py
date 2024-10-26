@@ -111,7 +111,13 @@ class CupheadBainging:
 
     def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
 
-        frame = 0
+        if self.hit_bool:
+            if self.before_state_tuple != self.now_state_tuple:
+                self.frame = 0
+            self.now_state_tuple = self.idle
+            return
+
+        self.frame = 0
 
         pass
 
@@ -124,11 +130,6 @@ class CupheadBainging:
         elif key == SDLK_LEFT:
             self.LR = True
 
-        elif key == SDLK_SPACE:
-            if self.jumping:
-                self.normal_attaking = True
-
-            self.jumping = True
 
         pass
 
@@ -204,9 +205,12 @@ class CupheadBainging:
 
     def player_resource_state(self):
 
+        self.before_state_tuple = self.now_state_tuple
+
         self.now_state_tuple = self.idle
 
         if self.running:
+
             self.now_state_tuple = self.run
 
         if self.jumping:
@@ -218,7 +222,15 @@ class CupheadBainging:
         if self.hit_bool:
             self.now_state_tuple = self.hit
 
+        if self.before_state_tuple == self.now_state_tuple:
+            self.frame += 1 * self.now_state_tuple[1]
+            if self.frame >= self.now_state_tuple[0]:
+                self.update_change_state()
 
+                self.frame = 0
+
+        else:
+            self.player_state_updete()
 
 
 
@@ -240,24 +252,32 @@ class CupheadBainging:
 
 
     def key_input_down(self, key):
+
+
+
         self.player_left_right_key_down(key)
+
         if key == SDLK_RIGHT:
 
             self.rundir += 1
             self.player_state_updete()
             pass
 
-        elif key == SDLK_SPACE:
-            self.now_state_tuple = self.jump
-            self.player_state_updete()
-            pass
-
-
         elif key == SDLK_LEFT:
 
             self.rundir -= 1
             self.player_state_updete()
             pass
+
+        elif self.hit_bool:
+            return
+
+        elif key == SDLK_SPACE:
+
+            if self.jumping:
+                self.normal_attaking = True
+
+            self.jumping = True
 
         elif key == SDLK_t:
             self.CY = 400
@@ -277,19 +297,21 @@ class CupheadBainging:
         pass
 
     def key_input_up(self, key):
+
+
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
             self.rundir -= 1
-            pass
-
-        elif key == SDLK_SPACE:
-
             pass
 
         elif key == SDLK_LEFT:
             self.rundir += 1
 
             pass
+
+        elif self.hit_bool:
+            return
+
         else:
             self.now_state_tuple = self.idle
             self.player_state_updete()
@@ -300,21 +322,19 @@ class CupheadBainging:
     def update_change_state(self):
         if self.now_state_tuple == self.hit:
             self.hit_bool = False  # 맞은 상태 끝!
-            self.player_state_updete()
+            self.now_state_tuple = self.idle
+
         pass
 
 
     def update(self):
 
+        self.player_resource_state()
+
         self.player_move()
 
 
-        self.frame += 1 * self.now_state_tuple[1]
-        if self.frame >= self.now_state_tuple[0]:
 
-            self.update_change_state()
-
-            self.frame = 0
 
         pass
 
@@ -325,12 +345,7 @@ class CupheadBainging:
 
 
 
-
-
-
-
-        self.player_resource_state()
-        pass
+          pass
 
     def render(self):
         if self.LR == True:
