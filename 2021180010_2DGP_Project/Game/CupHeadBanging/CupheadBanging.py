@@ -55,7 +55,7 @@ class CupheadBainging:
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
-        self.hit = [6,0.5,self.image_Hit]
+        self.hit = [6,0.2,self.image_Hit]
         self.jump = [8,0.4,self.image_Jump]
         self.nomal_attak = [8,0.4,self.image_Nomal_Attak]
         self.clear = [36,0.3,self.image_Clear]
@@ -185,6 +185,8 @@ class CupheadBainging:
 
 
     def player_move_hit(self):
+        if self.hit_bool:
+            self.now_state_tuple = self.hit
         pass
 
     def player_move_clear(self):
@@ -194,7 +196,7 @@ class CupheadBainging:
     def player_move(self):
         self.player_move_run()
         self.player_move_jump()
-
+        self.player_move_hit()
         self.player_gravity()
         pass
 
@@ -207,6 +209,7 @@ class CupheadBainging:
             self.gravity_time = 0.0
 
         pass
+
 
 
 
@@ -269,7 +272,9 @@ class CupheadBainging:
         pass
 
     def update_change_state(self):
-        
+        if self.now_state_tuple == self.hit:
+            self.hit_bool = False  # 맞은 상태 끝!
+            self.player_state_updete()
         pass
 
 
@@ -281,8 +286,7 @@ class CupheadBainging:
         self.frame += 1 * self.now_state_tuple[1]
         if self.frame >= self.now_state_tuple[0]:
 
-            if self.now_state_tuple == self.hit:
-                self.hit_bool = False # 맞은 상태 끝!
+            self.update_change_state()
 
             self.frame = 0
 
