@@ -253,7 +253,9 @@ class CupheadBainging:
 
     def key_input_down(self, key):
 
-
+        if self.hit_bool:
+            self.rundir = 0
+            return
 
         self.player_left_right_key_down(key)
 
@@ -269,8 +271,6 @@ class CupheadBainging:
             self.player_state_updete()
             pass
 
-        elif self.hit_bool:
-            return
 
         elif key == SDLK_SPACE:
 
@@ -298,6 +298,9 @@ class CupheadBainging:
 
     def key_input_up(self, key):
 
+        if self.hit_bool:
+            self.rundir = 0
+            return
 
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
@@ -309,8 +312,6 @@ class CupheadBainging:
 
             pass
 
-        elif self.hit_bool:
-            return
 
         else:
             self.now_state_tuple = self.idle
@@ -322,8 +323,8 @@ class CupheadBainging:
     def update_change_state(self):
         if self.now_state_tuple == self.hit:
             self.hit_bool = False  # 맞은 상태 끝!
+            self.rundir = 0
             self.now_state_tuple = self.idle
-
         pass
 
 
