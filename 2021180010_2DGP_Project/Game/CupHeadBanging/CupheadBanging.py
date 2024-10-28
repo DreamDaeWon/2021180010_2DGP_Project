@@ -55,7 +55,7 @@ class CupheadBainging:
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
-        self.hit = [6,0.2,self.image_Hit]
+        self.hit = [6,0.5,self.image_Hit]
         self.jump = [8,0.4,self.image_Jump]
         self.normal_attak = [8,0.4,self.image_Nomal_Attak]
         self.clear = [36,0.3,self.image_Clear]
@@ -117,7 +117,7 @@ class CupheadBainging:
             self.now_state_tuple = self.idle
             return
 
-        self.frame = 0
+        #self.frame = 0
 
         pass
 
@@ -144,15 +144,15 @@ class CupheadBainging:
         if self.rundir < 0:
             self.running = True
             self.CX -= self.run_speed
-            self.now_state_tuple = self.run
+            #self.now_state_tuple = self.run
 
         elif self.rundir > 0:
             self.running = True
             self.CX += self.run_speed
-            self.now_state_tuple = self.run
+            #self.now_state_tuple = self.run
         else:
             self.running = False
-            self.now_state_tuple = self.idle
+            #self.now_state_tuple = self.idle
 
         pass
 
@@ -221,6 +221,9 @@ class CupheadBainging:
 
         if self.hit_bool:
             self.now_state_tuple = self.hit
+
+        if self.frame >= self.now_state_tuple[0]:
+            self.frame = 0
 
         if self.before_state_tuple == self.now_state_tuple:
             self.frame += 1 * self.now_state_tuple[1]
@@ -296,9 +299,7 @@ class CupheadBainging:
 
     def key_input_up(self, key):
 
-        if self.hit_bool:
-            self.rundir = 0
-            return
+
 
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
@@ -310,7 +311,9 @@ class CupheadBainging:
 
             pass
 
-
+        if self.hit_bool:
+            self.rundir = 0
+            return
         else:
             self.now_state_tuple = self.idle
             self.player_state_updete()
