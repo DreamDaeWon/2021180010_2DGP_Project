@@ -226,9 +226,7 @@ class CupheadBainging:
             self.frame += 1 * self.now_state_tuple[1]
             if self.frame >= self.now_state_tuple[0]:
                 self.update_change_state()
-
                 self.frame = 0
-
         else:
             self.player_state_updete()
 
