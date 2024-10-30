@@ -30,7 +30,7 @@ class CupheadBanging:
 
         self.CY = 300
 
-        self.Player_Size = 0.9
+        self.Player_Size = 0.8
 
         self.frame = 0
 
