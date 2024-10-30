@@ -23,7 +23,19 @@ rander() : 그리기
 
 상태에 따른 렌더 하위우선순위 - 모두 True일 때
 
+idle
 
+run
+
+jump
+
+jumpattak
+
+hit
+
+skill
+
+clear
 
 
 
