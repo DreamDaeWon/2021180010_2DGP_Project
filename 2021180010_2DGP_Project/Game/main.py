@@ -39,7 +39,7 @@ def initialize():
 
 
     #Player 추가
-    world_all.append(CupheadBainging())
+    world_all.append(CupheadBanging())
     collision.get_player(world_all[0])
 
     pass

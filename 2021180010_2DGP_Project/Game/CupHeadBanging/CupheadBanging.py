@@ -14,7 +14,7 @@ class PlayerState(enum.Enum):
 
 
 
-class CupheadBainging:
+class CupheadBanging:
     def __init__(self):
         self.PlayerState = PlayerState.IDLE # Player State
 
@@ -29,6 +29,8 @@ class CupheadBainging:
         self.CX = 100
 
         self.CY = 300
+
+        self.Player_Size = 0.9
 
         self.frame = 0
 
@@ -343,8 +345,13 @@ class CupheadBainging:
           pass
 
     def render(self):
+
+
+
         if self.LR == True:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY)
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY,
+                                        self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
         else:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY)
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY,
+                                        self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
         pass
