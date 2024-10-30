@@ -55,7 +55,7 @@ class CupheadBainging:
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,0.2,self.image_Idle]
-        self.hit = [6,0.5,self.image_Hit]
+        self.hit = [6,0.3,self.image_Hit]
         self.jump = [8,0.4,self.image_Jump]
         self.normal_attak = [8,0.4,self.image_Nomal_Attak]
         self.clear = [36,0.3,self.image_Clear]
@@ -111,13 +111,13 @@ class CupheadBainging:
 
     def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
 
-        if self.hit_bool:
-            if self.before_state_tuple != self.now_state_tuple:
-                self.frame = 0
-            self.now_state_tuple = self.idle
-            return
+        #if self.hit_bool:
+        if self.before_state_tuple != self.now_state_tuple:
+            self.frame = 0
+            #self.now_state_tuple = self.idle
+            #return
 
-        #self.frame = 0
+        #s elf.frame = 0
 
         pass
 
@@ -210,7 +210,6 @@ class CupheadBainging:
         self.now_state_tuple = self.idle
 
         if self.running:
-
             self.now_state_tuple = self.run
 
         if self.jumping:
@@ -224,6 +223,7 @@ class CupheadBainging:
 
         if self.frame >= self.now_state_tuple[0]:
             self.frame = 0
+            pass
 
         if self.before_state_tuple == self.now_state_tuple:
             self.frame += 1 * self.now_state_tuple[1]
@@ -232,6 +232,7 @@ class CupheadBainging:
                 self.frame = 0
         else:
             self.player_state_updete()
+            print('in this')
 
 
 
@@ -290,8 +291,8 @@ class CupheadBainging:
             self.player_state_updete()
 
         else:
-            self.now_state_tuple = self.idle
-            self.player_state_updete()
+            #self.now_state_tuple = self.idle
+            #self.player_state_updete()
             pass
 
 
@@ -315,8 +316,8 @@ class CupheadBainging:
             self.rundir = 0
             return
         else:
-            self.now_state_tuple = self.idle
-            self.player_state_updete()
+            #self.now_state_tuple = self.idle
+            #self.player_state_updete()
             pass
 
         pass
