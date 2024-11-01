@@ -17,4 +17,11 @@ class Boss_Potato:
         self.frame = 0
 
         self.in_put_resources()
+
+        # 움직임 관련 변수
+        # 달리기
+        self.running = False
+        self.rundir = 0
+        self.run_speed = 10
+
     pass
