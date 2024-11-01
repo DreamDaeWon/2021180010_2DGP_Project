@@ -25,3 +25,13 @@ class Boss_Potato:
         self.run_speed = 10
 
     pass
+
+
+def in_put_resources(self):
+        # 리소스 기본상태
+    path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000'  # main.py 기준임
+    self.image_Idle = []
+    for a in range(1, 8 + 1):
+        finalPath = path + str(a) + '.png'
+        self.image_Idle.append(load_image(finalPath))
+
