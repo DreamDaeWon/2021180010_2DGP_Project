@@ -9,4 +9,12 @@ from pico2d import*
 class Boss_Potato:
 
     def __init__(self):
-        pass
+
+        self.CX = 100
+
+        self.CY = 300
+
+        self.frame = 0
+
+        self.in_put_resources()
+    pass
