@@ -35,3 +35,13 @@ def in_put_resources(self):
         finalPath = path + str(a) + '.png'
         self.image_Idle.append(load_image(finalPath))
 
+def boss_state_updete(self):  # 보스 상태가 변경 될 때 해주 어야 할 것들
+    if self.before_state_tuple != self.now_state_tuple:
+        self.frame = 0
+        pass
+
+
+
+
+
+
