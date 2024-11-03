@@ -26,16 +26,24 @@ class Boss_Potato:
 
         self.before_state_tuple = 0
         self.now_state_tuple = 0
+
+        self.image = 0
+
+
+        # 상태에 따른 튜플
+        self.Idle = []
+
+        self.Create = []
+
     pass
 
 
     def in_put_resources(self):
         # 리소스 기본상태
         path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
-        self.image_Idle = []
-        for a in range(1, 8 + 1):
-            #finalPath = path + str(a) + '.png'
-            self.image_Idle.append(load_image(path))
+        self.image = load_image(path)
+        self.Idle = []
+
 
     def boss_state_update(self):  # 보스 상태가 변경 될 때 해주 어야 할 것들
         if self.before_state_tuple != self.now_state_tuple:
