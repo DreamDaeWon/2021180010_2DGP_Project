@@ -35,6 +35,8 @@ class Boss_Potato:
 
         self.Create = []
 
+        self.now_state_tuple = self.Create
+
     pass
 
 
@@ -42,8 +44,10 @@ class Boss_Potato:
         # 리소스 기본상태
         path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
         self.image = load_image(path)
-        self.Idle = []
 
+        # 한 사진당 가로크기, 세로크기, 총 몇 프레임인지?, x값 어디서부터 시작하는지?, y값 어디서부터 시작하는지?, x값 얼마만큼 떨어지는지? , y값 얼마만큼 떨어지는지?
+        self.Idle = [526,512,20,7,4522,8,6]
+        self.Create = [526,512,20,7,4522,8,6]
 
     def boss_state_update(self):  # 보스 상태가 변경 될 때 해주 어야 할 것들
         if self.before_state_tuple != self.now_state_tuple:
@@ -55,11 +59,14 @@ class Boss_Potato:
         pass
 
 
+
+
+
     def boss_resource_state(self):
 
         self.before_state_tuple = self.now_state_tuple
 
-        self.now_state_tuple = self.idle
+        #self.now_state_tuple = self.Create
 
         if self.before_state_tuple == self.now_state_tuple:
             self.frame += 1 * self.now_state_tuple[1]
