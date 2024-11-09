@@ -26,7 +26,7 @@ class Boss_Potato:
         self.rundir = 0
         self.run_speed = 10
 
-        self.before_state_tuple = 0
+        self.before_state_dict = 0
         self.now_state_dict = 0
 
         #self.image = 0
@@ -55,17 +55,17 @@ class Boss_Potato:
         self.Create['high'] = 512 # 세로크기
         self.Create['frame'] = 20 # 총 몇 프레임인지?
         self.Create['frame_speed'] = 0.5  # 프레임 속도
-        self.Create['row_frame'] = 6 # 가로 프레임 몇 개인지?
-        self.Create['column_frame'] = 4 # 세로 프레임 몇 개인지?
+        self.Create['column_frame'] = 6 # 가로 프레임 몇 개인지?
+        self.Create['row_frame'] = 4 # 세로 프레임 몇 개인지?
         self.Create['last_row_frame'] = 2 # 마지막 줄 가로 프레임
         self.Create['left'] = 7 # x값 어디서부터 시작하는지?
         self.Create['bottom'] = 4522 # y값 어디서부터 시작하는지?
-        self.Create['go_right'] = 8 # x값 얼마만큼 떨어지는지?
-        self.Create['go_down'] = 6 # y값 얼마만큼 떨어지는지?
+        self.Create['go_right'] = 531 # x값 얼마만큼 떨어지는지?
+        self.Create['go_down'] = 517 # y값 얼마만큼 떨어지는지?
 
 
     def boss_state_update(self):  # 보스 상태가 변경 될 때 해주 어야 할 것들
-        if self.before_state_tuple != self.now_state_dict:
+        if self.before_state_dict != self.now_state_dict:
             self.frame = 0
             pass
 
@@ -74,20 +74,23 @@ class Boss_Potato:
         pass
 
     def render(self):
-        self.image.clip_composite_draw(self.now_state_dict['left'], self.now_state_dict['bottom'], self.now_state_dict['width'],
+        self.image.clip_composite_draw(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame']),
+                                       self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame),
+                                       self.now_state_dict['width'],
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
                                        self.now_state_dict['width'] *0.5,self.now_state_dict['high'] * 0.5)
         pass
 
     def boss_resource_state(self):
 
-        self.before_state_tuple = self.now_state_dict
+        self.before_state_dict = self.now_state_dict
 
         #self.now_state_dict = self.Create
 
-        if self.before_state_tuple == self.now_state_dict:
+        if self.before_state_dict == self.now_state_dict:
             self.frame += 1 * self.now_state_dict[1]
-            if self.frame >= self.Create['column_frame'] and self.frame >= self.Create['last_row_frame']:
+            self.row_frame = self.frame % self.now_state_dict['row_frame']
+            if self.row_frame >= self.Create['row_frame'] and self.frame >= self.Create['last_row_frame']:
                 self.frame = 0
                 self.row_frame = 0
         else:
