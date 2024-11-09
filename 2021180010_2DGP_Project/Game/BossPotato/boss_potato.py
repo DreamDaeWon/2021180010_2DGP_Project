@@ -73,6 +73,14 @@ class Boss_Potato:
     def boss_move(self):
         pass
 
+    def update(self):
+
+        self.boss_resource_state()
+
+        self.boss_move()
+
+        pass
+
     def render(self):
         self.image.clip_composite_draw(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame']),
                                        self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame),
