@@ -51,8 +51,8 @@ class Boss_Potato:
         # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
         #self.Idle = [526,512,20,7,4522,8,6]
-        self.Create['rx'] = 526 # 가로크기
-        self.Create['ry'] = 512 # 세로크기
+        self.Create['width'] = 526 # 가로크기
+        self.Create['high'] = 512 # 세로크기
         self.Create['frame'] = 20 # 총 몇 프레임인지?
         self.Create['frame_speed'] = 0.5  # 프레임 속도
         self.Create['row_frame'] = 6 # 가로 프레임 몇 개인지?
@@ -74,7 +74,9 @@ class Boss_Potato:
         pass
 
     def render(self):
-        self.image.clip_composite_draw(self.now_state_dict['left'], self.now_state_dict['bottom'], self.now_state_dict['bottom'],)
+        self.image.clip_composite_draw(self.now_state_dict['left'], self.now_state_dict['bottom'], self.now_state_dict['width'],
+                                       self.now_state_dict['high'],0,'',self.CX,self.CY,
+                                       self.now_state_dict['width'] *0.5,self.now_state_dict['high'] * 0.5)
         pass
 
     def boss_resource_state(self):
