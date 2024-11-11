@@ -81,6 +81,10 @@ class Boss_Potato:
 
         pass
 
+    def late_update(self):
+
+        pass
+
     def render(self):
         self.image.clip_composite_draw(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame']),
                                        self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame),
