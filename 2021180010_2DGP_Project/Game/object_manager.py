@@ -6,3 +6,8 @@ def input_object(object):
     world.append(object)
     pass
 
+def delete_object(object):
+    for i in world:
+        if i == object:
+            world.remove(object)
+    pass
