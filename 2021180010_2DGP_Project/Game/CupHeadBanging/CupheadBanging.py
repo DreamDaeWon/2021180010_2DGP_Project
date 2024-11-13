@@ -234,7 +234,7 @@ class CupheadBanging:
                 self.frame = 0
         else:
             self.player_state_updete()
-            print('in this')
+            #print('in this')
 
 
 
@@ -329,9 +329,6 @@ class CupheadBanging:
         self.player_resource_state()
 
         self.player_move()
-
-
-
 
         pass
 

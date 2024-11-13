@@ -11,3 +11,4 @@ def delete_object(object):
         if i == object:
             world.remove(object)
     pass
+

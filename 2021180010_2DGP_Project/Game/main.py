@@ -92,18 +92,21 @@ initialize()
 
 running = True
 
-
-
-
+frame_time = 0.0
 
 # Game Loop~
 while running:
+    global frame_time
+
+    current_time = time.time()
 
     handle_events()
     update()
     late_update()
     render_world()
 
-    delay(0.01)
+    frame_time = time.time() - current_time
+    frame_rate = 1.0 / frame_time
+    current_time += frame_time
 
 close_canvas()
