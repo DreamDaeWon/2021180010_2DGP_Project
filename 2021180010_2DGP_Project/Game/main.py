@@ -92,7 +92,7 @@ initialize()
 
 running = True
 
-frame_time = 0.0
+frametime.frame_time = 0.0
 
 # Game Loop~
 while running:
@@ -104,9 +104,9 @@ while running:
     late_update()
     render_world()
 
-    frame_time = time.time() - current_time
-    frame_rate = 1.0 / frame_time
-    current_time += frame_time
+    frametime.frame_time = time.time() - current_time
+    frame_rate = 1.0 / frametime.frame_time
+    current_time += frametime.frame_time
 
     #delay(0.01)
 
