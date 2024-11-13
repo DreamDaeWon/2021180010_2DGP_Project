@@ -96,7 +96,6 @@ frame_time = 0.0
 
 # Game Loop~
 while running:
-    global frame_time
 
     current_time = time.time()
 
@@ -108,5 +107,7 @@ while running:
     frame_time = time.time() - current_time
     frame_rate = 1.0 / frame_time
     current_time += frame_time
+
+    #delay(0.01)
 
 close_canvas()
