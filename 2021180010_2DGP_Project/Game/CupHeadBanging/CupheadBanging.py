@@ -6,6 +6,9 @@ import math
 
 from pico2d import*
 
+from Game.frametime import frame_time
+
+
 class PlayerState(enum.Enum):
     IDLE = 0
     MOVE_RIGHT = 1
@@ -169,7 +172,7 @@ class CupheadBanging:
                             self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
-                    self.normal_attaking_angle += 7  # 사실상 점프 속도
+                    self.normal_attaking_angle += 7 * frame_time  # 사실상 점프 속도
                 else:
                     self.normal_attaking_angle = 0
                 pass
@@ -179,7 +182,7 @@ class CupheadBanging:
                     self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
-                        self.jump_angle += 7  # 사실상 점프 속도
+                        self.jump_angle += 7 * frame_time # 사실상 점프 속도
                 else:
                     self.jump_angle = 0
                     self.normal_attaking_angle = 0
@@ -230,7 +233,7 @@ class CupheadBanging:
             pass
 
         if self.before_state_tuple == self.now_state_tuple:
-            self.frame += 1 * self.now_state_tuple[1]
+            self.frame += 1 * self.now_state_tuple[1] * frame_time
             if self.frame >= self.now_state_tuple[0]:
                 self.update_change_state()
                 self.frame = 0
@@ -247,7 +250,7 @@ class CupheadBanging:
     def player_gravity(self):
 
         if self.gravity:
-            self.gravity_time += 0.1
+            self.gravity_time += frame_time
             self.CY -= self.gravity_speed * self.gravity_time
         else:
             self.gravity_time = 0.0
