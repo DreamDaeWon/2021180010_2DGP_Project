@@ -67,13 +67,18 @@ class Boss_Potato:
         # 리소스 기본상태
         path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
         self.image = load_image(path)
-
         # 한 사진당
         # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
-        #self.Idle = [526,512,20,7,4522,8,6]
 
+        # 여기에 이미지 관련 정보 set 함수 적기
+
+        # 보스 intro 모션
         self.set_in_game_motion()
+        self.set_intro_ground_motion()
+
+
+        # 보스 일반 공격 모션
 
 
 
@@ -102,7 +107,7 @@ class Boss_Potato:
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
         # self.Idle = [526,512,20,7,4522,8,6]
         self.intro_ground_dict['width'] = 557  # 가로크기
-        self.intro_ground_dict['high'] = 461  # 세로크기
+        self.intro_ground_dict['high'] = 460  # 세로크기
         self.intro_ground_dict['frame'] = 19  # 총 몇 프레임인지?
         self.intro_ground_dict['frame_speed'] = 10  # 프레임 속도
         self.intro_ground_dict['column_frame'] = 5  # 가로 프레임 몇 개인지?
@@ -141,11 +146,41 @@ class Boss_Potato:
         pass
 
     def render(self):
+
+        if self.intro_ground_frame < 8 and self.now_state_dict == self.Create:
+            # 이건 인트로 때만 동작
+            if self.now_state_dict == self.Create:
+                self.image.clip_composite_draw(int(self.intro_ground_dict['left'] + (
+                        self.intro_ground_dict['go_right'] * int(
+                    int(self.intro_ground_frame) % self.intro_ground_dict['column_frame']))),
+                                               int(self.intro_ground_dict['bottom'] - (
+                                                       self.intro_ground_dict[
+                                                           'go_down'] * self.intro_ground_row_frame)),
+                                               self.intro_ground_dict['width'],
+                                               self.intro_ground_dict['high'], 0, '', self.CX + 20, self.CY - 50,
+                                               self.intro_ground_dict['width'] * self.boss_size,
+                                               self.intro_ground_dict['high'] * self.boss_size)
+            return
+
+
         self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * int(int(self.frame) % self.now_state_dict['column_frame']))),
                                        int(self.now_state_dict['bottom'] - (self.now_state_dict['go_down'] * self.row_frame)),
                                        self.now_state_dict['width'],
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
                                        self.now_state_dict['width'] * self.boss_size,self.now_state_dict['high'] * self.boss_size)
+
+        if self.intro_ground_frame <= 18:
+            # 이건 인트로 때만 동작
+            if self.now_state_dict == self.Create:
+                self.image.clip_composite_draw(int(self.intro_ground_dict['left'] + (
+                        self.intro_ground_dict['go_right'] * int(
+                    int(self.intro_ground_frame) % self.intro_ground_dict['column_frame']))),
+                                               int(self.intro_ground_dict['bottom'] - (
+                                                       self.intro_ground_dict['go_down'] * self.intro_ground_row_frame)),
+                                               self.intro_ground_dict['width'],
+                                               self.intro_ground_dict['high'], 0, '', self.CX, self.CY - 50,
+                                               self.intro_ground_dict['width'] * self.boss_size,
+                                               self.intro_ground_dict['high'] * self.boss_size)
 
         pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
         pass
