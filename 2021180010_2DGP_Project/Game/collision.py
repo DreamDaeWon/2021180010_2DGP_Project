@@ -40,6 +40,10 @@ class Collision:
             self.player.jump_angle = 0
             self.player.normal_attaking_angle = 0
 
-       
+        if self.player.get_collision_size()[0] <= 0.0:
+            self.player.CX = 0.0 + self.player.player_rx
+
+        if self.player.get_collision_size()[2] >= 800:
+            self.player.CX = 800 - self.player.player_rx
 
         pass
