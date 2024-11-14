@@ -52,4 +52,6 @@ class Collision:
 
         pass
 
-    
+    def boss_collision(self):
+        
+        pass
