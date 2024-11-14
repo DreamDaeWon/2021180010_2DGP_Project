@@ -21,6 +21,10 @@ class Collision:
         self.player = player
         pass
 
+    def get_boss(self, boss):  # 보스 받아오기
+        self.boss = boss
+        pass
+
     def get_ground(self, ground):  # 땅 받아오기
         self.ground = ground
         pass
@@ -47,3 +51,5 @@ class Collision:
             self.player.CX = 800 - self.player.player_rx
 
         pass
+
+    

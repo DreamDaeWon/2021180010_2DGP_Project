@@ -12,7 +12,7 @@ class Boss_Potato:
 
         self.CX = 600
 
-        self.CY = 400
+        self.CY = 100
 
         self.boss_potato_rx = 0.0
 
@@ -21,9 +21,6 @@ class Boss_Potato:
         self.frame = 0 # 그냥 프레임 (열 프레임)
 
         self.row_frame = 0 # 행 프레임
-
-        self.in_put_resources()
-
 
         self.boss_size = 0.3
 
@@ -39,6 +36,8 @@ class Boss_Potato:
         self.Idle = []
 
         self.Create = {}
+
+        self.in_put_resources()
 
         self.now_state_dict = self.Create
 
@@ -95,7 +94,7 @@ class Boss_Potato:
         self.boss_move()
 
         self.boss_potato_rx =  self.now_state_dict['width'] * 0.5 * self.boss_size
-        self.boss_potato_rx = self.now_state_dict['high'] * 0.5 * self.boss_size
+        self.boss_potato_ry = self.now_state_dict['high'] * 0.5 * self.boss_size
 
 
         pass
@@ -105,11 +104,20 @@ class Boss_Potato:
         pass
 
     def render(self):
-        self.image.clip_composite_draw(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame']),
-                                       self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame),
+        self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame'])),
+                                       int(self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame)),
                                        self.now_state_dict['width'],
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
                                        self.now_state_dict['width'] * self.boss_size,self.now_state_dict['high'] * self.boss_size)
+
+        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        pass
+
+
+    def key_input_down(self, Key):
+        pass
+
+    def key_input_up(self, Key):
         pass
 
     def boss_resource_state(self):
@@ -119,7 +127,7 @@ class Boss_Potato:
         #self.now_state_dict = self.Create
 
         if self.before_state_dict == self.now_state_dict:
-            self.frame += 1 * self.now_state_dict[1]
+            self.frame += 1 * self.now_state_dict['frame_speed']
             self.row_frame = self.frame % self.now_state_dict['row_frame']
             if self.row_frame >= self.now_state_dict['row_frame'] and self.frame >= self.now_state_dict['last_row_frame']:
 
