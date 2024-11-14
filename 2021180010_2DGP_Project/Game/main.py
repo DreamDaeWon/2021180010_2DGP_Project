@@ -30,7 +30,7 @@ def initialize():
     global world_all
     global collision
     collision = Collision()
-    world_all = []
+    world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
 
@@ -39,34 +39,39 @@ def initialize():
 
 
     #Player 추가
-    world_all.append(CupheadBanging())
-    collision.get_player(world_all[0])
+    world_all[2].append(CupheadBanging())
+    collision.get_player(world_all[2][0])
 
     pass
 
 def key_input_down(Key):
-    for object in world_all:
-        object.key_input_down(Key)
+
+    for world in world_all:
+        for object in world:
+            object.key_input_down(Key)
 
     pass
 
 def key_input_up(Key):
-    for object in world_all:
-        object.key_input_up(Key)
+    for world in world_all:
+        for object in world:
+            object.key_input_up(Key)
 
     pass
 
 def update():
-    for object in world_all:
-        object.update()
+    for world in world_all:
+        for object in world:
+            object.update()
 
     pass
 
 def late_update():
     global collision
 
-    for object in world_all:
-        object.late_update()
+    for world in world_all:
+        for object in world:
+            object.late_update()
 
     collision.all_collision()
     pass
@@ -75,8 +80,9 @@ def late_update():
 def render_world():
     clear_canvas()
 
-    for object in world_all:
-        object.render()
+    for world in world_all:
+        for object in world:
+            object.render()
 
     update_canvas()
     pass

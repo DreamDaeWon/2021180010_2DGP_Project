@@ -58,14 +58,14 @@ class CupheadBanging:
         self.rundir = 0
         self.run_speed = 700
         # 점프
-        self.jump_high = 25
+        self.jump_high = 8
         self.jump_angle = 0
         self.jumping = False
 
         # 기본 공격
         self.normal_attaking = False
         self.normal_attaking_angle = 0
-        self.normal_attaking_high = 10
+        self.normal_attaking_high = 5
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,15,self.image_Idle]
@@ -179,7 +179,7 @@ class CupheadBanging:
                             self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
-                    self.normal_attaking_angle += 7 * frametime.frame_time  # 사실상 점프 속도
+                    self.normal_attaking_angle += frametime.frame_time * 325  # 사실상 점프 속도
                 else:
                     self.normal_attaking_angle = 0
                 pass
@@ -189,7 +189,7 @@ class CupheadBanging:
                     self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
-                        self.jump_angle += 7 * frametime.frame_time # 사실상 점프 속도
+                        self.jump_angle += frametime.frame_time * 350 # 사실상 점프 속도
                 else:
                     self.jump_angle = 0
                     self.normal_attaking_angle = 0
@@ -349,14 +349,9 @@ class CupheadBanging:
     def late_update(self):
 
 
-
-
           pass
 
     def render(self):
-
-
-
         if self.LR == True:
             self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY,
                                         self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
@@ -364,3 +359,8 @@ class CupheadBanging:
             self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY,
                                         self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
         pass
+
+
+    def get_collision_size(self):
+        # left, top ,right, bottom
+        return self.CX - self.Player_Size * 0.5, self.CY + self.Player_Size * 0.5, self.CX + self.Player_Size * 0.5, self.CY - self.Player_Size * 0.5
