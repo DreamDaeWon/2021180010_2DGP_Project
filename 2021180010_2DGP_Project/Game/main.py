@@ -92,12 +92,12 @@ initialize()
 
 running = True
 
-frametime.frame_time = 0.0
-
 # Game Loop~
 while running:
 
     frametime.current_time = time.time()
+
+
 
     handle_events()
     update()

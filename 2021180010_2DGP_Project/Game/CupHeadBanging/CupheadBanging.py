@@ -6,8 +6,15 @@ import math
 
 from pico2d import*
 
-from Game.frametime import frame_time
+import os
+import sys
 
+
+# 현재 파일의 절대 경로를 가져옵니다
+current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
+parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
+sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
+import frametime
 
 class PlayerState(enum.Enum):
     IDLE = 0
@@ -29,7 +36,7 @@ class CupheadBanging:
 
         self.gravity_time = 0.0 # 중력 시간 값
 
-        self.gravity_speed = 3.5 # 중력 값
+        self.gravity_speed = 9.5 # 중력 값
 
         self.CX = 100
 
@@ -172,7 +179,7 @@ class CupheadBanging:
                             self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
-                    self.normal_attaking_angle += 7 * frame_time  # 사실상 점프 속도
+                    self.normal_attaking_angle += 7 * frametime.frame_time  # 사실상 점프 속도
                 else:
                     self.normal_attaking_angle = 0
                 pass
@@ -182,7 +189,7 @@ class CupheadBanging:
                     self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
-                        self.jump_angle += 7 * frame_time # 사실상 점프 속도
+                        self.jump_angle += 7 * frametime.frame_time # 사실상 점프 속도
                 else:
                     self.jump_angle = 0
                     self.normal_attaking_angle = 0
@@ -233,7 +240,7 @@ class CupheadBanging:
             pass
 
         if self.before_state_tuple == self.now_state_tuple:
-            self.frame += 1 * self.now_state_tuple[1] * frame_time
+            self.frame += 1 * self.now_state_tuple[1] * frametime.frame_time
             if self.frame >= self.now_state_tuple[0]:
                 self.update_change_state()
                 self.frame = 0
@@ -250,7 +257,7 @@ class CupheadBanging:
     def player_gravity(self):
 
         if self.gravity:
-            self.gravity_time += frame_time
+            self.gravity_time += frametime.frame_time * 3.0
             self.CY -= self.gravity_speed * self.gravity_time
         else:
             self.gravity_time = 0.0
