@@ -103,8 +103,6 @@ while running:
 
     frametime.current_time = time.time()
 
-
-
     handle_events()
     update()
     late_update()

@@ -124,9 +124,7 @@ class CupheadBanging:
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
 
-    def get_collision_size(self):
-        # left, top ,right, bottom
-        return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
+
 
 
     def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
@@ -373,5 +371,7 @@ class CupheadBanging:
 
         pass
 
-
+    def get_collision_size(self):
+        # left, top ,right, bottom
+        return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
 
