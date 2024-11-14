@@ -56,7 +56,7 @@ class CupheadBanging:
         # 달리기
         self.running = False
         self.rundir = 0
-        self.run_speed = 10
+        self.run_speed = 700
         # 점프
         self.jump_high = 25
         self.jump_angle = 0
@@ -68,12 +68,12 @@ class CupheadBanging:
         self.normal_attaking_high = 10
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.idle = [8,10,self.image_Idle]
-        self.hit = [6,11,self.image_Hit]
-        self.jump = [8,12,self.image_Jump]
-        self.normal_attak = [8,12,self.image_Nomal_Attak]
-        self.clear = [36,11,self.image_Clear]
-        self.run = [16,12,self.image_Run]
+        self.idle = [8,15,self.image_Idle]
+        self.hit = [6,13,self.image_Hit]
+        self.jump = [8,17,self.image_Jump]
+        self.normal_attak = [8,17,self.image_Nomal_Attak]
+        self.clear = [36,16,self.image_Clear]
+        self.run = [16,25,self.image_Run]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -157,12 +157,12 @@ class CupheadBanging:
     def player_move_run(self):
         if self.rundir < 0:
             self.running = True
-            self.CX -= self.run_speed
+            self.CX -= self.run_speed * frametime.frame_time
             #self.now_state_tuple = self.run
 
         elif self.rundir > 0:
             self.running = True
-            self.CX += self.run_speed
+            self.CX += self.run_speed * frametime.frame_time
             #self.now_state_tuple = self.run
         else:
             self.running = False
