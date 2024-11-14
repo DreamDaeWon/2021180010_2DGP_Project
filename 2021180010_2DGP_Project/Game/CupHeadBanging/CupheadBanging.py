@@ -60,14 +60,14 @@ class CupheadBanging:
         self.rundir = 0
         self.run_speed = 700
         # 점프
-        self.jump_high = 8
+        self.jump_high = 6.5
         self.jump_angle = 0
         self.jumping = False
 
         # 기본 공격
         self.normal_attaking = False
         self.normal_attaking_angle = 0
-        self.normal_attaking_high = 5
+        self.normal_attaking_high = 3
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8,15,self.image_Idle]
@@ -179,7 +179,7 @@ class CupheadBanging:
         if self.jumping:
             if self.normal_attaking == True:
                 self.jump_angle = 0
-                self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 9.8 * (
+                self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 7.8 * (
                             self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
@@ -190,7 +190,7 @@ class CupheadBanging:
             else:
                 self.normal_attaking_angle = 0
                 if self.jumping:
-                    self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 9.8 * (self.jump_angle / 180)
+                    self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 7.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
                         self.jump_angle += frametime.frame_time * 350 # 사실상 점프 속도

@@ -94,7 +94,7 @@ def level_changer(): # level change
 
 
 
-open_canvas(1000,700)
+open_canvas(1100,700)
 initialize()
 
 running = True

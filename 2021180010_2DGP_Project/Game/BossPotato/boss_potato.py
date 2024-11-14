@@ -19,7 +19,7 @@ class Boss_Potato:
 
     def __init__(self):
 
-        self.CX = 800
+        self.CX = 850
 
         self.CY = 100
 
@@ -39,7 +39,7 @@ class Boss_Potato:
         self.intro_ground_row_frame = 0 # 행 프레임
 
 
-        self.boss_size = 0.7
+        self.boss_size = 1.0
 
         # 움직임 관련 변수
 
