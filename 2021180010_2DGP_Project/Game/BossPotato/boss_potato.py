@@ -4,6 +4,15 @@ import math
 
 from pico2d import*
 
+import os
+import sys
+
+
+# 현재 파일의 절대 경로를 가져옵니다
+current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
+parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
+sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
+import frametime
 
 
 class Boss_Potato:
@@ -67,7 +76,7 @@ class Boss_Potato:
         self.Create['width'] = 526  # 가로크기
         self.Create['high'] = 512  # 세로크기
         self.Create['frame'] = 20  # 총 몇 프레임인지?
-        self.Create['frame_speed'] = 0.5  # 프레임 속도
+        self.Create['frame_speed'] = 5  # 프레임 속도
         self.Create['column_frame'] = 6  # 가로 프레임 몇 개인지?
         self.Create['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.Create['last_row_frame'] = 2  # 마지막 줄 가로 프레임
@@ -104,8 +113,8 @@ class Boss_Potato:
         pass
 
     def render(self):
-        self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * self.frame % self.now_state_dict['row_frame'])),
-                                       int(self.now_state_dict['bottom'] + (self.now_state_dict['go_down'] * self.row_frame)),
+        self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * int(int(self.frame) % self.now_state_dict['column_frame']))),
+                                       int(self.now_state_dict['bottom'] - (self.now_state_dict['go_down'] * self.row_frame)),
                                        self.now_state_dict['width'],
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
                                        self.now_state_dict['width'] * self.boss_size,self.now_state_dict['high'] * self.boss_size)
@@ -127,9 +136,9 @@ class Boss_Potato:
         #self.now_state_dict = self.Create
 
         if self.before_state_dict == self.now_state_dict:
-            self.frame += 1 * self.now_state_dict['frame_speed']
-            self.row_frame = self.frame % self.now_state_dict['row_frame']
-            if self.row_frame >= self.now_state_dict['row_frame'] and self.frame >= self.now_state_dict['last_row_frame']:
+            self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time
+            self.row_frame = int(self.frame / self.now_state_dict['column_frame'])
+            if self.frame >= self.now_state_dict['frame']:
 
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌
                 if self.now_state_dict == self.Create:
