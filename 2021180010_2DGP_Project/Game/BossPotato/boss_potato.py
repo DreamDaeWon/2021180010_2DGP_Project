@@ -64,6 +64,10 @@ class Boss_Potato:
         self.Create['go_down'] = 517 # y값 얼마만큼 떨어지는지?
 
 
+    def set_in_game_motion(self):
+        pass
+
+
     def boss_state_update(self):  # 보스 상태가 변경 될 때 해주 어야 할 것들
         if self.before_state_dict != self.now_state_dict:
             self.frame = 0
