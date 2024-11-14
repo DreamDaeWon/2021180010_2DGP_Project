@@ -32,6 +32,7 @@ class Collision:
 
     def all_collision(self): # 모든 객체에 대한 충돌 검사
         self.player_collision()
+        self.boss_collision()
         pass
 
     def player_collision(self):
@@ -53,5 +54,7 @@ class Collision:
         pass
 
     def boss_collision(self):
+        if self.boss.get_collision_size()[3] < 50:
+            self.boss.CY = 50 + self.boss.boss_potato_ry
 
         pass

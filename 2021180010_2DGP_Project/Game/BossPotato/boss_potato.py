@@ -19,7 +19,7 @@ class Boss_Potato:
 
     def __init__(self):
 
-        self.CX = 600
+        self.CX = 800
 
         self.CY = 100
 
@@ -31,7 +31,15 @@ class Boss_Potato:
 
         self.row_frame = 0 # 행 프레임
 
-        self.boss_size = 0.3
+
+
+
+        self.intro_ground_frame = 0 # 그냥 프레임 (열 프레임)
+
+        self.intro_ground_row_frame = 0 # 행 프레임
+
+
+        self.boss_size = 0.7
 
         # 움직임 관련 변수
 
@@ -45,6 +53,8 @@ class Boss_Potato:
         self.Idle = []
 
         self.Create = {}
+
+        self.intro_ground_dict = {}
 
         self.in_put_resources()
 
@@ -76,7 +86,7 @@ class Boss_Potato:
         self.Create['width'] = 526  # 가로크기
         self.Create['high'] = 512  # 세로크기
         self.Create['frame'] = 20  # 총 몇 프레임인지?
-        self.Create['frame_speed'] = 5  # 프레임 속도
+        self.Create['frame_speed'] = 10  # 프레임 속도
         self.Create['column_frame'] = 6  # 가로 프레임 몇 개인지?
         self.Create['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.Create['last_row_frame'] = 2  # 마지막 줄 가로 프레임
@@ -84,6 +94,24 @@ class Boss_Potato:
         self.Create['bottom'] = 4522  # y값 어디서부터 시작하는지?
         self.Create['go_right'] = 531  # x값 얼마만큼 떨어지는지?
         self.Create['go_down'] = 517  # y값 얼마만큼 떨어지는지?
+        pass
+
+    def set_intro_ground_motion(self):
+        # 한 사진당
+        # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
+        # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
+        # self.Idle = [526,512,20,7,4522,8,6]
+        self.intro_ground_dict['width'] = 557  # 가로크기
+        self.intro_ground_dict['high'] = 461  # 세로크기
+        self.intro_ground_dict['frame'] = 19  # 총 몇 프레임인지?
+        self.intro_ground_dict['frame_speed'] = 10  # 프레임 속도
+        self.intro_ground_dict['column_frame'] = 5  # 가로 프레임 몇 개인지?
+        self.intro_ground_dict['row_frame'] = 4  # 세로 프레임 몇 개인지?
+        self.intro_ground_dict['last_row_frame'] = 4  # 마지막 줄 가로 프레임
+        self.intro_ground_dict['left'] = 2  # x값 어디서부터 시작하는지?
+        self.intro_ground_dict['bottom'] = 6487  # y값 어디서부터 시작하는지?
+        self.intro_ground_dict['go_right'] = 558  # x값 얼마만큼 떨어지는지?
+        self.intro_ground_dict['go_down'] = 462  # y값 얼마만큼 떨어지는지?
         pass
 
 
@@ -135,12 +163,28 @@ class Boss_Potato:
 
         #self.now_state_dict = self.Create
 
+        if self.now_state_dict == self.Create:
+            self.intro_ground_frame += 1 * self.intro_ground_dict['frame_speed'] * frametime.frame_time
+            self.intro_ground_row_frame = int(self.intro_ground_frame / self.intro_ground_dict['column_frame'])
+            if self.frame >= self.now_state_dict['frame']:
+                self.frame = 0
+                self.row_frame = 0
+
+
         if self.before_state_dict == self.now_state_dict:
             self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time
             self.row_frame = int(self.frame / self.now_state_dict['column_frame'])
+
+            # 이건 인트로 때만 동작
+            if self.now_state_dict == self.Create:
+                if self.intro_ground_frame < 8:
+                    self.frame = 0
+                    self.row_frame = 0
+
+
             if self.frame >= self.now_state_dict['frame']:
 
-                # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌
+                # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
                 if self.now_state_dict == self.Create:
                     self.now_state_dict = self.Create # 일단은 반복
 

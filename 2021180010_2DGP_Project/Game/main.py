@@ -33,11 +33,11 @@ def initialize():
     world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
-    world_all[1].append(Boss_Potato())
-    collision.get_player(world_all[1][0])
+
 
     #보스 추가
-
+    world_all[1].append(Boss_Potato())
+    collision.get_boss(world_all[1][0])
 
     #Player 추가
     world_all[2].append(CupheadBanging())
@@ -94,7 +94,7 @@ def level_changer(): # level change
 
 
 
-open_canvas()
+open_canvas(1000,700)
 initialize()
 
 running = True
