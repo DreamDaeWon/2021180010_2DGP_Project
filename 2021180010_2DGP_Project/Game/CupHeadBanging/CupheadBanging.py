@@ -1,7 +1,5 @@
 import enum
 
-import Game.frametime
-
 import math
 
 from pico2d import*
