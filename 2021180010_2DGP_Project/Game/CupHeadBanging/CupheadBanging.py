@@ -42,6 +42,10 @@ class CupheadBanging:
 
         self.Player_Size = 0.8
 
+        self.player_rx = 0.0
+
+        self.player_ry = 0.0
+
         self.frame = 0.0
 
         self.LR = False # True 이면 왼쪽 False 이면 오른쪽
@@ -119,6 +123,10 @@ class CupheadBanging:
         for a in range(1, 16 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
+
+    def get_collision_size(self):
+        # left, top ,right, bottom
+        return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
 
 
     def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
@@ -340,6 +348,9 @@ class CupheadBanging:
 
         self.player_move()
 
+        self.player_rx =  self.now_state_tuple[2][int(self.frame)].w * 0.5
+        self.player_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
+
         pass
 
 
@@ -356,9 +367,11 @@ class CupheadBanging:
         else:
             self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY,
                                         self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
+
+        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],
+                              self.get_collision_size()[2],self.get_collision_size()[3])
+
         pass
 
 
-    def get_collision_size(self):
-        # left, top ,right, bottom
-        return self.CX - self.Player_Size * 0.5, self.CY + self.Player_Size * 0.5, self.CX + self.Player_Size * 0.5, self.CY - self.Player_Size * 0.5
+

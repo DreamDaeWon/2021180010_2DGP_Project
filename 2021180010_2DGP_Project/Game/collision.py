@@ -32,12 +32,14 @@ class Collision:
 
     def player_collision(self):
 
-        if self.player.CY < 100:
-            self.player.CY = 100
+        if self.player.get_collision_size()[3] < 50:
+            self.player.CY = 50 + self.player.player_ry
             self.player.gravity = False
             self.player.jumping = False
             self.player.normal_attaking = False
             self.player.jump_angle = 0
             self.player.normal_attaking_angle = 0
+
+       
 
         pass
