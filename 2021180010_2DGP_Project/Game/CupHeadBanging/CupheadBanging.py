@@ -44,7 +44,7 @@ class CupheadBanging:
 
         self.Player_Size = 0.8
 
-        self.frame = 0
+        self.frame = 0.0
 
         self.LR = False # True 이면 왼쪽 False 이면 오른쪽
 
@@ -68,12 +68,12 @@ class CupheadBanging:
         self.normal_attaking_high = 10
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.idle = [8,0.2,self.image_Idle]
-        self.hit = [6,0.3,self.image_Hit]
-        self.jump = [8,0.4,self.image_Jump]
-        self.normal_attak = [8,0.4,self.image_Nomal_Attak]
-        self.clear = [36,0.3,self.image_Clear]
-        self.run = [16,0.4,self.image_Run]
+        self.idle = [8,10,self.image_Idle]
+        self.hit = [6,11,self.image_Hit]
+        self.jump = [8,12,self.image_Jump]
+        self.normal_attak = [8,12,self.image_Nomal_Attak]
+        self.clear = [36,11,self.image_Clear]
+        self.run = [16,12,self.image_Run]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -127,7 +127,7 @@ class CupheadBanging:
 
         #if self.hit_bool:
         if self.before_state_tuple != self.now_state_tuple:
-            self.frame = 0
+            self.frame = 0.0
             #self.now_state_tuple = self.idle
             #return
 
@@ -236,14 +236,14 @@ class CupheadBanging:
             self.now_state_tuple = self.hit
 
         if self.frame >= self.now_state_tuple[0]:
-            self.frame = 0
+            self.frame = 0.0
             pass
 
         if self.before_state_tuple == self.now_state_tuple:
-            self.frame += 1 * self.now_state_tuple[1] * frametime.frame_time
+            self.frame += 1.0 * self.now_state_tuple[1] * frametime.frame_time
             if self.frame >= self.now_state_tuple[0]:
                 self.update_change_state()
-                self.frame = 0
+                self.frame = 0.0
         else:
             self.player_state_updete()
             #print('in this')
@@ -257,7 +257,7 @@ class CupheadBanging:
     def player_gravity(self):
 
         if self.gravity:
-            self.gravity_time += frametime.frame_time * 3.0
+            self.gravity_time += frametime.frame_time
             self.CY -= self.gravity_speed * self.gravity_time
         else:
             self.gravity_time = 0.0
