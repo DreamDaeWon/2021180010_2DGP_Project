@@ -52,6 +52,8 @@ class Boss_Potato:
 
         #self.image = 0
 
+        self.shoot = False # 쐈는지?
+
 
         # 상태에 따른 딕셔너리
         self.Idle = []
@@ -151,6 +153,15 @@ class Boss_Potato:
 
 
     def boss_move(self):
+
+        if int(self.frame) > 13:
+            self.shoot = False
+
+        if not self.shoot:
+            if self.now_state_dict == self.attack_dict and int(self.frame) == 13:
+                self.shoot_skill()
+                self.shoot = True
+
         pass
 
     def update(self):
@@ -265,5 +276,7 @@ class Boss_Potato:
 
     def shoot_skill(self):
         bullet = Boss_potato_skill()
+        bullet.CX = self.CX - self.boss_potato_rx
+        bullet.CY = self.CY - self.boss_potato_ry * 0.7
         object_manager.input_object(bullet,3)
         pass

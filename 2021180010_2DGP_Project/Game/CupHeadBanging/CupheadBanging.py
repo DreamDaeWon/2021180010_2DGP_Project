@@ -32,6 +32,8 @@ class CupheadBanging:
 
         self.gravity = True # 중력을 현재 적용 하는지?
 
+        self.LR = False
+
         self.gravity_time = 0.0 # 중력 시간 값
 
         self.gravity_speed = 5.5 # 중력 값
@@ -48,7 +50,11 @@ class CupheadBanging:
 
         self.frame = 0.0
 
-        self.LR = False # True 이면 왼쪽 False 이면 오른쪽
+        # 왼쪽 오른쪽 키 입력
+        self.Left_Key_Down = False
+        self.Right_Key_Down = False
+
+        self.key_input_LR = False # 현재 키가 눌려있는 상태인지?
 
         self.hit_bool = False # 맞은 상태인지?
 
@@ -149,6 +155,7 @@ class CupheadBanging:
             self.LR = True
 
 
+
         pass
 
     def player_left_right_key_up(self, key):
@@ -159,12 +166,12 @@ class CupheadBanging:
 
     # 움직임 관련 함수
     def player_move_run(self):
-        if self.rundir < 0:
+        if self.Left_Key_Down == True and self.Right_Key_Down == False:
             self.running = True
             self.CX -= self.run_speed * frametime.frame_time
             #self.now_state_tuple = self.run
 
-        elif self.rundir > 0:
+        elif self.Left_Key_Down == False and self.Right_Key_Down == True:
             self.running = True
             self.CX += self.run_speed * frametime.frame_time
             #self.now_state_tuple = self.run
@@ -206,7 +213,11 @@ class CupheadBanging:
 
     def player_move_hit(self):
         if self.hit_bool:
+            #if self.gravity == False and self.gravity_time != 0.0:
             self.now_state_tuple = self.hit
+            self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 5.8 * (self.jump_angle / 180)
+            if self.jump_angle < 350:
+                self.jump_angle += frametime.frame_time * 300  # 사실상 점프 속도
         pass
 
     def player_move_clear(self):
@@ -214,10 +225,13 @@ class CupheadBanging:
         pass
 
     def player_move(self):
-        self.player_move_run()
-        self.player_move_jump()
+        if self.now_state_tuple != self.hit:
+            self.player_move_run()
+            self.player_move_jump()
+            self.player_gravity()
+
         self.player_move_hit()
-        self.player_gravity()
+
         pass
 
 
@@ -281,13 +295,13 @@ class CupheadBanging:
 
         if key == SDLK_RIGHT:
 
-            self.rundir += 1
+            self.Right_Key_Down = True
             self.player_state_updete()
             pass
 
         elif key == SDLK_LEFT:
 
-            self.rundir -= 1
+            self.Left_Key_Down = True
             self.player_state_updete()
             pass
 
@@ -322,10 +336,12 @@ class CupheadBanging:
 
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
+            self.Right_Key_Down = False
             self.rundir -= 1
             pass
 
         elif key == SDLK_LEFT:
+            self.Left_Key_Down = False
             self.rundir += 1
 
             pass
@@ -335,7 +351,10 @@ class CupheadBanging:
     def update_change_state(self):
         if self.now_state_tuple == self.hit:
             self.hit_bool = False  # 맞은 상태 끝!
-            self.rundir = 0
+            #self.rundir = 0
+            self.gravity = True
+            self.gravity_time = 0.0
+            self.jump_angle = 0
             self.now_state_tuple = self.idle
         pass
 

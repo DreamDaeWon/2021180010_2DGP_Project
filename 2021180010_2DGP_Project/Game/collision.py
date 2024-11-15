@@ -17,6 +17,10 @@ class Collision:
         pass
 
 
+    def box_collision(self):
+        pass
+
+
     def get_player(self, player): # 플레이어 받아오기
         self.player = player
         pass
