@@ -257,3 +257,9 @@ class Boss_Potato:
     def get_collision_size(self):
         # left, top ,right, bottom
         return self.CX - self.boss_potato_rx, self.CY + self.boss_potato_ry * 0.5, self.CX + self.boss_potato_rx, self.CY - self.boss_potato_ry
+
+
+    def shoot_skill(self):
+
+
+        pass

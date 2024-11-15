@@ -36,6 +36,8 @@ class Collision:
         pass
 
     def player_collision(self):
+        if self.player == None:
+            return
 
         if self.player.get_collision_size()[3] < 50:
             self.player.CY = 50 + self.player.player_ry
@@ -54,6 +56,10 @@ class Collision:
         pass
 
     def boss_collision(self):
+
+        if self.boss == None:
+            return
+
         if self.boss.get_collision_size()[3] < 50:
             self.boss.CY = 50 + self.boss.boss_potato_ry
 

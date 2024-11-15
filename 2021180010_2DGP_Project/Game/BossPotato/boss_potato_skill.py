@@ -28,12 +28,12 @@ class Boss_potato_skill:
         self.now_state_dict = 0
 
 
-        self.attack_dick = {}
+        self.attack_dict = {}
 
 
         self.in_put_resources()
 
-        self.now_state_dict = self.attack_dick
+        self.now_state_dict = self.attack_dict
 
         self.size = 1.0
 
@@ -117,7 +117,7 @@ class Boss_potato_skill:
                                        int(self.now_state_dict['bottom'] - (self.now_state_dict['go_down'] * self.row_frame)),
                                        self.now_state_dict['width'],
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
-                                       self.now_state_dict['width'] * self.boss_size,self.now_state_dict['high'] * self.boss_size)
+                                       self.now_state_dict['width'] * self.size,self.now_state_dict['high'] * self.size)
 
         #pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
         pass

@@ -30,7 +30,7 @@ def initialize():
     global world_all
     global collision
     collision = Collision()
-    world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
+    #world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
 

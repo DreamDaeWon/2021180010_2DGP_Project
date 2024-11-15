@@ -6,3 +6,5 @@ import frametime
 
 from CupHeadBanging.cupheadBanging import CupheadBanging
 from BossPotato.boss_potato import Boss_Potato
+
+import object_manager
