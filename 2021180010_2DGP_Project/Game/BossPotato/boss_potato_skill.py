@@ -43,3 +43,20 @@ class Boss_potato_skill:
 
         # 보스 일반 공격 모션
 
+    def set_attack_motion(self):
+        # 한 사진당
+        # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
+        # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
+        # self.Idle = [526,512,20,7,4522,8,6]
+        self.attack_dict['width'] = 526  # 가로크기
+        self.attack_dict['high'] = 511  # 세로크기
+        self.attack_dict['frame'] = 17  # 총 몇 프레임인지? 1 부터 시작
+        self.attack_dict['frame_speed'] = 20  # 프레임 속도
+        self.attack_dict['column_frame'] = 6  # 가로 프레임 몇 개인지?
+        self.attack_dict['row_frame'] = 3  # 세로 프레임 몇 개인지?
+        self.attack_dict['last_row_frame'] = 5  # 마지막 줄 가로 프레임
+        self.attack_dict['left'] = 7  # x값 어디서부터 시작하는지?
+        self.attack_dict['bottom'] = 2391  # y값 어디서부터 시작하는지?
+        self.attack_dict['go_right'] = 531  # x값 얼마만큼 떨어지는지?
+        self.attack_dict['go_down'] = 517  # y값 얼마만큼 떨어지는지?
+        pass
