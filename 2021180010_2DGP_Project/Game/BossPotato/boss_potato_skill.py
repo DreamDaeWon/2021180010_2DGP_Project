@@ -33,6 +33,10 @@ class Boss_potato_skill:
 
         self.in_put_resources()
 
+        self.now_state_dict = self.attack_dick
+
+        self.size = 1.0
+
 
         pass
 
@@ -97,10 +101,31 @@ class Boss_potato_skill:
 
         self.boss_skill_move()
 
-        self.boss_potato_rx =  self.now_state_dict['width'] * 0.5 * self.boss_size
-        self.boss_potato_ry = self.now_state_dict['high'] * 0.5 * self.boss_size
+        self.rx =  self.now_state_dict['width'] * 0.5 * self.size
+        self.ry = self.now_state_dict['high'] * 0.5 * self.size
 
 
+        pass
+
+    def late_update(self):
+
+        pass
+
+    def render(self):
+
+        self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * int(int(self.frame) % self.now_state_dict['column_frame']))),
+                                       int(self.now_state_dict['bottom'] - (self.now_state_dict['go_down'] * self.row_frame)),
+                                       self.now_state_dict['width'],
+                                       self.now_state_dict['high'],0,'',self.CX,self.CY,
+                                       self.now_state_dict['width'] * self.boss_size,self.now_state_dict['high'] * self.boss_size)
+
+        #pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        pass
+
+    def key_input_down(self, Key):
+        pass
+
+    def key_input_up(self, Key):
         pass
 
     def boss_skill_move(self):
