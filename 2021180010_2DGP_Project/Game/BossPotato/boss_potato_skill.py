@@ -131,3 +131,7 @@ class Boss_potato_skill:
     def boss_skill_move(self):
         self.CX -= self.move_speed * frametime.frame_time
         pass
+
+    def get_collision_size(self):
+        # left, top ,right, bottom
+        return self.CX - self.rx, self.CY + self.ry, self.CX + self.rx, self.CY - self.ry
