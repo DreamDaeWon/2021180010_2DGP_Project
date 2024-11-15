@@ -6,12 +6,22 @@ def input_object(object,list):
     world[list].append(object)
     pass
 
-def delete_object(object):
+def delete_want_object(object):
     for list in world:
         for i in list:
             if i == object:
                 world.remove(object)
                 del i
+
+
+def delete_object():
+
+    for list in world:
+        copy_list = list
+        for i in copy_list:
+            if i.this_delete:
+                list.remove(i)
+
 
     pass
 

@@ -34,14 +34,16 @@ def initialize():
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
 
+    # Player 추가
+    object_manager.world[2].append(CupheadBanging())
+    collision.get_player(object_manager.world[2][0])
+
 
     #보스 추가
     object_manager.world[1].append(Boss_Potato())
     collision.get_boss(object_manager.world[1][0])
 
-    #Player 추가
-    object_manager.world[2].append(CupheadBanging())
-    collision.get_player(object_manager.world[2][0])
+
 
     pass
 
@@ -75,6 +77,8 @@ def late_update():
             object.late_update()
 
     collision.all_collision()
+
+    object_manager.delete_object()
     pass
 
 

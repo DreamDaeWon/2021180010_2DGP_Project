@@ -15,13 +15,15 @@ class Boss_potato_skill:
     image = None
     def __init__(self):
 
+        self.this_delete = False # 이 객체를 지워야 하는지?
+
         self.CX = 0.0
         self.CY = 0.0
 
         self.rx = 0.0
         self.ry = 0.0
 
-        self.move_speed = 350.0
+        self.move_speed = 500.0
 
         self.frame = 0.0
 

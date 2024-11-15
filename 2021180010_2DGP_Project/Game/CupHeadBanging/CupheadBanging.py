@@ -26,11 +26,15 @@ class PlayerState(enum.Enum):
 
 class CupheadBanging:
     def __init__(self):
+
+        self.this_delete = False # 이 객체를 지워야 하는지?
+
         self.PlayerState = PlayerState.IDLE # Player State
 
         self.Right = True # 플레이어 방향 오른쪽인지?
 
         self.gravity = True # 중력을 현재 적용 하는지?
+
 
         self.LR = False
 

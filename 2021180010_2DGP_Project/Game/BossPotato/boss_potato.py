@@ -15,6 +15,7 @@ parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경
 sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
 import object_manager
+import collision
 
 
 
@@ -22,6 +23,10 @@ import object_manager
 class Boss_Potato:
 
     def __init__(self):
+
+
+        self.this_delete = False # 이 객체를 지워야 하는지?
+
 
         self.CX = 850
 
@@ -53,6 +58,8 @@ class Boss_Potato:
         #self.image = 0
 
         self.shoot = False # 쐈는지?
+
+        self.player = object_manager.world[2][0]
 
 
         # 상태에 따른 딕셔너리
@@ -177,6 +184,7 @@ class Boss_Potato:
         pass
 
     def late_update(self):
+
 
         pass
 
