@@ -179,21 +179,21 @@ class CupheadBanging:
         if self.jumping:
             if self.normal_attaking == True:
                 self.jump_angle = 0
-                self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 7.8 * (
+                self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 5.8 * (
                             self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
-                    self.normal_attaking_angle += frametime.frame_time * 325  # 사실상 점프 속도
+                    self.normal_attaking_angle += frametime.frame_time * 300  # 사실상 점프 속도
                 else:
                     self.normal_attaking_angle = 0
                 pass
             else:
                 self.normal_attaking_angle = 0
                 if self.jumping:
-                    self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 7.8 * (self.jump_angle / 180)
+                    self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 5.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
-                        self.jump_angle += frametime.frame_time * 350 # 사실상 점프 속도
+                        self.jump_angle += frametime.frame_time * 300 # 사실상 점프 속도
                 else:
                     self.jump_angle = 0
                     self.normal_attaking_angle = 0

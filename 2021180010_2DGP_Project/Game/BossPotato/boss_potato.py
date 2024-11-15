@@ -56,6 +56,8 @@ class Boss_Potato:
 
         self.intro_ground_dict = {}
 
+        self.attack_dict = {}
+
         self.in_put_resources()
 
         self.now_state_dict = self.Create
@@ -76,7 +78,7 @@ class Boss_Potato:
         # 보스 intro 모션
         self.set_in_game_motion()
         self.set_intro_ground_motion()
-
+        self.set_attack_motion()
 
         # 보스 일반 공격 모션
 
@@ -89,9 +91,9 @@ class Boss_Potato:
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
         # self.Idle = [526,512,20,7,4522,8,6]
         self.Create['width'] = 526  # 가로크기
-        self.Create['high'] = 512  # 세로크기
+        self.Create['high'] = 511  # 세로크기
         self.Create['frame'] = 20  # 총 몇 프레임인지?
-        self.Create['frame_speed'] = 10  # 프레임 속도
+        self.Create['frame_speed'] = 15  # 프레임 속도
         self.Create['column_frame'] = 6  # 가로 프레임 몇 개인지?
         self.Create['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.Create['last_row_frame'] = 2  # 마지막 줄 가로 프레임
@@ -109,7 +111,7 @@ class Boss_Potato:
         self.intro_ground_dict['width'] = 557  # 가로크기
         self.intro_ground_dict['high'] = 460  # 세로크기
         self.intro_ground_dict['frame'] = 19  # 총 몇 프레임인지?
-        self.intro_ground_dict['frame_speed'] = 10  # 프레임 속도
+        self.intro_ground_dict['frame_speed'] = 15  # 프레임 속도
         self.intro_ground_dict['column_frame'] = 5  # 가로 프레임 몇 개인지?
         self.intro_ground_dict['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.intro_ground_dict['last_row_frame'] = 4  # 마지막 줄 가로 프레임
@@ -117,6 +119,24 @@ class Boss_Potato:
         self.intro_ground_dict['bottom'] = 6487  # y값 어디서부터 시작하는지?
         self.intro_ground_dict['go_right'] = 558  # x값 얼마만큼 떨어지는지?
         self.intro_ground_dict['go_down'] = 462  # y값 얼마만큼 떨어지는지?
+        pass
+
+    def set_attack_motion(self):
+        # 한 사진당
+        # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
+        # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
+        # self.Idle = [526,512,20,7,4522,8,6]
+        self.attack_dict['width'] = 526  # 가로크기
+        self.attack_dict['high'] = 511  # 세로크기
+        self.attack_dict['frame'] = 17  # 총 몇 프레임인지? 1 부터 시작
+        self.attack_dict['frame_speed'] = 15  # 프레임 속도
+        self.attack_dict['column_frame'] = 6  # 가로 프레임 몇 개인지?
+        self.attack_dict['row_frame'] = 3  # 세로 프레임 몇 개인지?
+        self.attack_dict['last_row_frame'] = 5  # 마지막 줄 가로 프레임
+        self.attack_dict['left'] = 7  # x값 어디서부터 시작하는지?
+        self.attack_dict['bottom'] = 2391  # y값 어디서부터 시작하는지?
+        self.attack_dict['go_right'] = 531  # x값 얼마만큼 떨어지는지?
+        self.attack_dict['go_down'] = 517  # y값 얼마만큼 떨어지는지?
         pass
 
 
@@ -221,7 +241,7 @@ class Boss_Potato:
 
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
                 if self.now_state_dict == self.Create:
-                    self.now_state_dict = self.Create # 일단은 반복
+                    self.now_state_dict = self.attack_dict # 일단은 반복
 
                 self.frame = 0
                 self.row_frame = 0
@@ -236,4 +256,4 @@ class Boss_Potato:
 
     def get_collision_size(self):
         # left, top ,right, bottom
-        return self.CX - self.boss_potato_rx, self.CY + self.boss_potato_ry, self.CX + self.boss_potato_rx, self.CY - self.boss_potato_ry
+        return self.CX - self.boss_potato_rx, self.CY + self.boss_potato_ry * 0.5, self.CX + self.boss_potato_rx, self.CY - self.boss_potato_ry
