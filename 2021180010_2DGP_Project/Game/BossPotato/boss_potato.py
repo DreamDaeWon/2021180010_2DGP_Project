@@ -266,5 +266,4 @@ class Boss_Potato:
     def shoot_skill(self):
         bullet = Boss_potato_skill()
         object_manager.input_object(bullet,3)
-
         pass

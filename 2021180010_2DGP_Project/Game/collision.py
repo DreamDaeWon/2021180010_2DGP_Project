@@ -64,3 +64,12 @@ class Collision:
             self.boss.CY = 50 + self.boss.boss_potato_ry
 
         pass
+
+    def boss_bullet_collision(self):
+
+        for o in object_manager.world[3]:
+            if o.CX + o.get_collision_size()[0] < 0:
+                object_manager.delete_object(o)
+                del o
+
+        pass
