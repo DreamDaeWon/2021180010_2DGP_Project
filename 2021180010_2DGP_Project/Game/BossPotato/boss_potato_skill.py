@@ -21,6 +21,8 @@ class Boss_potato_skill:
         self.rx = 0.0
         self.ry = 0.0
 
+        self.move_speed = 5.0
+
         self.frame = 0.0
 
         self.now_state_dict = 0
@@ -66,4 +68,41 @@ class Boss_potato_skill:
         self.attack_dict['bottom'] = 651  # y값 어디서부터 시작하는지?
         self.attack_dict['go_right'] = 135  # x값 얼마만큼 떨어지는지?
         self.attack_dict['go_down'] = 139  # y값 얼마만큼 떨어지는지?
+        pass
+
+    def boss_skill_state_update(self):
+
+        pass
+
+    def boss_skill_resource_state(self):
+        self.before_state_dict = self.now_state_dict
+
+
+        if self.before_state_dict == self.now_state_dict:
+            self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time
+            self.row_frame = int(self.frame / self.now_state_dict['column_frame'])
+
+
+            if self.frame >= self.now_state_dict['frame']:
+                self.frame = 0
+                self.row_frame = 0
+        else:
+            self.boss_skill_state_update()
+            print('in this')
+        pass
+
+    def update(self):
+
+        self.boss_skill_resource_state()
+
+        self.boss_skill_move()
+
+        self.boss_potato_rx =  self.now_state_dict['width'] * 0.5 * self.boss_size
+        self.boss_potato_ry = self.now_state_dict['high'] * 0.5 * self.boss_size
+
+
+        pass
+
+    def boss_skill_move(self):
+        self.CX -= self.move_speed * frametime.frame_time
         pass
