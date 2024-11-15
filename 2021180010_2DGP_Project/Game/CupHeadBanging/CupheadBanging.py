@@ -60,7 +60,7 @@ class CupheadBanging:
         self.rundir = 0
         self.run_speed = 700
         # 점프
-        self.jump_high = 6.5
+        self.jump_high = 6
         self.jump_angle = 0
         self.jumping = False
 

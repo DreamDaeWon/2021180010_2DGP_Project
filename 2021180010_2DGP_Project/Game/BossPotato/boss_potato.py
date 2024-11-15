@@ -93,7 +93,7 @@ class Boss_Potato:
         self.Create['width'] = 526  # 가로크기
         self.Create['high'] = 511  # 세로크기
         self.Create['frame'] = 20  # 총 몇 프레임인지?
-        self.Create['frame_speed'] = 15  # 프레임 속도
+        self.Create['frame_speed'] = 20  # 프레임 속도
         self.Create['column_frame'] = 6  # 가로 프레임 몇 개인지?
         self.Create['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.Create['last_row_frame'] = 2  # 마지막 줄 가로 프레임
@@ -111,7 +111,7 @@ class Boss_Potato:
         self.intro_ground_dict['width'] = 557  # 가로크기
         self.intro_ground_dict['high'] = 460  # 세로크기
         self.intro_ground_dict['frame'] = 19  # 총 몇 프레임인지?
-        self.intro_ground_dict['frame_speed'] = 15  # 프레임 속도
+        self.intro_ground_dict['frame_speed'] = 20  # 프레임 속도
         self.intro_ground_dict['column_frame'] = 5  # 가로 프레임 몇 개인지?
         self.intro_ground_dict['row_frame'] = 4  # 세로 프레임 몇 개인지?
         self.intro_ground_dict['last_row_frame'] = 4  # 마지막 줄 가로 프레임
@@ -129,7 +129,7 @@ class Boss_Potato:
         self.attack_dict['width'] = 526  # 가로크기
         self.attack_dict['high'] = 511  # 세로크기
         self.attack_dict['frame'] = 17  # 총 몇 프레임인지? 1 부터 시작
-        self.attack_dict['frame_speed'] = 15  # 프레임 속도
+        self.attack_dict['frame_speed'] = 20  # 프레임 속도
         self.attack_dict['column_frame'] = 6  # 가로 프레임 몇 개인지?
         self.attack_dict['row_frame'] = 3  # 세로 프레임 몇 개인지?
         self.attack_dict['last_row_frame'] = 5  # 마지막 줄 가로 프레임
