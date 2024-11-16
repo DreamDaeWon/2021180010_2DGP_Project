@@ -46,6 +46,7 @@ class Collision:
         self.player_collision()
         self.boss_collision()
         self.boss_bullet_collision()
+        self.boss_bullet_item_collision()
         pass
 
     def player_collision(self):
@@ -105,7 +106,7 @@ class Collision:
                 o.this_delete = True
 
             elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
-                self.player.hit_bool = True
+                self.player.skill_number += 1
                 o.this_delete = True
 
 
