@@ -15,7 +15,7 @@ import frametime
 
 
 class Player_skill_cup:
-    image = None
+    image_attack = None
     def __init__(self):
 
         self.this_delete = False  # 이 객체를 지워야 하는지?
@@ -38,7 +38,7 @@ class Player_skill_cup:
 
 
 
-        self.state_attack = [83,20.0,self.image_attack]
+        self.state_attack = [41,20.0,self.image_attack]
 
 
 
@@ -50,11 +50,12 @@ class Player_skill_cup:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        path = 'CupHeadBanging/PlayerResoures/Skill1_ShootCup/player_skill_cup'  # main.py 기준임
-        self.image_attack = []
-        for a in range(0, 83):
-            finalPath = path + str(a) + '.png'
-            self.image_attack.append(load_image(finalPath))
+        if Player_skill_cup.image_attack == None:
+            path = 'CupHeadBanging/PlayerResoures/Skill1_ShootCup/player_skill_cup'  # main.py 기준임
+            Player_skill_cup.image_attack = []
+            for a in range(0, 40+1):
+                finalPath = path + str(a) + '.png'
+                Player_skill_cup.image_attack.append(load_image(finalPath))
 
 
     def player_skill_cup_move(self):

@@ -2,21 +2,25 @@ import enum
 
 import math
 
-from pico2d import*
+from pico2d import *
+
+
+import Game.CupHeadBanging.player_skill_cup
+
 
 import os
 import sys
 
-import player_skill_cup
-
-
 # 현재 파일의 절대 경로를 가져옵니다
-current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
-parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
-sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
+current_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
+parent_dir = os.path.dirname(current_dir)  # 부모 디렉터리를 시스템 경로에 추가합니다
+sys.path.append(parent_dir)  # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
 
 import object_manager
+
+
+
 
 class PlayerState(enum.Enum):
     IDLE = 0
@@ -26,25 +30,22 @@ class PlayerState(enum.Enum):
     JUMP = 4
 
 
-
-
 class CupheadBanging:
     def __init__(self):
 
-        self.this_delete = False # 이 객체를 지워야 하는지?
+        self.this_delete = False  # 이 객체를 지워야 하는지?
 
-        self.PlayerState = PlayerState.IDLE # Player State
+        self.PlayerState = PlayerState.IDLE  # Player State
 
-        self.Right = True # 플레이어 방향 오른쪽인지?
+        self.Right = True  # 플레이어 방향 오른쪽인지?
 
-        self.gravity = True # 중력을 현재 적용 하는지?
-
+        self.gravity = True  # 중력을 현재 적용 하는지?
 
         self.LR = False
 
-        self.gravity_time = 0.0 # 중력 시간 값
+        self.gravity_time = 0.0  # 중력 시간 값
 
-        self.gravity_speed = 5.5 # 중력 값
+        self.gravity_speed = 5.5  # 중력 값
 
         self.CX = 100
 
@@ -57,22 +58,20 @@ class CupheadBanging:
         self.player_ry = 0.0
 
         self.frame = 0.0
-        
-        
-        self.skill_number = 0 # 스킬 개수
-        
+
+        self.skill_number = 0  # 스킬 개수
 
         # 왼쪽 오른쪽 키 입력
         self.Left_Key_Down = False
         self.Right_Key_Down = False
 
-        self.key_input_LR = False # 현재 키가 눌려있는 상태인지?
+        self.key_input_LR = False  # 현재 키가 눌려있는 상태인지?
 
-        self.hit_bool = False # 맞은 상태인지?
+        self.hit_bool = False  # 맞은 상태인지?
 
         self.in_put_resources()
 
-    # 움직임 관련 변수
+        # 움직임 관련 변수
         # 달리기
         self.running = False
         self.rundir = 0
@@ -88,12 +87,12 @@ class CupheadBanging:
         self.normal_attaking_high = 3
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.idle = [8,15,self.image_Idle]
-        self.hit = [6,13,self.image_Hit]
-        self.jump = [8,17,self.image_Jump]
-        self.normal_attak = [8,17,self.image_Nomal_Attak]
-        self.clear = [36,16,self.image_Clear]
-        self.run = [16,25,self.image_Run]
+        self.idle = [8, 15, self.image_Idle]
+        self.hit = [6, 13, self.image_Hit]
+        self.jump = [8, 17, self.image_Jump]
+        self.normal_attak = [8, 17, self.image_Nomal_Attak]
+        self.clear = [36, 16, self.image_Clear]
+        self.run = [16, 25, self.image_Run]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -142,10 +141,7 @@ class CupheadBanging:
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
 
-
-
-
-    def player_state_updete(self): # 플레이어 상태가 변경 될 때 해주어야 할 것들
+    def player_state_updete(self):  # 플레이어 상태가 변경 될 때 해주어야 할 것들
 
         #if self.hit_bool:
         if self.before_state_tuple != self.now_state_tuple:
@@ -157,8 +153,7 @@ class CupheadBanging:
 
         pass
 
-
-    def player_left_right_key_down(self,key):
+    def player_left_right_key_down(self, key):
 
         if key == SDLK_RIGHT:
             self.LR = False
@@ -166,13 +161,9 @@ class CupheadBanging:
         elif key == SDLK_LEFT:
             self.LR = True
 
-
-
         pass
 
     def player_left_right_key_up(self, key):
-
-
 
         pass
 
@@ -193,13 +184,12 @@ class CupheadBanging:
 
         pass
 
-
     def player_move_jump(self):
         if self.jumping:
             if self.normal_attaking == True:
                 self.jump_angle = 0
                 self.CY += math.sin(math.radians(self.normal_attaking_angle)) * self.normal_attaking_high - 5.8 * (
-                            self.normal_attaking_angle / 180)
+                        self.normal_attaking_angle / 180)
                 self.now_state_tuple = self.normal_attak
                 if self.normal_attaking_angle < 350:
                     self.normal_attaking_angle += frametime.frame_time * 300  # 사실상 점프 속도
@@ -212,7 +202,7 @@ class CupheadBanging:
                     self.CY += math.sin(math.radians(self.jump_angle)) * self.jump_high - 5.8 * (self.jump_angle / 180)
                     self.now_state_tuple = self.jump
                     if self.jump_angle < 350:
-                        self.jump_angle += frametime.frame_time * 300 # 사실상 점프 속도
+                        self.jump_angle += frametime.frame_time * 300  # 사실상 점프 속도
                 else:
                     self.jump_angle = 0
                     self.normal_attaking_angle = 0
@@ -221,7 +211,6 @@ class CupheadBanging:
     def player_move_skill(self):
 
         pass
-
 
     def player_move_hit(self):
         if self.hit_bool:
@@ -245,7 +234,6 @@ class CupheadBanging:
         self.player_move_hit()
 
         pass
-
 
     def player_resource_state(self):
 
@@ -278,11 +266,7 @@ class CupheadBanging:
             self.player_state_updete()
             #print('in this')
 
-
-
         pass
-
-
 
     def player_gravity(self):
 
@@ -293,9 +277,6 @@ class CupheadBanging:
             self.gravity_time = 0.0
 
         pass
-
-
-
 
     def key_input_down(self, key):
 
@@ -316,6 +297,9 @@ class CupheadBanging:
             self.Left_Key_Down = True
             self.player_state_updete()
             pass
+
+        elif key == SDLK_z:
+            self.shoot_skill()
 
 
         elif key == SDLK_SPACE:
@@ -339,12 +323,9 @@ class CupheadBanging:
             #self.player_state_updete()
             pass
 
-
         pass
 
     def key_input_up(self, key):
-
-
 
         self.player_left_right_key_up(key)
         if key == SDLK_RIGHT:
@@ -370,35 +351,37 @@ class CupheadBanging:
             self.now_state_tuple = self.idle
         pass
 
-
     def update(self):
 
         self.player_resource_state()
 
         self.player_move()
 
-        self.player_rx =  self.now_state_tuple[2][int(self.frame)].w * 0.5
+        self.player_rx = self.now_state_tuple[2][int(self.frame)].w * 0.5
         self.player_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
 
         pass
 
-
-
     def late_update(self):
 
-
-          pass
+        pass
 
     def render(self):
         if self.LR == True:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY,
-                                        self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0, 300, 300, 0, 'h', self.CX, self.CY,
+                                                                         self.now_state_tuple[2][
+                                                                             int(self.frame)].w * self.Player_Size,
+                                                                         self.now_state_tuple[2][
+                                                                             int(self.frame)].h * self.Player_Size)
         else:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY,
-                                        self.now_state_tuple[2][int(self.frame)].w * self.Player_Size,self.now_state_tuple[2][int(self.frame)].h * self.Player_Size)
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0, 300, 300, 0, '', self.CX, self.CY,
+                                                                         self.now_state_tuple[2][
+                                                                             int(self.frame)].w * self.Player_Size,
+                                                                         self.now_state_tuple[2][
+                                                                             int(self.frame)].h * self.Player_Size)
 
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],
-                              self.get_collision_size()[2],self.get_collision_size()[3])
+        pico2d.draw_rectangle(self.get_collision_size()[0], self.get_collision_size()[1],
+                              self.get_collision_size()[2], self.get_collision_size()[3])
 
         pass
 
@@ -406,11 +389,9 @@ class CupheadBanging:
         # left, top ,right, bottom
         return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
 
-
     def shoot_skill(self):
-        bullet = player_skill_cup.Player_skill_cup()
+        bullet = Game.CupHeadBanging.player_skill_cup.Player_skill_cup()
         bullet.CX = self.CX
         bullet.CY = self.CY
-        object_manager.input_object(bullet,object_manager.player_skill_list_num)
+        object_manager.input_object(bullet, object_manager.player_skill_list_num)
         pass
-
