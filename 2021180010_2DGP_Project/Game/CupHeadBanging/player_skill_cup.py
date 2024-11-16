@@ -31,6 +31,9 @@ class Player_skill_cup:
         self.LR = True # True면 오른쪽
 
 
+        self.frame = 0.0
+
+
         self.in_put_resources()
 
 
@@ -55,8 +58,10 @@ class Player_skill_cup:
 
 
     def player_skill_cup_move(self):
-
-
+        if self.LR == True: # 오른쪽
+            self.CX += self.move_speed * frametime.frame_time
+        else:
+            self.CX -= self.move_speed * frametime.frame_time
         pass
 
     def skill_update(self):
@@ -110,10 +115,10 @@ class Player_skill_cup:
 
     def render(self):
         if self.LR == False:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'h',self.CX,self.CY,
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,700,700,0,'h',self.CX,self.CY,
                                         self.now_state_tuple[2][int(self.frame)].w * self.skill_size,self.now_state_tuple[2][int(self.frame)].h * self.skill_size)
         else:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,300,300,0,'',self.CX,self.CY,
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,700,700,0,'',self.CX,self.CY,
                                         self.now_state_tuple[2][int(self.frame)].w * self.skill_size,self.now_state_tuple[2][int(self.frame)].h * self.skill_size)
 
         pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],

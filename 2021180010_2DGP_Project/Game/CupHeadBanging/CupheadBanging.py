@@ -7,6 +7,8 @@ from pico2d import*
 import os
 import sys
 
+import player_skill_cup
+
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
@@ -401,4 +403,6 @@ class CupheadBanging:
     def get_collision_size(self):
         # left, top ,right, bottom
         return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
+
+
 
