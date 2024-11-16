@@ -16,6 +16,8 @@ parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경
 sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
 
+import object_manager
+
 class PlayerState(enum.Enum):
     IDLE = 0
     MOVE_RIGHT = 1
@@ -405,4 +407,10 @@ class CupheadBanging:
         return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
 
 
+    def shoot_skill(self):
+        bullet = player_skill_cup.Player_skill_cup()
+        bullet.CX = self.CX
+        bullet.CY = self.CY
+        object_manager.input_object(bullet,object_manager.player_skill_list_num)
+        pass
 

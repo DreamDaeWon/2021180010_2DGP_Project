@@ -286,5 +286,5 @@ class Boss_Potato:
         bullet = Boss_potato_skill()
         bullet.CX = self.CX - self.boss_potato_rx
         bullet.CY = self.CY - self.boss_potato_ry * 0.7
-        object_manager.input_object(bullet,3)
+        object_manager.input_object(bullet,object_manager.boss_skill_list_num)
         pass
