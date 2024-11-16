@@ -18,6 +18,8 @@ class Player_skill_cup:
     image = None
     def __init__(self):
 
+        self.this_delete = False  # 이 객체를 지워야 하는지?
+
         self.move_speed = 50.0
 
         self.CX = 100
@@ -52,19 +54,25 @@ class Player_skill_cup:
             self.image_attack.append(load_image(finalPath))
 
 
-    def player_move(self):
+    def player_skill_cup_move(self):
 
 
         pass
 
+    def skill_update(self):
+        if self.now_state_tuple == self.state_attack:
+            self.this_delete = True
+        pass
 
-    def player_resource_state(self):
+
+    def player_skill_cup_resource_state(self):
 
         self.before_state_tuple = self.now_state_tuple
 
         if self.before_state_tuple == self.now_state_tuple:
             self.frame += 1.0 * self.now_state_tuple[1] * frametime.frame_time
             if self.frame >= self.now_state_tuple[0]:
+                self.skill_update()
                 self.frame = 0.0
 
         pass
@@ -84,12 +92,12 @@ class Player_skill_cup:
 
     def update(self):
 
-        self.player_resource_state()
+        self.player_skill_cup_resource_state()
 
-        self.player_move()
+        self.player_skill_cup_move()
 
-        self.player_rx =  self.now_state_tuple[2][int(self.frame)].w * 0.5
-        self.player_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
+        self.player_skill_cup_rx =  self.now_state_tuple[2][int(self.frame)].w * 0.5
+        self.player_skill_cup_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
 
         pass
 
@@ -115,4 +123,4 @@ class Player_skill_cup:
 
     def get_collision_size(self):
         # left, top ,right, bottom
-        return self.CX - self.player_rx, self.CY + self.player_ry, self.CX + self.player_rx, self.CY - self.player_ry
+        return self.CX - self.player_skill_cup_rx, self.CY + self.player_skill_cup_ry, self.CX + self.player_skill_cup_rx, self.CY - self.player_skill_cup_ry
