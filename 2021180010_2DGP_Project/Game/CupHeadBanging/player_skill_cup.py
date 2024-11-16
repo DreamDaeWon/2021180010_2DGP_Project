@@ -20,7 +20,7 @@ class Player_skill_cup:
 
         self.this_delete = False  # 이 객체를 지워야 하는지?
 
-        self.move_speed = 50.0
+        self.move_speed = 500.0
 
         self.CX = 100
 
