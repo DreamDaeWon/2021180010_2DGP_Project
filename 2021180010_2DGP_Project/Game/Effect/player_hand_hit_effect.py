@@ -14,34 +14,31 @@ import frametime
 
 
 
-class Player_skill_cup:
-    image_attack = None
+class Player_hand_hit_effect:
+    image_hand_attack_effect = None
     def __init__(self):
 
         self.this_delete = False  # 이 객체를 지워야 하는지?
 
-        self.move_speed = 500.0
+        self.move_speed = 0.0
 
         self.CX = 100
 
         self.CY = 300
 
-        self.skill_size = 0.8
+        self.effect_size = 0.8
 
         self.LR = True # True면 오른쪽
 
 
         self.frame = 0.0
 
-        self.freeze = True # 가만히
-
-
 
         self.in_put_resources()
 
 
 
-        self.state_attack = [41,18.0,self.image_attack]
+        self.state_attack = [9,20.0,self.image_hand_attack_effect]
 
 
 
@@ -53,26 +50,20 @@ class Player_skill_cup:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        if Player_skill_cup.image_attack == None:
-            path = 'CupHeadBanging/PlayerResoures/Skill1_ShootCup/player_skill_cup'  # main.py 기준임
-            Player_skill_cup.image_attack = []
-            for a in range(0, 40+1):
+        if Player_hand_hit_effect.image_hand_attack_effect == None:
+            path = 'Effect/Hand_hit/cuphead_slap_spark_000'  # main.py 기준임
+            Player_hand_hit_effect.image_hand_attack_effect = []
+            for a in range(1, 9+1):
                 finalPath = path + str(a) + '.png'
-                Player_skill_cup.image_attack.append(load_image(finalPath))
+                Player_hand_hit_effect.image_hand_attack_effect.append(load_image(finalPath))
 
 
     def player_skill_cup_move(self):
-        if self.freeze:
-            return
-        if self.LR == True: # 오른쪽
-            self.CX += self.move_speed * frametime.frame_time
-        else:
-            self.CX -= self.move_speed * frametime.frame_time
+
         pass
 
     def skill_update(self):
-        if self.now_state_tuple == self.state_attack:
-            self.this_delete = True
+
         pass
 
 
@@ -85,9 +76,7 @@ class Player_skill_cup:
             if self.frame >= self.now_state_tuple[0]:
                 self.skill_update()
                 self.frame = 0.0
-
-        if self.frame >= 15:
-            self.freeze = False
+                self.this_delete = True
 
         pass
 
@@ -123,15 +112,8 @@ class Player_skill_cup:
           pass
 
     def render(self):
-        if self.LR == False:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,700,700,0,'h',self.CX,self.CY,
-                                        self.now_state_tuple[2][int(self.frame)].w * self.skill_size,self.now_state_tuple[2][int(self.frame)].h * self.skill_size)
-        else:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,700,700,0,'',self.CX,self.CY,
-                                        self.now_state_tuple[2][int(self.frame)].w * self.skill_size,self.now_state_tuple[2][int(self.frame)].h * self.skill_size)
-
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],
-                              self.get_collision_size()[2],self.get_collision_size()[3])
+        self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0,0,700,700,0,'',self.CX,self.CY,
+                                    self.now_state_tuple[2][int(self.frame)].w * self.effect_size,self.now_state_tuple[2][int(self.frame)].h * self.effect_size)
 
         pass
 

@@ -1,6 +1,6 @@
 from dw_define import*
 
-world = [[],[],[],[],[],[],[]] # 모든 세상 객체들 # 0번 배경, 1번 보스, 2번 플레이어, 3번 보스 스킬, 4번 플레이어 스킬, 5번 플레이어 아이템, 6번 UI
+world = [[],[],[],[],[],[],[],[]] # 모든 세상 객체들 # 0번 배경, 1번 보스, 2번 플레이어, 3번 보스 스킬, 4번 플레이어 스킬, 5번 플레이어 아이템, 6번 이펙트, 7번 UI
 
 back_ground_list_num = 0
 
@@ -14,7 +14,9 @@ player_skill_list_num = 4
 
 player_skill_item_num = 5
 
-UI_list_num = 6
+effect_num = 6
+
+UI_list_num = 7
 
 
 def input_object(object,list):

@@ -1,6 +1,9 @@
+from Game.Effect import player_hand_hit_effect
 from dw_define import*
 
 import object_manager
+
+import Effect.player_hand_hit_effect
 
 class Collision:
     def __init__(self):
@@ -86,6 +89,16 @@ class Collision:
 
         pass
 
+    def player_skill_collision(self):
+
+        for o in object_manager.world[object_manager.player_skill_list_num]:
+            if o.CX + o.get_collision_size()[0] < 0:
+                o.this_delete = True
+
+            elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
+                self.player.hit_bool = True
+                o.this_delete = True
+
     def boss_bullet_collision(self):
 
         for o in object_manager.world[3]:
@@ -107,6 +120,10 @@ class Collision:
 
             elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
                 self.player.skill_number += 1
+                effect = player_hand_hit_effect.Player_hand_hit_effect()
+                effect.CX = self.player.CX
+                effect.CY = self.player.CY
+                object_manager.world[object_manager.effect_num].append(effect)
                 o.this_delete = True
 
 

@@ -86,6 +86,11 @@ class CupheadBanging:
         self.normal_attaking_angle = 0
         self.normal_attaking_high = 3
 
+        # 스킬사용
+        self.skill = False
+        self.skill_freeze_time = 0.0 # 2초동안 가만히
+
+
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.idle = [8, 15, self.image_Idle]
         self.hit = [6, 13, self.image_Hit]
@@ -393,5 +398,6 @@ class CupheadBanging:
         bullet = Game.CupHeadBanging.player_skill_cup.Player_skill_cup()
         bullet.CX = self.CX
         bullet.CY = self.CY
+        bullet.LR = not self.LR
         object_manager.input_object(bullet, object_manager.player_skill_list_num)
         pass
