@@ -68,8 +68,9 @@ class Collision:
             self.player.CX = 1100 - self.player.player_rx
 
         if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
-            if not self.player.normal_attaking:
+            if not self.player.normal_attaking and self.boss.shoot == True:
                 self.player.hit_bool = True
+
 
         pass
 
