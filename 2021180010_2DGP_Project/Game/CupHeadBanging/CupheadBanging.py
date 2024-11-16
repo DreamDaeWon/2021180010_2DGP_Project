@@ -53,6 +53,10 @@ class CupheadBanging:
         self.player_ry = 0.0
 
         self.frame = 0.0
+        
+        
+        self.skill_number = 0 # 스킬 개수
+        
 
         # 왼쪽 오른쪽 키 입력
         self.Left_Key_Down = False

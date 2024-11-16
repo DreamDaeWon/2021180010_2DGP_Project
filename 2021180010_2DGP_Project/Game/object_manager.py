@@ -22,6 +22,5 @@ def delete_object():
             if i.this_delete:
                 list.remove(i)
 
-
     pass
 
