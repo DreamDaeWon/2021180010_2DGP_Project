@@ -67,6 +67,10 @@ class Collision:
         if self.player.get_collision_size()[2] >= 1100:
             self.player.CX = 1100 - self.player.player_rx
 
+        if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
+            if not self.player.normal_attaking:
+                self.player.hit_bool = True
+
         pass
 
     def boss_collision(self):
@@ -76,6 +80,7 @@ class Collision:
 
         if self.boss.get_collision_size()[3] < 50:
             self.boss.CY = 50 + self.boss.boss_potato_ry
+
 
         pass
 
