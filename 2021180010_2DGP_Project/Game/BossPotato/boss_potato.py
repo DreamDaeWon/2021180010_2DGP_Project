@@ -2,12 +2,16 @@ import enum
 
 import math
 
+import random
+
 from pico2d import*
 
 import os
 import sys
 
 from Game.BossPotato.boss_potato_skill import Boss_potato_skill
+
+from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
@@ -283,8 +287,15 @@ class Boss_Potato:
 
 
     def shoot_skill(self):
-        bullet = Boss_potato_skill()
-        bullet.CX = self.CX - self.boss_potato_rx
-        bullet.CY = self.CY - self.boss_potato_ry * 0.7
-        object_manager.input_object(bullet,object_manager.boss_skill_list_num)
+        rand_num = random.randint(0,10)
+        if rand_num >= 7:
+            bullet = Boss_potato_skill_item()
+            bullet.CX = self.CX - self.boss_potato_rx
+            bullet.CY = self.CY - self.boss_potato_ry * 0.7
+            object_manager.input_object(bullet, object_manager.player_skill_item_num)
+        else:
+            bullet = Boss_potato_skill()
+            bullet.CX = self.CX - self.boss_potato_rx
+            bullet.CY = self.CY - self.boss_potato_ry * 0.7
+            object_manager.input_object(bullet,object_manager.boss_skill_list_num)
         pass

@@ -97,3 +97,16 @@ class Collision:
 
 
         pass
+
+    def boss_bullet_item_collision(self):
+
+        for o in object_manager.world[object_manager.player_skill_item_num]:
+            if o.CX + o.get_collision_size()[0] < 0:
+                o.this_delete = True
+
+            elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
+                self.player.hit_bool = True
+                o.this_delete = True
+
+
+        pass

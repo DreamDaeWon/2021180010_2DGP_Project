@@ -11,7 +11,7 @@ sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습�
 import frametime
 
 
-class Boss_potato_skill:
+class Boss_potato_skill_item:
     image = None
     def __init__(self):
 
@@ -45,7 +45,7 @@ class Boss_potato_skill:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
+        path = 'BossPotato/PotatoResource/player_item.png'  # main.py 기준임
         if Boss_potato_skill.image is None:
             Boss_potato_skill.image = load_image(path)
         # 한 사진당
@@ -64,17 +64,17 @@ class Boss_potato_skill:
         # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
         # self.Idle = [526,512,20,7,4522,8,6]
-        self.attack_dict['width'] = 134  # 가로크기
-        self.attack_dict['high'] = 138  # 세로크기
+        self.attack_dict['width'] = 132  # 가로크기
+        self.attack_dict['high'] = 142  # 세로크기
         self.attack_dict['frame'] = 8  # 총 몇 프레임인지? 1 부터 시작
-        self.attack_dict['frame_speed'] = 20  # 프레임 속도
-        self.attack_dict['column_frame'] = 8  # 가로 프레임 몇 개인지?
+        self.attack_dict['frame_speed'] = 10  # 프레임 속도
+        self.attack_dict['column_frame'] = 4  # 가로 프레임 몇 개인지?
         self.attack_dict['row_frame'] = 1  # 세로 프레임 몇 개인지?
-        self.attack_dict['last_row_frame'] = 8  # 마지막 줄 가로 프레임
-        self.attack_dict['left'] = 1  # x값 어디서부터 시작하는지?
-        self.attack_dict['bottom'] = 651  # y값 어디서부터 시작하는지?
-        self.attack_dict['go_right'] = 135  # x값 얼마만큼 떨어지는지?
-        self.attack_dict['go_down'] = 139  # y값 얼마만큼 떨어지는지?
+        self.attack_dict['last_row_frame'] = 4  # 마지막 줄 가로 프레임
+        self.attack_dict['left'] = 0  # x값 어디서부터 시작하는지?
+        self.attack_dict['bottom'] = 0  # y값 어디서부터 시작하는지?
+        self.attack_dict['go_right'] = 132  # x값 얼마만큼 떨어지는지?
+        self.attack_dict['go_down'] = 142  # y값 얼마만큼 떨어지는지?
         pass
 
     def boss_skill_state_update(self):
