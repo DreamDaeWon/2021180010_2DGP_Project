@@ -11,11 +11,11 @@ class Collision:
 
         self.player = None # 플레이어 객체를 받아올 것임
 
-        self.player_bullet = None # 플레이어 총알 객체 리스트를 받아올 것임
+        #self.player_bullet = None # 플레이어 총알 객체 리스트를 받아올 것임
 
         self.boss = None # 보스 객체를 받아 올 것임
 
-        self.boss_bullet = None # 보스의 총알 객체 리스트를 받아올 것임
+        #self.boss_bullet = None # 보스의 총알 객체 리스트를 받아올 것임
 
         self.ground = None # 땅 받아오기
 
@@ -129,3 +129,6 @@ class Collision:
 
 
         pass
+
+
+World_collision = Collision()

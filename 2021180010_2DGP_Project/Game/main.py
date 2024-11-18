@@ -2,7 +2,7 @@ from os import closerange
 
 from dw_define import*
 
-from collision import *
+from Game.collision import World_collision
 
 
 
@@ -28,8 +28,6 @@ def handle_events():
 
 def initialize():
     #global world_all
-    global collision
-    collision = Collision()
     #world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
@@ -38,12 +36,12 @@ def initialize():
 
     # Player 추가
     object_manager.world[2].append(CupheadBanging())
-    collision.get_player(object_manager.world[2][0])
+    World_collision.get_player(object_manager.world[2][0])
 
 
     #보스 추가
     #object_manager.world[1].append(Boss_Potato())
-    #collision.get_boss(object_manager.world[1][0])
+    #All_collision.get_boss(object_manager.world[1][0])
 
 
 
@@ -72,13 +70,11 @@ def update():
     pass
 
 def late_update():
-    global collision
-
     for world in object_manager.world:
         for object in world:
             object.late_update()
 
-    collision.all_collision()
+    World_collision.all_collision()
 
     object_manager.delete_object()
     pass

@@ -7,9 +7,9 @@ from pico2d import *
 
 import Game.CupHeadBanging.player_skill_cup
 
-import Game.BossPotato.boss_potato
+from Game.BossPotato.boss_potato import Boss_Potato
 
-import Game.collision
+from Game.collision import World_collision
 
 import os
 import sys
@@ -326,8 +326,8 @@ class CupheadBanging:
             self.player_state_updete()
 
         elif key == SDLK_b:
-            object_manager.world[1].append(Game.BossPotato.boss_potato.Boss_Potato())
-            Game.collision.Collision.get_boss(Game.collision.Collision,object_manager.world[1][0])
+            object_manager.world[1].append(Boss_Potato())
+            World_collision.get_boss(object_manager.world[1][0])
 
         else:
             #self.now_state_tuple = self.idle

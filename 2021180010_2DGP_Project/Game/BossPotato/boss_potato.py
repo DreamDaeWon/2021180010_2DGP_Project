@@ -23,7 +23,6 @@ import collision
 
 
 
-
 class Boss_Potato:
 
     def __init__(self):
@@ -34,7 +33,7 @@ class Boss_Potato:
 
         self.CX = 850
 
-        self.CY = 300
+        self.CY = 100
 
         self.boss_potato_rx = 0.0
 
