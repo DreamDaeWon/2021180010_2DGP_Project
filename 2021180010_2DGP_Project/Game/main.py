@@ -42,8 +42,8 @@ def initialize():
 
 
     #보스 추가
-    object_manager.world[1].append(Boss_Potato())
-    collision.get_boss(object_manager.world[1][0])
+    #object_manager.world[1].append(Boss_Potato())
+    #collision.get_boss(object_manager.world[1][0])
 
 
 

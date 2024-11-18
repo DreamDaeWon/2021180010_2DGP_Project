@@ -34,7 +34,7 @@ class Boss_Potato:
 
         self.CX = 850
 
-        self.CY = 100
+        self.CY = 300
 
         self.boss_potato_rx = 0.0
 

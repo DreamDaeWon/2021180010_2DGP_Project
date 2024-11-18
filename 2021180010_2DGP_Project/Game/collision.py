@@ -7,17 +7,17 @@ import Effect.player_hand_hit_effect
 
 class Collision:
     def __init__(self):
-        self.all_object = 0 # 모든 객체를 받아올 것임
+        self.all_object = None # 모든 객체를 받아올 것임
 
-        self.player = 0 # 플레이어 객체를 받아올 것임
+        self.player = None # 플레이어 객체를 받아올 것임
 
-        self.player_bullet = 0 # 플레이어 총알 객체 리스트를 받아올 것임
+        self.player_bullet = None # 플레이어 총알 객체 리스트를 받아올 것임
 
-        self.boss = 0 # 보스 객체를 받아 올 것임
+        self.boss = None # 보스 객체를 받아 올 것임
 
-        self.boss_bullet = 0 # 보스의 총알 객체 리스트를 받아올 것임
+        self.boss_bullet = None # 보스의 총알 객체 리스트를 받아올 것임
 
-        self.ground = 0 # 땅 받아오기
+        self.ground = None # 땅 받아오기
 
         pass
 
@@ -71,9 +71,10 @@ class Collision:
         if self.player.get_collision_size()[2] >= 1100:
             self.player.CX = 1100 - self.player.player_rx
 
-        if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
-            if not self.player.normal_attaking and self.boss.shoot == True:
-                self.player.hit_bool = True
+        if self.boss != None:
+            if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
+                if not self.player.normal_attaking and self.boss.shoot == True:
+                    self.player.hit_bool = True
 
 
         pass

@@ -7,6 +7,9 @@ from pico2d import *
 
 import Game.CupHeadBanging.player_skill_cup
 
+import Game.BossPotato.boss_potato
+
+import Game.collision
 
 import os
 import sys
@@ -18,7 +21,6 @@ sys.path.append(parent_dir)  # 이제 'frametime' 모듈을 가져올 수 있습
 import frametime
 
 import object_manager
-
 
 
 
@@ -322,6 +324,10 @@ class CupheadBanging:
         elif key == SDLK_k:
             self.hit_bool = True
             self.player_state_updete()
+
+        elif key == SDLK_b:
+            object_manager.world[1].append(Game.BossPotato.boss_potato.Boss_Potato())
+            Game.collision.Collision.get_boss(Game.collision.Collision,object_manager.world[1][0])
 
         else:
             #self.now_state_tuple = self.idle
