@@ -45,7 +45,7 @@ class Ui_Black_Circle:
 
     def update(self):
         if self.now_size > 0.3:
-            self.now_size -= frametime.frame_time * 2.0
+            self.now_size -= frametime.frame_time * 1.5
 
         pass
 
