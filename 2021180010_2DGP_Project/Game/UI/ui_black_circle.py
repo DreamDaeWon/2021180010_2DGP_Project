@@ -80,7 +80,7 @@ class Ui_Black_Circle:
         self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
 
         if self.bRender_Restart_Message_UI:
-            self.Restart_Message_image.draw(0,0,1100,700)
+            self.Restart_Message_image.draw(550,350,1100,700)
 
         pass
 
