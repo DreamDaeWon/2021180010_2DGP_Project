@@ -90,7 +90,7 @@ class Collision:
 
         pass
 
-    def player_skill_collision(self): # 이거 수정하고 추가해야 함
+    def player_skill_collision(self): # 보스가 맞는 거임 # 이거 수정하고 추가해야 함
 
         for o in object_manager.world[object_manager.player_skill_list_num]:
             if o.CX + o.get_collision_size()[0] < 0:
