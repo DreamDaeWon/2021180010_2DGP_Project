@@ -16,6 +16,7 @@ import frametime
 
 class Ui_Black_Circle:
     image = None
+    Restart_Message_image = None
     def __init__(self):
         self.this_delete = False
 
@@ -28,10 +29,15 @@ class Ui_Black_Circle:
         self.now_size = 5.0
 
 
+        self.bRender_Restart_Message_UI = False
+
 
         self.now_image = 0
 
+        self.Restart_Message_image = 0
+
         self.init_image()
+
 
     def init_image(self):
         if Ui_Black_Circle.image is None:
@@ -40,12 +46,20 @@ class Ui_Black_Circle:
 
         self.now_image = Ui_Black_Circle.image
 
+        if Ui_Black_Circle.Restart_Message_image is None:
+            path = 'UI/resource/Restart_Message_UI.png'  # main.py 기준임
+            Ui_Black_Circle.Restart_Message_image = load_image(path)
+
+        self.Restart_Message_image = Ui_Black_Circle.Restart_Message_image
+
 
         pass
 
     def update(self):
         if self.now_size > 0.3:
             self.now_size -= frametime.frame_time * 1.5
+        else:
+            self.bRender_Restart_Message_UI = True
 
         pass
 
@@ -65,8 +79,13 @@ class Ui_Black_Circle:
     def render(self):
         self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
 
+        if self.bRender_Restart_Message_UI:
+            self.Restart_Message_image.draw(0,0,1100,700)
+
         pass
+
     def key_input_down(self, Key):
+
         pass
 
     def key_input_up(self, Key):
