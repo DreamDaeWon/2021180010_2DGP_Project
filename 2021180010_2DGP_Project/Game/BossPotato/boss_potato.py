@@ -13,6 +13,8 @@ from Game.BossPotato.boss_potato_skill import Boss_potato_skill
 
 from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
 
+from Game.collision import World_collision
+
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
@@ -20,7 +22,6 @@ parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경
 sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
 import object_manager
-import collision
 
 
 
@@ -188,7 +189,7 @@ class Boss_Potato:
         pass
 
     def late_update(self):
-
+        World_collision.boss_collision()
 
         pass
 
