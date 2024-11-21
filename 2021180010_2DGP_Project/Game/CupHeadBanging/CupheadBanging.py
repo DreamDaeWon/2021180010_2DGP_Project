@@ -100,6 +100,7 @@ class CupheadBanging:
         self.normal_attak = [8, 17, self.image_Nomal_Attak]
         self.clear = [36, 16, self.image_Clear]
         self.run = [16, 25, self.image_Run]
+        self.die = [24,25,self.image_Die]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -145,6 +146,13 @@ class CupheadBanging:
         path = 'CupHeadBanging/PlayerResoures/Run/cuphead_run_'  # main.py 기준임
         self.image_Run = []
         for a in range(1, 16 + 1):
+            finalPath = path + str(a) + '.png'
+            self.image_Run.append(load_image(finalPath))
+
+        # 리소스 죽음 상태
+        path = 'CupHeadBanging/PlayerResoures/Die/cuphead_ghost_'  # main.py 기준임
+        self.image_Die = []
+        for a in range(1, 24 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
 
