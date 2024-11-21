@@ -414,6 +414,7 @@ class CupheadBanging:
 
     def late_update(self):
         World_collision.player_collision()
+        World_collision.player_skill_collision()
         pass
 
     def render(self):
