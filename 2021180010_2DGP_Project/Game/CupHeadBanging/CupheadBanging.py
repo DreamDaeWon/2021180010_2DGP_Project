@@ -284,6 +284,8 @@ class CupheadBanging:
         if self.hit_bool:
             self.now_state_tuple = self.hit
 
+
+        # 죽었다면?
         if self.hp <= 0:
             self.now_state_tuple = self.die
 
