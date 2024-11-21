@@ -46,10 +46,10 @@ class Collision:
 
 
     def all_collision(self): # 모든 객체에 대한 충돌 검사
-        self.player_collision()
-        self.boss_collision()
-        self.boss_bullet_collision()
-        self.boss_bullet_item_collision()
+        #self.player_collision()
+        #self.boss_collision()
+        #self.boss_bullet_collision()
+        #self.boss_bullet_item_collision()
         pass
 
     def player_collision(self):

@@ -177,6 +177,9 @@ class CupheadBanging:
         if self.now_state_tuple == self.die:
             return
 
+        if self.stop:
+            return
+
         if key == SDLK_RIGHT:
             self.LR = False
 
@@ -251,6 +254,9 @@ class CupheadBanging:
 
         if self.now_state_tuple == self.die:
             self.player_gravity()
+            return
+
+        if self.stop:
             return
 
         if self.now_state_tuple != self.hit:
@@ -395,6 +401,8 @@ class CupheadBanging:
 
     def update(self):
 
+        self.check_stop_time()
+
         self.player_resource_state()
 
         self.player_move()
@@ -443,7 +451,11 @@ class CupheadBanging:
         pass
 
     def check_stop_time(self):
-      #if self.skill_freeze_time < 2.0:
+        if self.stop:
+            if self.skill_freeze_time < 1.0:
+                self.skill_freeze_time += frametime.frame_time
 
-
+            else:
+                self.skill_freeze_time = 0.0
+                self.stop = False
         pass
