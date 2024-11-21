@@ -9,19 +9,23 @@ import Game.CupHeadBanging.player_skill_cup
 
 from Game.BossPotato.boss_potato import Boss_Potato
 
+from Game.UI.ui_black_circle import Ui_Black_Circle
+
 from Game.collision import World_collision
 
 import os
 import sys
+
+
+
+from Game.object_manager import world, UI_list_num
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
 parent_dir = os.path.dirname(current_dir)  # 부모 디렉터리를 시스템 경로에 추가합니다
 sys.path.append(parent_dir)  # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
-
 import object_manager
-
 
 
 class PlayerState(enum.Enum):
@@ -393,6 +397,10 @@ class CupheadBanging:
             #self.rundir = 0
             if self.hp > 0:
                 self.hp -= 1
+                if self.hp == 0:
+                    object_manager.world[object_manager.UI_list_num].append(Ui_Black_Circle())
+
+
             self.gravity = True
             self.gravity_time = 0.0
             self.jump_angle = 0
