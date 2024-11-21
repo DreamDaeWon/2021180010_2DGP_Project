@@ -149,12 +149,13 @@ class CupheadBanging:
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
 
-        # 리소스 죽음 상태
+            # 리소스 죽음 상태
         path = 'CupHeadBanging/PlayerResoures/Die/cuphead_ghost_'  # main.py 기준임
         self.image_Die = []
         for a in range(1, 24 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
+
 
     def player_state_updete(self):  # 플레이어 상태가 변경 될 때 해주어야 할 것들
 
