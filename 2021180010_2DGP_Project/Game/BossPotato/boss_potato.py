@@ -193,7 +193,7 @@ class Boss_Potato:
 
     def late_update(self):
         World_collision.boss_collision()
-        World_collision.player_skill_collision()
+        #World_collision.player_skill_collision()
         pass
 
     def render(self):

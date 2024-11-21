@@ -56,7 +56,7 @@ class Ui_Black_Circle:
         pass
 
     def update(self):
-        if self.now_size > 0.3:
+        if self.now_size > 0.32:
             self.now_size -= frametime.frame_time * 1.5
         else:
             self.bRender_Restart_Message_UI = True
