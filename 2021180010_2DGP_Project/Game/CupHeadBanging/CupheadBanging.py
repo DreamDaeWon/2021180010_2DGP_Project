@@ -438,7 +438,7 @@ class CupheadBanging:
         bullet.LR = not self.LR
         object_manager.input_object(bullet, object_manager.player_skill_list_num)
 
-        self.stop = True;
+        self.stop = True
 
         pass
 
