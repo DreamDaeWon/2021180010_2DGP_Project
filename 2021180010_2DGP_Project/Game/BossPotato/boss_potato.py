@@ -4,6 +4,7 @@ import math
 
 import random
 
+import pygame
 from pico2d import*
 
 import os
@@ -26,7 +27,7 @@ import object_manager
 
 
 class Boss_Potato:
-
+    Boss_image = None
     def __init__(self):
 
 
@@ -86,7 +87,9 @@ class Boss_Potato:
     def in_put_resources(self):
         # 리소스 기본상태
         path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
-        self.image = load_image(path)
+        if Boss_Potato.Boss_image is None:
+            Boss_Potato.Boss_image = load_image(path)
+        self.image = Boss_Potato.Boss_image
         # 한 사진당
         # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
         # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
