@@ -89,8 +89,11 @@ class CupheadBanging:
         self.normal_attaking_high = 3
 
         # 스킬사용
-        self.skill = False
+        self.stop = False
         self.skill_freeze_time = 0.0 # 2초동안 가만히
+
+        # 체력
+        self.hp = 5
 
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
@@ -154,7 +157,7 @@ class CupheadBanging:
         self.image_Die = []
         for a in range(1, 24 + 1):
             finalPath = path + str(a) + '.png'
-            self.image_Run.append(load_image(finalPath))
+            self.image_Die.append(load_image(finalPath))
 
 
     def player_state_updete(self):  # 플레이어 상태가 변경 될 때 해주어야 할 것들
@@ -170,6 +173,9 @@ class CupheadBanging:
         pass
 
     def player_left_right_key_down(self, key):
+
+        if self.now_state_tuple == self.die:
+            return
 
         if key == SDLK_RIGHT:
             self.LR = False
@@ -242,6 +248,11 @@ class CupheadBanging:
         pass
 
     def player_move(self):
+
+        if self.now_state_tuple == self.die:
+            self.player_gravity()
+            return
+
         if self.now_state_tuple != self.hit:
             self.player_move_run()
             self.player_move_jump()
@@ -253,7 +264,11 @@ class CupheadBanging:
 
     def player_resource_state(self):
 
+
+
         self.before_state_tuple = self.now_state_tuple
+
+
 
         self.now_state_tuple = self.idle
 
@@ -268,6 +283,9 @@ class CupheadBanging:
 
         if self.hit_bool:
             self.now_state_tuple = self.hit
+
+        if self.hp <= 0:
+            self.now_state_tuple = self.die
 
         if self.frame >= self.now_state_tuple[0]:
             self.frame = 0.0
@@ -365,6 +383,8 @@ class CupheadBanging:
         if self.now_state_tuple == self.hit:
             self.hit_bool = False  # 맞은 상태 끝!
             #self.rundir = 0
+            if self.hp > 0:
+                self.hp -= 1
             self.gravity = True
             self.gravity_time = 0.0
             self.jump_angle = 0
@@ -415,4 +435,13 @@ class CupheadBanging:
         bullet.CY = self.CY
         bullet.LR = not self.LR
         object_manager.input_object(bullet, object_manager.player_skill_list_num)
+
+        self.stop = True;
+
+        pass
+
+    def check_stop_time(self):
+      #if self.skill_freeze_time < 2.0:
+
+
         pass
