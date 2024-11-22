@@ -31,12 +31,13 @@ def initialize():
     #world_all = [[],[],[],[]] # 0번 배경, 1번 보스, 2번 플레이어, 3번 총알
 # 추가 순서는 배경->보스->플레이어 순
     #배경 추가
-    object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Farm())
-
-
-    # Player 추가
-    object_manager.world[2].append(CupheadBanging())
-    World_collision.get_player(object_manager.world[2][0])
+    #object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Farm())
+#
+#
+    ## Player 추가
+    #object_manager.world[2].append(CupheadBanging())
+    #World_collision.get_player(object_manager.world[2][0])
+    object_manager.change_object(1)
 
 
     #보스 추가
