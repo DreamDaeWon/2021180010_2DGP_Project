@@ -7,6 +7,8 @@ import sys
 
 import object_manager
 
+import stage_manager
+
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
 parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
@@ -17,11 +19,13 @@ import frametime
 class Ui_Black_Circle:
     image = None
     Restart_Message_image = None
-    def __init__(self):
+    def __init__(self,now_stage):
         self.this_delete = False
 
         self.x = 1100 * 0.5
         self.y = 700 * 0.5
+
+        self.now_stage = now_stage
 
         self.image_width = 6600
         self.image_height = 4200
@@ -85,7 +89,9 @@ class Ui_Black_Circle:
         pass
 
     def key_input_down(self, Key):
-
+        if Key == SDLK_r:
+            if self.bRender_Restart_Message_UI:
+                stage_manager.change_stage(self.now_stage)
         pass
 
     def key_input_up(self, Key):

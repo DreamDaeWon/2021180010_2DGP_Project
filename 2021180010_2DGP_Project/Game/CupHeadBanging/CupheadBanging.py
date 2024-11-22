@@ -5,6 +5,9 @@ import math
 from pico2d import *
 
 
+import stage_manager
+
+
 import Game.CupHeadBanging.player_skill_cup
 
 from Game.BossPotato.boss_potato import Boss_Potato
@@ -35,7 +38,9 @@ class PlayerState(enum.Enum):
 
 
 class CupheadBanging:
-    def __init__(self):
+    def __init__(self, now_stage):
+
+        self.now_stage = now_stage
 
         self.this_delete = False  # 이 객체를 지워야 하는지?
 
@@ -357,6 +362,8 @@ class CupheadBanging:
             self.CY = 400
             self.gravity = True
 
+
+
             pass
         elif key == SDLK_k:
             self.hit_bool = True
@@ -396,7 +403,7 @@ class CupheadBanging:
             if self.hp > 0:
                 self.hp -= 1
                 if self.hp == 0:
-                    object_manager.world[object_manager.UI_list_num].append(Ui_Black_Circle())
+                    object_manager.world[object_manager.UI_list_num].append(Ui_Black_Circle(self.now_stage))
 
 
             self.gravity = True

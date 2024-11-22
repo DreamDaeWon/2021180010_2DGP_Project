@@ -38,6 +38,12 @@ def delete_object():
         for i in copy_list:
             if i.this_delete:
                 list.remove(i)
+                del i
 
 
 
+def delete_all():
+    for w in world:
+        for i in w:
+            del i
+        w.clear()

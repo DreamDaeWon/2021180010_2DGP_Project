@@ -36,7 +36,7 @@ class Boss_Potato:
 
         self.CX = 850
 
-        self.CY = 100
+        self.CY = 300
 
         self.boss_potato_rx = 0.0
 
@@ -46,6 +46,9 @@ class Boss_Potato:
 
         self.row_frame = 0 # 행 프레임
 
+        self.hp = 10
+
+        self.hit_bool = False
 
 
 

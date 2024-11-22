@@ -41,7 +41,7 @@ def initialize():
 
 
     # 스테이지 매니저 추가
-    stage_manager.change_object(1)
+    stage_manager.change_stage(1)
 
 
 
