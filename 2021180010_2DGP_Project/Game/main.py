@@ -1,5 +1,6 @@
 from os import closerange
 
+from Game import stage_manager
 from dw_define import*
 
 from Game.collision import World_collision
@@ -37,12 +38,10 @@ def initialize():
     ## Player 추가
     #object_manager.world[2].append(CupheadBanging())
     #World_collision.get_player(object_manager.world[2][0])
-    object_manager.change_object(1)
 
 
-    #보스 추가
-    #object_manager.world[1].append(Boss_Potato())
-    #All_collision.get_boss(object_manager.world[1][0])
+    # 스테이지 매니저 추가
+    stage_manager.change_object(1)
 
 
 
