@@ -80,6 +80,8 @@ class Boss_Potato:
 
         self.attack_dict = {}
 
+        self.die_dict = {}
+
         self.in_put_resources()
 
         self.now_state_dict = self.Create
@@ -162,6 +164,24 @@ class Boss_Potato:
         self.attack_dict['bottom'] = 2391  # y값 어디서부터 시작하는지?
         self.attack_dict['go_right'] = 531  # x값 얼마만큼 떨어지는지?
         self.attack_dict['go_down'] = 517  # y값 얼마만큼 떨어지는지?
+        pass
+
+    def set_die_motion(self):
+        # 한 사진당
+        # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
+        # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
+        # self.Idle = [526,512,20,7,4522,8,6]
+        self.die_dict['width'] = 303  # 가로크기
+        self.die_dict['high'] = 439  # 세로크기
+        self.die_dict['frame'] = 9  # 총 몇 프레임인지?
+        self.die_dict['frame_speed'] = 20  # 프레임 속도
+        self.die_dict['column_frame'] = 9  # 가로 프레임 몇 개인지?
+        self.die_dict['row_frame'] = 1  # 세로 프레임 몇 개인지?
+        self.die_dict['last_row_frame'] = 9  # 마지막 줄 가로 프레임
+        self.die_dict['left'] = 7  # x값 어디서부터 시작하는지?
+        self.die_dict['bottom'] = 850  # y값 어디서부터 시작하는지?
+        self.die_dict['go_right'] = 308  # x값 얼마만큼 떨어지는지?
+        self.die_dict['go_down'] = 439  # y값 얼마만큼 떨어지는지?
         pass
 
 
