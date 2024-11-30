@@ -333,6 +333,9 @@ class CupheadBanging:
         #    self.rundir = 0
         #    return
 
+        if self.hp == 0:
+            return
+
         self.player_left_right_key_down(key)
 
         if key == SDLK_RIGHT:
@@ -348,7 +351,9 @@ class CupheadBanging:
             pass
 
         elif key == SDLK_z:
-            self.shoot_skill()
+            if self.skill_number > 0:
+                self.skill_number -= 1
+                self.shoot_skill()
 
 
         elif key == SDLK_SPACE:

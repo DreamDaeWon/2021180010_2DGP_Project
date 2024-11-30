@@ -15,11 +15,11 @@ import frametime
 
 class Player_Skill_Ui:
     image = None
-    def __init__(self,x,y):
+    def __init__(self,x):
         self.this_delete = False
 
-        self.x = 100*x
-        self.y = 600
+        self.x = 100*x - 30
+        self.y = 630
 
         self.image_width = 0
         self.image_height = 0
@@ -49,7 +49,7 @@ class Player_Skill_Ui:
 
 
     def render(self):
-        self.now_image.draw(self.x,self.y,self.image_width,self.image_height)
+        self.now_image.draw(self.x,self.y,self.image_width * 0.3,self.image_height * 0.3)
         pass
     def key_input_down(self, Key):
         pass

@@ -1,4 +1,6 @@
 from Game.Effect import player_hand_hit_effect
+from Game.UI import player_skill_ui
+from Game.UI.player_skill_ui import Player_Skill_Ui
 from dw_define import*
 
 import object_manager
@@ -120,7 +122,11 @@ class Collision:
                 o.this_delete = True
 
             elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
-                self.player.skill_number += 1
+                if self.player.skill_number < 3:
+                    self.player.skill_number += 1
+                    skill = Player_Skill_Ui(self.player.skill_number)
+                    object_manager.world[object_manager.UI_list_num].append(skill)
+
                 effect = player_hand_hit_effect.Player_hand_hit_effect()
                 effect.CX = self.player.CX
                 effect.CY = self.player.CY
