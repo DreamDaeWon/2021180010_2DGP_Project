@@ -30,6 +30,7 @@ class Player_skill_cup:
 
         self.LR = True # True면 오른쪽
 
+        self.bool_hit = False # 보스때렸는지?
 
         self.frame = 0.0
 
@@ -82,7 +83,14 @@ class Player_skill_cup:
 
         if self.before_state_tuple == self.now_state_tuple:
             self.frame += 1.0 * self.now_state_tuple[1] * frametime.frame_time
+
+            if self.bool_hit is False and self.frame >= 26:
+                self.frame = 14
+
+
+
             if self.frame >= self.now_state_tuple[0]:
+                self.this_delete = True
                 self.skill_update()
                 self.frame = 0.0
 

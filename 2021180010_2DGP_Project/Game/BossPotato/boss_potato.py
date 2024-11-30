@@ -46,7 +46,7 @@ class Boss_Potato:
 
         self.row_frame = 0 # 행 프레임
 
-        self.hp = 10
+        self.hp = 1
 
         self.hit_bool = False
 
