@@ -40,7 +40,11 @@ def delete_object():
                 list.remove(i)
                 del i
 
-
+def delete_want_list(list_num):
+    w = world[list_num]
+    for i in w:
+        del i
+    w.clear()
 
 def delete_all():
     for w in world:

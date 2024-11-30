@@ -201,6 +201,11 @@ class Boss_Potato:
                 self.shoot_skill()
                 self.shoot = True
 
+        if self.hit_bool is True:
+            if self.hp > 0:
+                self.hp -= 1
+            self.hit_bool = False
+
         pass
 
     def update(self):
@@ -272,6 +277,10 @@ class Boss_Potato:
         self.before_state_dict = self.now_state_dict
 
         #self.now_state_dict = self.Create
+
+        if self.hp <= 0:
+            self.now_state_dict = self.die_dict
+
 
         if self.now_state_dict == self.Create:
             self.intro_ground_frame += 1 * self.intro_ground_dict['frame_speed'] * frametime.frame_time

@@ -81,6 +81,10 @@ class Collision:
 
         pass
 
+
+
+
+
     def boss_collision(self):
 
         if self.boss == None:

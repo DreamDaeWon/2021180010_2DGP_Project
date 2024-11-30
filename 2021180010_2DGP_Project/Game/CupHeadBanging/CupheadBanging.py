@@ -408,6 +408,7 @@ class CupheadBanging:
             if self.hp > 0:
                 self.hp -= 1
                 if self.hp == 0:
+                    object_manager.delete_want_list(object_manager.UI_list_num)
                     object_manager.world[object_manager.UI_list_num].append(Ui_Black_Circle(self.now_stage))
 
 
