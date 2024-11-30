@@ -103,6 +103,7 @@ class Boss_Potato:
         self.set_in_game_motion()
         self.set_intro_ground_motion()
         self.set_attack_motion()
+        self.set_die_motion()
 
         # 보스 일반 공격 모션
 
