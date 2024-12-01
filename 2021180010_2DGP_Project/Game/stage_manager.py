@@ -2,11 +2,15 @@ import object_manager
 from Game.CupHeadBanging.cupheadBanging import CupheadBanging
 from Game.UI.back_ground_Farm import Back_Ground_Farm
 from Game.collision import World_collision
+from Game.UI.Title.ui_main_title import Ui_Main_Title
 
 
 
 def change_stage(want_level_num):
     object_manager.delete_all()
+
+    if want_level_num == 0:
+        object_manager.world[object_manager.back_ground_list_num].append(Ui_Main_Title())
 
     if want_level_num == 1:
         object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Farm())

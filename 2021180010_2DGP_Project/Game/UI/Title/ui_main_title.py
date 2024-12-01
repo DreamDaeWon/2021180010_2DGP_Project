@@ -17,15 +17,18 @@ import frametime
 
 
 class Ui_Main_Title:
-    image = None
-    Restart_Message_image = None
-    def __init__(self,now_stage):
+    mian_image = None
+    black_circle = None
+    banging = None
+    made_by_dw = None
+    main_cuphead_banging = None
+
+    def __init__(self):
         self.this_delete = False
 
         self.x = 1100 * 0.5
         self.y = 700 * 0.5
 
-        self.now_stage = now_stage
 
         self.image_width = 6600
         self.image_height = 4200
@@ -36,26 +39,52 @@ class Ui_Main_Title:
         self.bRender_Restart_Message_UI = False
 
 
-        self.now_image = 0
+        self.mian_image = 0
 
-        self.Restart_Message_image = 0
+        self.black_circle = 0
+
+        self.banging = 0
+
+        self.made_by_dw = 0
+
+        self.main_cuphead_banging = []
 
         self.init_image()
 
 
     def init_image(self):
-        if Ui_Black_Circle.image is None:
+        if Ui_Main_Title.mian_image is None:
+            path = 'UI/resource/Title/title_screen_background.png'  # main.py 기준임
+            Ui_Main_Title.mian_image = load_image(path)
+
+        self.mian_image = Ui_Main_Title.mian_image
+
+        if Ui_Main_Title.black_circle is None:
             path = 'UI/resource/Black_Circle.png'  # main.py 기준임
-            Ui_Black_Circle.image = load_image(path)
+            Ui_Main_Title.black_circle = load_image(path)
 
-        self.now_image = Ui_Black_Circle.image
+        self.black_circle = Ui_Main_Title.black_circle
 
-        if Ui_Black_Circle.Restart_Message_image is None:
-            path = 'UI/resource/Restart_Message_UI.png'  # main.py 기준임
-            Ui_Black_Circle.Restart_Message_image = load_image(path)
+        if Ui_Main_Title.banging is None:
+            path = 'UI/resource/Title/Title_Banging.png'  # main.py 기준임
+            Ui_Main_Title.banging = load_image(path)
 
-        self.Restart_Message_image = Ui_Black_Circle.Restart_Message_image
+        self.banging = Ui_Main_Title.banging
 
+        if Ui_Main_Title.made_by_dw is None:
+            path = 'UI/resource/Title/made_by_dw.png'  # main.py 기준임
+            Ui_Main_Title.made_by_dw = load_image(path)
+
+        self.made_by_dw = Ui_Main_Title.made_by_dw
+
+        if Ui_Main_Title.main_cuphead_banging is None:
+            path = 'UI/resource/Title/Cup_Head_Banging_Title'  # main.py 기준임
+            Ui_Main_Title.main_cuphead_banging = []
+            for i in range(1,13):
+                finalpath = path + str(i) + '.png'
+                Ui_Main_Title.main_cuphead_banging.append(load_image(finalpath))
+
+        self.main_cuphead_banging = Ui_Main_Title.main_cuphead_banging
 
         pass
 
@@ -72,15 +101,12 @@ class Ui_Main_Title:
         if object_manager.world[object_manager.player_list_num][0] is None:
             self.this_delete = True
 
-        else:
-            self.x = object_manager.world[object_manager.player_list_num][0].CX
-            self.y = object_manager.world[object_manager.player_list_num][0].CY
-
 
         pass
 
 
     def render(self):
+
         self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
 
         if self.bRender_Restart_Message_UI:
@@ -89,9 +115,9 @@ class Ui_Main_Title:
         pass
 
     def key_input_down(self, Key):
-        if Key == SDLK_r:
+        if Key == SDLK_KP_ENTER:
             if self.bRender_Restart_Message_UI:
-                stage_manager.change_stage(self.now_stage)
+                stage_manager.change_stage(1)
         pass
 
     def key_input_up(self, Key):
