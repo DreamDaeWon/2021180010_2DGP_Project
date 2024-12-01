@@ -30,6 +30,12 @@ def delete_want_object(object):
                 world.remove(object)
                 del i
 
+def delete_want_list_last_object(list_num):
+    w = world[list_num]
+    o = w[-1]
+    w.pop()
+
+    del o
 
 def delete_object():
 

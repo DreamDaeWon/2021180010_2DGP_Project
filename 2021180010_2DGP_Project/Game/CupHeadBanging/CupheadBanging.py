@@ -354,6 +354,7 @@ class CupheadBanging:
             if self.skill_number > 0:
                 self.skill_number -= 1
                 self.shoot_skill()
+                object_manager.delete_want_list_last_object(object_manager.UI_list_num)
 
 
         elif key == SDLK_SPACE:
