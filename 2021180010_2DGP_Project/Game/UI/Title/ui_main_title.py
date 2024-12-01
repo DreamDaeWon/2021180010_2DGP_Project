@@ -16,7 +16,7 @@ sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습�
 import frametime
 
 
-class Ui_Black_Circle:
+class Ui_Main_Title:
     image = None
     Restart_Message_image = None
     def __init__(self,now_stage):
