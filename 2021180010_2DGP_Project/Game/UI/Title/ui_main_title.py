@@ -9,6 +9,10 @@ import object_manager
 
 import stage_manager
 
+PI = 3.141592653589793
+
+Rad = PI/180
+
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
 parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
@@ -52,6 +56,19 @@ class Ui_Main_Title:
         self.init_image()
 
 
+        #Banging 관련 변수
+        self.banging_angle = 0.0
+
+        #made_by_daewon 관련 변수
+        self.dae_won_X_pos = 600
+
+        #컵헤드 뱅잉 관련변수
+        self.frame = 0.0
+        self.frame_speed = 20
+        self.frame_Move = 1
+        self.cuphead_banging_size = 1.0
+
+
     def init_image(self):
         if Ui_Main_Title.mian_image is None:
             path = 'UI/resource/Title/title_screen_background.png'  # main.py 기준임
@@ -78,7 +95,7 @@ class Ui_Main_Title:
         self.made_by_dw = Ui_Main_Title.made_by_dw
 
         if Ui_Main_Title.main_cuphead_banging is None:
-            path = 'UI/resource/Title/Cup_Head_Banging_Title'  # main.py 기준임
+            path = 'UI/resource/Title/Cuphead/Cup_Head_Banging_Title'  # main.py 기준임
             Ui_Main_Title.main_cuphead_banging = []
             for i in range(1,13):
                 finalpath = path + str(i) + '.png'
@@ -94,12 +111,35 @@ class Ui_Main_Title:
         else:
             self.bRender_Restart_Message_UI = True
 
+        if self.banging_angle < 720:
+            self.banging_angle += 750.0 * frametime.frame_time
+        else:
+            self.banging_angle = 720
+
+
+        if self.banging_angle == 720:
+            if self.dae_won_X_pos > 0:
+                self.dae_won_X_pos -= frametime.frame_time * 500
+            else:
+                self.dae_won_X_pos = 0
+
+
+        if self.dae_won_X_pos == 0:
+            self.frame += frametime.frame_time * self.frame_speed
+
+        if self.frame >= 13:
+            self.frame_Move *= -1
+            self.frame = 12
+        elif self.frame <= -1:
+            self.frame_Move *= -1
+            self.frame = 0
+
         pass
 
     def late_update(self):
 
-        if object_manager.world[object_manager.player_list_num][0] is None:
-            self.this_delete = True
+        #if object_manager.world[object_manager.player_list_num][0] is None:
+        #    self.this_delete = True
 
 
         pass
@@ -107,17 +147,29 @@ class Ui_Main_Title:
 
     def render(self):
 
-        self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
+        self.mian_image.draw(570,350,1244,700)
 
-        if self.bRender_Restart_Message_UI:
-            self.Restart_Message_image.draw(550,350,1100,700)
+        self.banging.clip_composite_draw(0,0, self.banging.w, self.banging.h,self.banging_angle * Rad,'',550,350,self.banging.w * self.banging_angle / 720, self.banging.h * self.banging_angle / 720)
+
+        self.made_by_dw.draw(480 + self.dae_won_X_pos, 350, 1244, 700)
+        #self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
+
+        if self.dae_won_X_pos == 0:
+            self.main_cuphead_banging[int(self.frame)].clip_composite_draw(0,0, self.main_cuphead_banging[int(self.frame)].w, self.main_cuphead_banging[int(self.frame)].h,
+                                                                           0,'',300,300,
+                                                                           self.main_cuphead_banging[int(self.frame)].w,
+                                                                           self.main_cuphead_banging[int(self.frame)].h)
+
+        #if self.bRender_Restart_Message_UI:
+        #    self.Restart_Message_image.draw(550,350,1100,700)
+
+
 
         pass
 
     def key_input_down(self, Key):
-        if Key == SDLK_KP_ENTER:
-            if self.bRender_Restart_Message_UI:
-                stage_manager.change_stage(1)
+        if Key == SDLK_RETURN:
+            stage_manager.change_stage(1)
         pass
 
     def key_input_up(self, Key):
