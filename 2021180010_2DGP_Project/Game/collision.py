@@ -97,7 +97,6 @@ class Collision:
         pass
 
     def player_skill_collision(self): # 보스가 맞는 거임 # 이거 수정하고 추가해야 함
-
         for o in object_manager.world[object_manager.player_skill_list_num]:
             if o.CX + o.get_collision_size()[0] < 0:
                 o.this_delete = True
@@ -120,6 +119,12 @@ class Collision:
 
     def boss_bullet_collision(self):
 
+        if self.boss == None:
+            return
+
+        if self.boss.hp <= 0:
+            return
+
         for o in object_manager.world[3]:
             if o.CX + o.get_collision_size()[0] < 0:
                 o.this_delete = True
@@ -133,6 +138,12 @@ class Collision:
         pass
 
     def boss_bullet_item_collision(self):
+
+        if self.boss == None:
+            return
+
+        if self.boss.hp <= 0:
+            return
 
         for o in object_manager.world[object_manager.player_skill_item_num]:
             if o.CX + o.get_collision_size()[0] < 0:
