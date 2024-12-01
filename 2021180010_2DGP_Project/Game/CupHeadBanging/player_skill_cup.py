@@ -145,4 +145,5 @@ class Player_skill_cup:
 
     def get_collision_size(self):
         # left, top ,right, bottom
-        return self.CX - self.player_skill_cup_rx, self.CY + self.player_skill_cup_ry, self.CX + self.player_skill_cup_rx, self.CY - self.player_skill_cup_ry
+        size = 0.5
+        return self.CX - self.player_skill_cup_rx * size, self.CY + self.player_skill_cup_ry * size, self.CX + self.player_skill_cup_rx* size, self.CY - self.player_skill_cup_ry* size

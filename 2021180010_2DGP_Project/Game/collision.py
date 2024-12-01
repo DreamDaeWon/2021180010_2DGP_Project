@@ -104,7 +104,19 @@ class Collision:
 
             elif self.box_collision(self.boss.get_collision_size(),o.get_collision_size()):
                 self.boss.hit_bool = True
-                o.this_delete = True
+                if o.bool_hit is False:
+                    o.bool_hit = True
+                    effect = player_hand_hit_effect.Player_hand_hit_effect()
+                    if o.LR is True:
+                        effect.CX = o.CX + 150
+                    else:
+                        effect.CX = o.CX - 150
+
+                    effect.CY = o.CY
+                    object_manager.world[object_manager.effect_num].append(effect)
+
+
+                #o.this_delete = True
 
     def boss_bullet_collision(self):
 
@@ -115,6 +127,7 @@ class Collision:
             elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
                 self.player.hit_bool = True
                 o.this_delete = True
+
 
 
         pass
