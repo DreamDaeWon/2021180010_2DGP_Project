@@ -97,7 +97,7 @@ class Ui_Main_Title:
         if Ui_Main_Title.main_cuphead_banging is None:
             path = 'UI/resource/Title/Cuphead/Cup_Head_Banging_Title'  # main.py 기준임
             Ui_Main_Title.main_cuphead_banging = []
-            for i in range(1,13):
+            for i in range(1,14):
                 finalpath = path + str(i) + '.png'
                 Ui_Main_Title.main_cuphead_banging.append(load_image(finalpath))
 
@@ -125,7 +125,7 @@ class Ui_Main_Title:
 
 
         if self.dae_won_X_pos == 0:
-            self.frame += frametime.frame_time * self.frame_speed
+            self.frame += frametime.frame_time * self.frame_speed * self.frame_Move
 
         if self.frame >= 13:
             self.frame_Move *= -1
@@ -157,8 +157,8 @@ class Ui_Main_Title:
         if self.dae_won_X_pos == 0:
             self.main_cuphead_banging[int(self.frame)].clip_composite_draw(0,0, self.main_cuphead_banging[int(self.frame)].w, self.main_cuphead_banging[int(self.frame)].h,
                                                                            0,'',300,300,
-                                                                           self.main_cuphead_banging[int(self.frame)].w,
-                                                                           self.main_cuphead_banging[int(self.frame)].h)
+                                                                           self.main_cuphead_banging[int(self.frame)].w * self.cuphead_banging_size,
+                                                                           self.main_cuphead_banging[int(self.frame)].h * self.cuphead_banging_size,)
 
         #if self.bRender_Restart_Message_UI:
         #    self.Restart_Message_image.draw(550,350,1100,700)
