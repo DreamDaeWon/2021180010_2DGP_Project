@@ -38,7 +38,6 @@ def delete_want_list_last_object(list_num):
     del o
 
 def delete_object():
-
     for list in world:
         copy_list = list
         for i in copy_list:

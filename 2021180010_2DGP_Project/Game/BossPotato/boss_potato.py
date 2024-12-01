@@ -46,6 +46,8 @@ class Boss_Potato:
 
         self.row_frame = 0 # 행 프레임
 
+        self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
+
         self.hp = 1
 
         self.hit_bool = False
@@ -173,11 +175,11 @@ class Boss_Potato:
         # self.Idle = [526,512,20,7,4522,8,6]
         self.die_dict['width'] = 303  # 가로크기
         self.die_dict['high'] = 438  # 세로크기
-        self.die_dict['frame'] = 9  # 총 몇 프레임인지?
-        self.die_dict['frame_speed'] = 10  # 프레임 속도
-        self.die_dict['column_frame'] = 9# 가로 프레임 몇 개인지?
+        self.die_dict['frame'] = 8  # 총 몇 프레임인지?
+        self.die_dict['frame_speed'] = 20  # 프레임 속도
+        self.die_dict['column_frame'] = 8# 가로 프레임 몇 개인지?
         self.die_dict['row_frame'] = 1  # 세로 프레임 몇 개인지?
-        self.die_dict['last_row_frame'] = 9  # 마지막 줄 가로 프레임
+        self.die_dict['last_row_frame'] = 8  # 마지막 줄 가로 프레임
         self.die_dict['left'] = 7  # x값 어디서부터 시작하는지?
         self.die_dict['bottom'] = 850  # y값 어디서부터 시작하는지?
         self.die_dict['go_right'] = 308  # x값 얼마만큼 떨어지는지?
@@ -280,6 +282,7 @@ class Boss_Potato:
 
         if self.hp <= 0:
             self.now_state_dict = self.die_dict
+            self.CY -= 50
 
 
         if self.now_state_dict == self.Create:
@@ -291,8 +294,11 @@ class Boss_Potato:
 
 
         if self.before_state_dict == self.now_state_dict:
-            self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time
+            self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time * self.frame_move
             self.row_frame = int(self.frame / self.now_state_dict['column_frame'])
+
+
+
 
             # 이건 인트로 때만 동작
             if self.now_state_dict == self.Create:
@@ -300,14 +306,22 @@ class Boss_Potato:
                     self.frame = 0
                     self.row_frame = 0
 
+            if self.frame <= -1:
+                self.frame_move = self.frame_move * -1
+                self.frame = 0
+                self.row_frame = 0
+
 
             if self.frame >= self.now_state_dict['frame']:
-
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
                 if self.now_state_dict == self.Create:
                     self.now_state_dict = self.attack_dict # 일단은 반복
 
-                self.frame = 0
+                if self.now_state_dict == self.die_dict:
+                    self.frame_move = self.frame_move * -1
+                    self.frame -= self.now_state_dict['frame_speed'] * frametime.frame_time * 1
+                else:
+                    self.frame = 0
                 self.row_frame = 0
         else:
             self.boss_state_update()
