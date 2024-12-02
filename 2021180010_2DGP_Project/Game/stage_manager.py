@@ -24,6 +24,7 @@ def change_stage(want_level_num):
     if want_level_num == 2:
         object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Forest())
         object_manager.world[2].append(CupheadBanging(2))
+        World_collision.get_player(object_manager.world[2][0])
         pass
 
     pass
