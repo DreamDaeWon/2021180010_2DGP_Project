@@ -71,31 +71,31 @@ class Ui_Main_Title:
 
     def init_image(self):
         if Ui_Main_Title.mian_image is None:
-            path = 'UI/resource/Title/title_screen_background.png'  # main.py 기준임
+            path = 'Resources/UiResources/Title/title_screen_background.png'  # main.py 기준임
             Ui_Main_Title.mian_image = load_image(path)
 
         self.mian_image = Ui_Main_Title.mian_image
 
         if Ui_Main_Title.black_circle is None:
-            path = 'UI/resource/Black_Circle.png'  # main.py 기준임
+            path = 'Resources/UiResources/Black_Circle.png'  # main.py 기준임
             Ui_Main_Title.black_circle = load_image(path)
 
         self.black_circle = Ui_Main_Title.black_circle
 
         if Ui_Main_Title.banging is None:
-            path = 'UI/resource/Title/Title_Banging.png'  # main.py 기준임
+            path = 'Resources/UiResources/Title/Title_Banging.png'  # main.py 기준임
             Ui_Main_Title.banging = load_image(path)
 
         self.banging = Ui_Main_Title.banging
 
         if Ui_Main_Title.made_by_dw is None:
-            path = 'UI/resource/Title/made_by_dw.png'  # main.py 기준임
+            path = 'Resources/UiResources/Title/made_by_dw.png'  # main.py 기준임
             Ui_Main_Title.made_by_dw = load_image(path)
 
         self.made_by_dw = Ui_Main_Title.made_by_dw
 
         if Ui_Main_Title.main_cuphead_banging is None:
-            path = 'UI/resource/Title/Cuphead/Cup_Head_Banging_Title'  # main.py 기준임
+            path = 'Resources/UiResources/Title/Cuphead/Cup_Head_Banging_Title'  # main.py 기준임
             Ui_Main_Title.main_cuphead_banging = []
             for i in range(1,14):
                 finalpath = path + str(i) + '.png'

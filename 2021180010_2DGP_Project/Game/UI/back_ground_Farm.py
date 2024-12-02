@@ -30,7 +30,7 @@ class Back_Ground_Farm:
 
     def init_image(self):
         if Back_Ground_Farm.image is None:
-            path = 'UI/resource/farm.png'  # main.py 기준임
+            path = 'Resources/UiResources/farm.png'  # main.py 기준임
             Back_Ground_Farm.image = load_image(path)
 
         self.now_image = Back_Ground_Farm.image

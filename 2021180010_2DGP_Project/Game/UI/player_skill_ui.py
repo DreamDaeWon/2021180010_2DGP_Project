@@ -30,7 +30,7 @@ class Player_Skill_Ui:
 
     def init_image(self):
         if Player_Skill_Ui.image is None:
-            path = 'UI/resource/player_skill_ui.png'  # main.py 기준임
+            path = 'Resources/UiResources/player_skill_ui.png'  # main.py 기준임
             Player_Skill_Ui.image = load_image(path)
 
         self.now_image = Player_Skill_Ui.image

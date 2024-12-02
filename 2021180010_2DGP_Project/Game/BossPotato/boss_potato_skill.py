@@ -45,7 +45,7 @@ class Boss_potato_skill:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
+        path = 'Resources/PotatoResource/BossPotato.png'  # main.py 기준임
         if Boss_potato_skill.image is None:
             Boss_potato_skill.image = load_image(path)
         # 한 사진당

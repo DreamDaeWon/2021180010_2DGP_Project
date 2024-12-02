@@ -118,49 +118,49 @@ class CupheadBanging:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        path = 'CupHeadBanging/PlayerResoures/Idle/cuphead_idle_000'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Idle/cuphead_idle_000'  # main.py 기준임
         self.image_Idle = []
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Idle.append(load_image(finalPath))
 
         # 리소스 맞는상태
-        path = 'CupHeadBanging/PlayerResoures/Hit/cuphead_hit_air_000'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Hit/cuphead_hit_air_000'  # main.py 기준임
         self.image_Hit = []
         for a in range(1, 6 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Hit.append(load_image(finalPath))
 
         # 리소스 점프상태
-        path = 'CupHeadBanging/PlayerResoures/Jump/cuphead_jump_000'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Jump/cuphead_jump_000'  # main.py 기준임
         self.image_Jump = []
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Jump.append(load_image(finalPath))
 
         # 리소스 점프공격 상태
-        path = 'CupHeadBanging/PlayerResoures/Attak/Hand/cuphead_parry_000'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Attak/Hand/cuphead_parry_000'  # main.py 기준임
         self.image_Nomal_Attak = []
         for a in range(1, 8 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Nomal_Attak.append(load_image(finalPath))
 
         # 리소스 클리어 상태
-        path = 'CupHeadBanging/PlayerResoures/Clear/player_ch_powerup_'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Clear/player_ch_powerup_'  # main.py 기준임
         self.image_Clear = []
         for a in range(1, 36 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Clear.append(load_image(finalPath))
 
         # 리소스 달리기 상태
-        path = 'CupHeadBanging/PlayerResoures/Run/cuphead_run_'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Run/cuphead_run_'  # main.py 기준임
         self.image_Run = []
         for a in range(1, 16 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
 
             # 리소스 죽음 상태
-        path = 'CupHeadBanging/PlayerResoures/Die/cuphead_ghost_'  # main.py 기준임
+        path = 'Resources/PlayerResoures/Die/cuphead_ghost_'  # main.py 기준임
         self.image_Die = []
         for a in range(1, 24 + 1):
             finalPath = path + str(a) + '.png'
@@ -367,6 +367,9 @@ class CupheadBanging:
         elif key == SDLK_t:
             self.CY = 400
             self.gravity = True
+            
+        elif key == SDLK_RETURN:
+            stage_manager.change_stage(self.now_stage + 1)
 
 
 

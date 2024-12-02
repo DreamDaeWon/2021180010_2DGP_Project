@@ -93,7 +93,7 @@ class Boss_Potato:
 
     def in_put_resources(self):
         # 리소스 기본상태
-        path = 'BossPotato/PotatoResource/BossPotato.png'  # main.py 기준임
+        path = 'Resources/PotatoResource/BossPotato.png'  # main.py 기준임
         if Boss_Potato.Boss_image is None:
             Boss_Potato.Boss_image = load_image(path)
         self.image = Boss_Potato.Boss_image

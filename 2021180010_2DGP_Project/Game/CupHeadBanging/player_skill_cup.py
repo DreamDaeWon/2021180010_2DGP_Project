@@ -55,7 +55,7 @@ class Player_skill_cup:
     def in_put_resources(self):
         # 리소스 기본상태
         if Player_skill_cup.image_attack == None:
-            path = 'CupHeadBanging/PlayerResoures/Skill1_ShootCup/player_skill_cup'  # main.py 기준임
+            path = 'Resources/PlayerResoures/Skill1_ShootCup/player_skill_cup'  # main.py 기준임
             Player_skill_cup.image_attack = []
             for a in range(0, 40+1):
                 finalPath = path + str(a) + '.png'

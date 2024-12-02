@@ -51,7 +51,7 @@ class Player_hand_hit_effect:
     def in_put_resources(self):
         # 리소스 기본상태
         if Player_hand_hit_effect.image_hand_attack_effect == None:
-            path = 'Effect/Hand_hit/cuphead_slap_spark_000'  # main.py 기준임
+            path = 'Resources/Hand_hit/cuphead_slap_spark_000'  # main.py 기준임
             Player_hand_hit_effect.image_hand_attack_effect = []
             for a in range(1, 9+1):
                 finalPath = path + str(a) + '.png'

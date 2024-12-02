@@ -45,13 +45,13 @@ class Ui_Black_Circle:
 
     def init_image(self):
         if Ui_Black_Circle.image is None:
-            path = 'UI/resource/Black_Circle.png'  # main.py 기준임
+            path = 'Resources/UiResources/Black_Circle.png'  # main.py 기준임
             Ui_Black_Circle.image = load_image(path)
 
         self.now_image = Ui_Black_Circle.image
 
         if Ui_Black_Circle.Restart_Message_image is None:
-            path = 'UI/resource/Restart_Message_UI.png'  # main.py 기준임
+            path = 'Resources/UiResources/Restart_Message_UI.png'  # main.py 기준임
             Ui_Black_Circle.Restart_Message_image = load_image(path)
 
         self.Restart_Message_image = Ui_Black_Circle.Restart_Message_image
