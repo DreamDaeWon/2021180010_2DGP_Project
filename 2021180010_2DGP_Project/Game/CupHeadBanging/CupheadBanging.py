@@ -367,9 +367,6 @@ class CupheadBanging:
         elif key == SDLK_t:
             self.CY = 400
             self.gravity = True
-            
-        elif key == SDLK_RETURN:
-            stage_manager.change_stage(self.now_stage + 1)
 
 
 

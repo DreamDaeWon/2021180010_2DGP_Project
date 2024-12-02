@@ -16,6 +16,8 @@ from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
 
 from Game.collision import World_collision
 
+import stage_manager
+
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
@@ -269,6 +271,9 @@ class Boss_Potato:
 
 
     def key_input_down(self, Key):
+        if Key == SDLK_RETURN:
+            if self.hp <= 0:
+                stage_manager.change_stage(2)
         pass
 
     def key_input_up(self, Key):

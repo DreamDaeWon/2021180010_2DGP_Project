@@ -160,8 +160,6 @@ class Collision:
                 effect.CY = self.player.CY
                 object_manager.world[object_manager.effect_num].append(effect)
                 o.this_delete = True
-
-
         pass
 
 

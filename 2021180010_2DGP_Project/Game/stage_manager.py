@@ -1,6 +1,7 @@
 import object_manager
 from Game.CupHeadBanging.cupheadBanging import CupheadBanging
 from Game.UI.back_ground_Farm import Back_Ground_Farm
+from Game.UI.back_ground_forest import Back_Ground_Forest
 from Game.collision import World_collision
 from Game.UI.Title.ui_main_title import Ui_Main_Title
 
@@ -21,6 +22,7 @@ def change_stage(want_level_num):
         pass
 
     if want_level_num == 2:
+        object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Forest())
         object_manager.world[2].append(CupheadBanging(2))
         pass
 
