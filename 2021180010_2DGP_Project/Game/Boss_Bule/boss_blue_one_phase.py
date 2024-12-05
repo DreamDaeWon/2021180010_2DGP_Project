@@ -10,6 +10,8 @@ from pico2d import*
 import os
 import sys
 
+import random
+
 #from Game.BossPotato.boss_potato_skill import Boss_potato_skill
 
 #from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
@@ -98,12 +100,12 @@ class Boss_Blue_One_Phase:
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
         self.Intro = [27, 13, self.image_Intro]
-        self.Punch = [16, 15, self.image_Punch]
-        self.jump = [9, 15, self.image_Jump]
-        self.Question_player_item = [37, 15, self.image_Question_player_item]
+        self.Punch = [16, 13, self.image_Punch]
+        self.jump = [9, 13, self.image_Jump]
+        self.Question_player_item = [37, 13, self.image_Question_player_item]
         self.Die = [48, 15, self.image_Change_Phase]
 
-
+        self.All_State = [self.Punch,self.jump,self.Question_player_item]
 
 
         self.now_state_tuple = self.Intro
@@ -210,6 +212,13 @@ class Boss_Blue_One_Phase:
     def boss_move(self):
 
 
+
+        pass
+
+    def boss_jump(self):
+        if self.now_state_tuple == self.jump:
+
+            
         pass
 
     def update(self):
@@ -220,7 +229,7 @@ class Boss_Blue_One_Phase:
 
         self.CX = self.RealCX + self.moveX
 
-        #self.boss_move()
+        self.boss_move()
 
         #self.boss_blue_rx = self.now_state_tuple[2][int(self.frame)].w * 0.5
         #self.boss_blue_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
@@ -294,9 +303,13 @@ class Boss_Blue_One_Phase:
                     self.frame = 35
                 else:
                     self.frame = 0
+                    next_state = random.randint(0,2)
+                    self.now_state_tuple = self.All_State[next_state]
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
                 if self.now_state_tuple == self.Intro:
-                    self.now_state_tuple = self.Punch # 일단은 반복
+                    next_state = random.randint(0, 2)
+                    self.now_state_tuple = self.All_State[next_state]
+                    #self.now_state_tuple = self.Punch # 일단은 반복
         else:
             self.boss_state_update()
             print('in this')
