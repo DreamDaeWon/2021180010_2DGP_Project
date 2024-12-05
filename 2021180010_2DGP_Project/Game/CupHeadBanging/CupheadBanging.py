@@ -12,6 +12,8 @@ import Game.CupHeadBanging.player_skill_cup
 
 from Game.BossPotato.boss_potato import Boss_Potato
 
+from Game.Boss_Bule.boss_blue_one_phase import Boss_Blue_One_Phase
+
 from Game.UI.ui_black_circle import Ui_Black_Circle
 
 from Game.collision import World_collision
@@ -376,8 +378,11 @@ class CupheadBanging:
             self.player_state_updete()
 
         elif key == SDLK_b:
-            object_manager.world[1].append(Boss_Potato())
-            World_collision.get_boss(object_manager.world[1][0])
+            if self.now_stage is 1 and len(object_manager.world[1]) == 0:
+                object_manager.world[1].append(Boss_Potato())
+                World_collision.get_boss(object_manager.world[1][0])
+            elif self.now_stage is 2 and len(object_manager.world[1]) == 0:
+                object_manager.world[1].append(Boss_Blue_One_Phase())
 
         else:
             #self.now_state_tuple = self.idle
