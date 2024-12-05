@@ -88,7 +88,8 @@ class Back_Ground_Forest:
 
         if self.frame <= 11:
             self.frame += self.frame_speed * frametime.frame_time
-        else:
+
+        if self.frame > 11:
             self.frame = 0.0
 
         if object_manager.world[object_manager.player_list_num][0] is None:

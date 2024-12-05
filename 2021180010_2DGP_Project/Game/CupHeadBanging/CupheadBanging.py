@@ -113,6 +113,7 @@ class CupheadBanging:
         self.clear = [36, 16, self.image_Clear]
         self.run = [16, 25, self.image_Run]
         self.die = [24,25,self.image_Die]
+        self.down = []
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -383,6 +384,7 @@ class CupheadBanging:
                 World_collision.get_boss(object_manager.world[1][0])
             elif self.now_stage is 2 and len(object_manager.world[1]) == 0:
                 object_manager.world[1].append(Boss_Blue_One_Phase())
+                World_collision.get_boss(object_manager.world[1][0])
 
         else:
             #self.now_state_tuple = self.idle

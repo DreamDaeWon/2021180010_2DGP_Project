@@ -41,16 +41,18 @@ class Boss_Blue_One_Phase:
 
         self.CX = 850
 
-        self.CY = 300
+        self.RealCX = 850
+
+        self.CY = 0
 
         self.LR = False
 
         self.Boss_Size = 1.0
 
 
-        self.boss_blue_rx = 0.0
+        self.boss_blue_rx = 100.0
 
-        self.boss_blue_ry = 0.0
+        self.boss_blue_ry = 100.0
 
         self.frame = 0 # 그냥 프레임 (열 프레임)
 
@@ -61,6 +63,9 @@ class Boss_Blue_One_Phase:
         self.hp = 1
 
         self.hit_bool = False
+
+
+        self.moveX = 0.0
 
 
 
@@ -93,11 +98,11 @@ class Boss_Blue_One_Phase:
         self.in_put_resources()
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.Intro = [27, 20, self.image_Intro]
-        self.Punch = [6, 20, self.image_Punch]
-        self.jump = [8, 20, self.image_Jump]
-        self.Question_player_item = [8, 20, self.image_Question_player_item]
-        self.Die = [24, 25, self.image_Change_Phase]
+        self.Intro = [27, 13, self.image_Intro]
+        self.Punch = [16, 15, self.image_Punch]
+        self.jump = [9, 15, self.image_Jump]
+        self.Question_player_item = [37, 15, self.image_Question_player_item]
+        self.Die = [48, 15, self.image_Change_Phase]
 
 
 
@@ -131,8 +136,8 @@ class Boss_Blue_One_Phase:
                 finalPath = path + str(a) + '.png'
                 Boss_Blue_One_Phase.Boss_image_Intro.append(load_image(finalPath))
 
-        self.image_Idle = []
-        self.image_Idle = Boss_Blue_One_Phase.Boss_image_Intro
+        self.image_Intro = []
+        self.image_Intro = Boss_Blue_One_Phase.Boss_image_Intro
         pass
 
 
@@ -205,36 +210,28 @@ class Boss_Blue_One_Phase:
 
     def boss_move(self):
 
-        if int(self.frame) > 13:
-            self.shoot = False
-
-        if not self.shoot:
-            if self.now_state_tuple == self.attack_dict and int(self.frame) == 13:
-                self.shoot_skill()
-                self.shoot = True
-
-        if self.hit_bool is True:
-            if self.hp > 0:
-                self.hp -= 1
-            self.hit_bool = False
 
         pass
 
     def update(self):
 
-        #self.boss_resource_state()
+        self.boss_resource_state()
+
+        self.moveX = object_manager.world[object_manager.back_ground_list_num][0].moveX
+
+        self.CX = self.RealCX + self.moveX
 
         #self.boss_move()
 
-        self.boss_blue_rx = self.now_state_tuple[2][int(self.frame)].w * 0.5
-        self.boss_blue_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
+        #self.boss_blue_rx = self.now_state_tuple[2][int(self.frame)].w * 0.5
+        #self.boss_blue_ry = self.now_state_tuple[2][int(self.frame)].h * 0.5
 
 
         pass
 
     def late_update(self):
-        World_collision.boss_collision()
-        World_collision.player_skill_collision()
+        World_collision.boss_blue_collision()
+        #World_collision.player_skill_collision()
         pass
 
     def render(self):
@@ -242,8 +239,8 @@ class Boss_Blue_One_Phase:
             self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0, self.now_state_tuple[2][int(self.frame)].w, self.now_state_tuple[2][int(self.frame)].h,
                                                                          0,
                                                                          'h',
-                                                                         self.CX,
-                                                                         self.CY,
+                                                                         self.CX - self.now_state_tuple[2][int(self.frame)].w * 0.5,
+                                                                         self.CY + self.now_state_tuple[2][int(self.frame)].h * 0.5,
                                                                          self.now_state_tuple[2][int(self.frame)].w * self.Boss_Size,
                                                                          self.now_state_tuple[2][int(self.frame)].h * self.Boss_Size)
         else:
@@ -252,8 +249,8 @@ class Boss_Blue_One_Phase:
                                                                          self.now_state_tuple[2][int(self.frame)].h,
                                                                          0,
                                                                          '',
-                                                                         self.CX,
-                                                                         self.CY,
+                                                                         self.CX - self.now_state_tuple[2][int(self.frame)].w * 0.5,
+                                                                         self.CY + self.now_state_tuple[2][int(self.frame)].h * 0.5,
                                                                          self.now_state_tuple[2][
                                                                              int(self.frame)].w * self.Boss_Size,
                                                                          self.now_state_tuple[2][
@@ -277,24 +274,10 @@ class Boss_Blue_One_Phase:
         #self.now_state_tuple = self.Create
 
         if self.hp <= 0:
-            self.now_state_tuple = self.die_dict
-            self.CY -= 50
-
-
-        if self.now_state_tuple == self.Create:
-            self.intro_ground_frame += 1 * self.intro_ground_dict['frame_speed'] * frametime.frame_time
-            self.intro_ground_row_frame = int(self.intro_ground_frame / self.intro_ground_dict['column_frame'])
-            if self.frame >= self.now_state_tuple['frame']:
-                self.frame = 0
-                self.row_frame = 0
-
+            self.now_state_tuple = self.Die
 
         if self.before_state_tuple == self.now_state_tuple:
-            self.frame += 1 * self.now_state_tuple['frame_speed'] * frametime.frame_time * self.frame_move
-            self.row_frame = int(self.frame / self.now_state_tuple['column_frame'])
-
-
-
+            self.frame += 1 * self.now_state_tuple[1] * frametime.frame_time
 
             # 이건 인트로 때만 동작
             if self.now_state_tuple == self:
@@ -302,22 +285,17 @@ class Boss_Blue_One_Phase:
                     self.frame = 0
                     self.row_frame = 0
 
-            if self.frame <= -1:
-                self.frame_move = self.frame_move * -1
-                self.frame = 0
-                self.row_frame = 0
-
 
             if self.frame >= self.now_state_tuple[0]:
-                # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
-                if self.now_state_tuple == self.Intro:
-                    self.now_state_tuple = self.Intro # 일단은 반복
-
                 if self.now_state_tuple == self.Die:
                     self.this_delete = True
+                elif self.now_state_tuple == self.Question_player_item:
+                    self.frame = 35
                 else:
                     self.frame = 0
-                self.row_frame = 0
+                # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
+                if self.now_state_tuple == self.Intro:
+                    self.now_state_tuple = self.Punch # 일단은 반복
         else:
             self.boss_state_update()
             print('in this')
@@ -329,7 +307,7 @@ class Boss_Blue_One_Phase:
 
     def get_collision_size(self):
         # left, top ,right, bottom
-        return self.CX - self.boss_blue_rx, self.CY + self.boss_blue_ry * 0.5, self.CX + self.boss_blue_rx, self.CY - self.boss_blue_ry
+        return self.CX  - self.boss_blue_rx * 2 , self.CY + self.boss_blue_ry * 2, self.CX, self.CY
 
 
     def shoot_skill(self):

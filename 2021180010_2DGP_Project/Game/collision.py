@@ -81,6 +81,24 @@ class Collision:
 
         pass
 
+    def boss_blue_collision(self):
+        if self.boss == None:
+            return
+
+        if self.boss.get_collision_size()[3] < 50:
+            self.boss.CY = 60
+            self.boss.gravity = False
+            self.boss.jumping = False
+            self.boss.jump_angle = 0
+
+        if self.boss.get_collision_size()[0] <= 0.0:
+            self.boss.CX = 0.0 + 150
+
+        if self.boss.get_collision_size()[2] >= 1100:
+            self.boss.CX = 1100 - 150
+
+        pass
+
 
 
 
