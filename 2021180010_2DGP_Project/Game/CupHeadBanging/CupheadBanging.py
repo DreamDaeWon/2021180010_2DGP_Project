@@ -76,6 +76,8 @@ class CupheadBanging:
         self.Left_Key_Down = False
         self.Right_Key_Down = False
 
+        self.Down_Key_Down = False
+
         self.key_input_LR = False  # 현재 키가 눌려있는 상태인지?
 
         self.hit_bool = False  # 맞은 상태인지?
@@ -113,7 +115,7 @@ class CupheadBanging:
         self.clear = [36, 16, self.image_Clear]
         self.run = [16, 25, self.image_Run]
         self.die = [24,25,self.image_Die]
-        self.down = []
+        self.down = [12,20,self.image_Down]
 
         # 현재 상태 배열
         self.now_state_tuple = self.idle
@@ -161,6 +163,13 @@ class CupheadBanging:
         for a in range(1, 16 + 1):
             finalPath = path + str(a) + '.png'
             self.image_Run.append(load_image(finalPath))
+
+        # 리소스 엎드리기 상태
+        path = 'Resources/PlayerResoures/Down/cuphead_down_'  # main.py 기준임
+        self.image_Down = []
+        for a in range(1, 12 + 1):
+            finalPath = path + str(a) + '.png'
+            self.image_Down.append(load_image(finalPath))
 
             # 리소스 죽음 상태
         path = 'Resources/PlayerResoures/Die/cuphead_ghost_'  # main.py 기준임
@@ -270,9 +279,16 @@ class CupheadBanging:
             return
 
         if self.now_state_tuple != self.hit:
+
+            if self.Down_Key_Down:
+                self.CY -= self.Player_Size
+
+
             self.player_move_run()
             self.player_move_jump()
             self.player_gravity()
+
+
 
         self.player_move_hit()
 
@@ -287,6 +303,9 @@ class CupheadBanging:
 
 
         self.now_state_tuple = self.idle
+
+        if self.Down_Key_Down:
+            self.now_state_tuple = self.down
 
         if self.running:
             self.now_state_tuple = self.run
@@ -313,7 +332,11 @@ class CupheadBanging:
             self.frame += 1.0 * self.now_state_tuple[1] * frametime.frame_time
             if self.frame >= self.now_state_tuple[0]:
                 self.update_change_state()
-                self.frame = 0.0
+
+                if self.now_state_tuple == self.down:
+                    self.frame = 7.0
+                else:
+                    self.frame = 0.0
         else:
             self.player_state_updete()
             #print('in this')
@@ -341,17 +364,21 @@ class CupheadBanging:
 
         self.player_left_right_key_down(key)
 
-        if key == SDLK_RIGHT:
+        if key == SDLK_DOWN:
+            self.Down_Key_Down = True
 
+        if key == SDLK_RIGHT:
+            self.Down_Key_Down = False
             self.Right_Key_Down = True
             self.player_state_updete()
             pass
 
         elif key == SDLK_LEFT:
-
+            self.Down_Key_Down = False
             self.Left_Key_Down = True
             self.player_state_updete()
             pass
+
 
         elif key == SDLK_z:
             if self.skill_number > 0:
@@ -361,7 +388,7 @@ class CupheadBanging:
 
 
         elif key == SDLK_SPACE:
-
+            self.Down_Key_Down = False
             if self.jumping:
                 self.normal_attaking = True
 
@@ -401,6 +428,9 @@ class CupheadBanging:
             self.rundir -= 1
             pass
 
+        if key == SDLK_DOWN:
+            self.Left_Key_Down = False
+
         elif key == SDLK_LEFT:
             self.Left_Key_Down = False
             self.rundir += 1
@@ -424,6 +454,9 @@ class CupheadBanging:
             self.gravity_time = 0.0
             self.jump_angle = 0
             self.now_state_tuple = self.idle
+
+
+
         pass
 
     def update(self):

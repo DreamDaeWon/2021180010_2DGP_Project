@@ -14,8 +14,7 @@ import sys
 
 #from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
 
-from Game.collision import World_collision
-
+from Game.collision import World_collision, Collision
 
 # 현재 파일의 절대 경로를 가져옵니다
 current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 단계 위 디렉터리를 가져옵니다
@@ -232,6 +231,7 @@ class Boss_Blue_One_Phase:
     def late_update(self):
         World_collision.boss_blue_collision()
         #World_collision.player_skill_collision()
+        self.skill_punch()
         pass
 
     def render(self):
@@ -258,6 +258,7 @@ class Boss_Blue_One_Phase:
 
 
         pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        pico2d.draw_rectangle(self.get_punch_collision_size()[0],self.get_punch_collision_size()[1],self.get_punch_collision_size()[2],self.get_punch_collision_size()[3])
         pass
 
 
@@ -308,6 +309,21 @@ class Boss_Blue_One_Phase:
     def get_collision_size(self):
         # left, top ,right, bottom
         return self.CX  - self.boss_blue_rx * 2 , self.CY + self.boss_blue_ry * 2, self.CX, self.CY
+
+    def get_punch_collision_size(self):
+        # left, top ,right, bottom
+        if self.LR is True:
+            return self.CX, self.CY + self.boss_blue_ry * 4, self.CX + self.boss_blue_rx * 6, self.CY + self.boss_blue_ry * 1
+        else:
+            return self.CX - self.boss_blue_rx * 6, self.CY + self.boss_blue_ry * 4, self.CX, self.CY + self.boss_blue_ry * 1
+
+
+    def skill_punch(self):
+        if self.now_state_tuple == self.Punch:
+            if self.frame >= 9 and self.frame <= 12:
+                if Collision.box_collision(Collision,self.get_punch_collision_size(),object_manager.world[object_manager.player_list_num][0].get_collision_size()) is True:
+                    object_manager.world[object_manager.player_list_num][0].hit_bool = True
+                    print('good')
 
 
     def shoot_skill(self):
