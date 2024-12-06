@@ -87,15 +87,15 @@ class Collision:
 
         if self.boss.get_collision_size()[3] < 50:
             self.boss.CY = 60
-            self.boss.gravity = False
             self.boss.jumping = False
             self.boss.jump_angle = 0
 
-        if self.boss.get_collision_size()[0] <= 0.0:
-            self.boss.CX = 0.0 + 150
+        if self.boss.RealCX - self.boss.boss_blue_rx * 2 <= 0.0:
+            self.boss.RealCX = 0.0 + self.boss.boss_blue_rx * 2
 
-        if self.boss.get_collision_size()[2] >= 1100:
-            self.boss.CX = 1100 - 150
+        if self.boss.RealCX + self.boss.boss_blue_rx * 1 >= 1458:
+            self.boss.RealCX = 1458 - self.boss.boss_blue_rx * 1
+
 
         pass
 
