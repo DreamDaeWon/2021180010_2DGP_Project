@@ -266,7 +266,7 @@ class Boss_Potato:
                                                self.intro_ground_dict['width'] * self.boss_size,
                                                self.intro_ground_dict['high'] * self.boss_size)
 
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+       # pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
         pass
 
 
