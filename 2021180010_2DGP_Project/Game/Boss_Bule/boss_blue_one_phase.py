@@ -19,6 +19,8 @@ from pygame.pypm import FALSE
 
 from Game.Boss_Bule.boss_blue_player_item import Boss_Blue_Player_Item
 
+from Game.Boss_Bule.boss_blue_two_phase import Boss_Blue_Two_Phase
+
 from Game.collision import World_collision, Collision
 
 # 현재 파일의 절대 경로를 가져옵니다
@@ -69,7 +71,7 @@ class Boss_Blue_One_Phase:
 
         self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
 
-        self.hp = 1
+        self.hp = 3
 
         self.hit_bool = False
 
@@ -229,8 +231,14 @@ class Boss_Blue_One_Phase:
             self.frame = 0
             pass
 
+    def boss_hit(self):
+        if self.hit_bool is True:
+            self.hp -= 1
+            self.hit_bool = False
+        pass
 
     def boss_move(self):
+        self.boss_hit()
         self.boss_jump()
         self.boss_shoot_skill()
 
@@ -300,6 +308,7 @@ class Boss_Blue_One_Phase:
     def late_update(self):
         World_collision.boss_blue_collision()
         World_collision.player_skill_collision()
+        World_collision.player_skill_collision()
         self.skill_punch()
         pass
 
@@ -359,6 +368,11 @@ class Boss_Blue_One_Phase:
 
             if self.frame >= self.now_state_tuple[0]:
                 if self.now_state_tuple == self.Die:
+                    if self.LR is False:
+                        object_manager.world[object_manager.boss_list_num].append(Boss_Blue_Two_Phase(self.RealCX + self.boss_blue_rx * 1,0,self.LR))
+                    else:
+                        object_manager.world[object_manager.boss_list_num].append(Boss_Blue_Two_Phase(self.RealCX + self.boss_blue_rx * 1,0,self.LR))
+                    World_collision.get_boss(object_manager.world[1][1])
                     self.this_delete = True
                 elif self.now_state_tuple == self.Question_player_item and len(object_manager.world[object_manager.player_skill_item_num]) > 2:
                     self.frame = 35

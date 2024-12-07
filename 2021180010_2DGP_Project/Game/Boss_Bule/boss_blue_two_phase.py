@@ -37,7 +37,7 @@ class Boss_Blue_Two_Phase:
     Boss_image_Punch = None
     Boss_image_Question_player_item = None
     Boss_image_Change_Phase = None
-    def __init__(self):
+    def __init__(self,cx,cy,LR):
 
 
         self.this_delete = False # 이 객체를 지워야 하는지?
@@ -45,11 +45,11 @@ class Boss_Blue_Two_Phase:
 
         self.CX = 850
 
-        self.RealCX = 850
+        self.RealCX = cx
 
         self.CY = 0
 
-        self.LR = False
+        self.LR = LR
 
         self.Boss_Size = 1.0
 
@@ -69,7 +69,7 @@ class Boss_Blue_Two_Phase:
 
         self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
 
-        self.hp = 1
+        self.hp = 5
 
         self.hit_bool = False
 
@@ -118,11 +118,11 @@ class Boss_Blue_Two_Phase:
         self.in_put_resources()
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.Intro = [0, 13, self.image_Intro]
-        self.Punch = [16, 13, self.image_Punch]
-        self.jump = [19, 19, self.image_Jump]
+        self.Intro = [5, 13, self.image_Intro]
+        self.Punch = [32, 13, self.image_Punch]
+        self.jump = [22, 19, self.image_Jump]
         self.Question_player_item = [37, 13, self.image_Question_player_item]
-        self.Die = [48, 15, self.image_Change_Phase]
+        self.Die = [20, 15, self.image_Change_Phase]
 
         self.All_State = [self.Punch,self.jump]
 
@@ -139,7 +139,7 @@ class Boss_Blue_Two_Phase:
     def in_put_resources(self):
         # 리소스 기본상태
 
-        self.set_player_item_motion()
+        #self.set_player_item_motion()
         self.set_intro_motion()
         self.set_jump_motion()
         self.set_punch_motion()
@@ -152,9 +152,9 @@ class Boss_Blue_Two_Phase:
         if Boss_Blue_Two_Phase.Boss_image_Intro is None:
             Boss_Blue_Two_Phase.Boss_image_Intro = []
 
-            path = 'Resources/Blue_Boss/Phase 1/Intro/slime_intro_'  # main.py 기준임
+            path = 'Resources/Blue_Boss/Phase 2/Idle/lg_slime_idle_000'  # main.py 기준임
 
-            for a in range(1, 27 + 1):
+            for a in range(1, 5 + 1):
                 finalPath = path + str(a) + '.png'
                 Boss_Blue_Two_Phase.Boss_image_Intro.append(load_image(finalPath))
 
@@ -168,9 +168,9 @@ class Boss_Blue_Two_Phase:
         if Boss_Blue_Two_Phase.Boss_image_Punch is None:
             Boss_Blue_Two_Phase.Boss_image_Punch = []
 
-            path = 'Resources/Blue_Boss/Phase 1/Punch/slime_punch_'  # main.py 기준임
+            path = 'Resources/Blue_Boss/Phase 2/Punch/lg_slime_punch_'  # main.py 기준임
 
-            for a in range(1, 16 + 1):
+            for a in range(1, 32 + 1):
                 finalPath = path + str(a) + '.png'
                 Boss_Blue_Two_Phase.Boss_image_Punch.append(load_image(finalPath))
 
@@ -183,9 +183,9 @@ class Boss_Blue_Two_Phase:
         if Boss_Blue_Two_Phase.Boss_image_Jump is None:
             Boss_Blue_Two_Phase.Boss_image_Jump = []
 
-            path = 'Resources/Blue_Boss/Phase 1/Jump/jump_'  # main.py 기준임
+            path = 'Resources/Blue_Boss/Phase 2/Jump/boss_phase_two_jump_'  # main.py 기준임
 
-            for a in range(1, 19 + 1):
+            for a in range(1, 22 + 1):
                 finalPath = path + str(a) + '.png'
                 Boss_Blue_Two_Phase.Boss_image_Jump.append(load_image(finalPath))
 
@@ -213,9 +213,9 @@ class Boss_Blue_Two_Phase:
         if Boss_Blue_Two_Phase.Boss_image_Change_Phase is None:
             Boss_Blue_Two_Phase.Boss_image_Change_Phase = []
 
-            path = 'Resources/Blue_Boss/Phase 1/Transition To Ph2/slime_morph_'  # main.py 기준임
+            path = 'Resources/Blue_Boss/Phase 2/Death/lg_slime_death_'  # main.py 기준임
 
-            for a in range(1, 48 + 1):
+            for a in range(1, 20 + 1):
                 finalPath = path + str(a) + '.png'
                 Boss_Blue_Two_Phase.Boss_image_Change_Phase.append(load_image(finalPath))
 
@@ -231,13 +231,14 @@ class Boss_Blue_Two_Phase:
 
 
     def boss_move(self):
+        self.boss_hit()
         self.boss_jump()
-        self.boss_shoot_skill()
+
 
         pass
 
     def boss_shoot_skill(self):
-        if self.now_state_tuple == self.Question_player_item and self.frame >= 34:
+        if self.now_state_tuple == self.jump and self.frame >= 34:
             if self.shoot_bool is False:
                 self.shoot_skill()
                 self.shoot_bool = True
@@ -249,17 +250,26 @@ class Boss_Blue_Two_Phase:
 
         pass
 
+    def boss_hit(self):
+        if self.hit_bool is True:
+            self.hp -= 1
+            self.hit_bool = False
+        pass
+
     def boss_jump(self):
 
         if self.now_state_tuple == self.jump and int(self.frame) == 9:
             self.jumping = True
+            if self.shoot_bool is False:
+                self.shoot_skill()
+                self.shoot_bool = True
 
         if self.jumping is False:
             self.set_Player_Pos = False
             self.jump_angle = 0.0
+            self.shoot_bool = False
 
         if self.jumping is True:
-
             if self.set_Player_Pos is False:
                 self.setJump_Finish_Pos = object_manager.world[2][0].CX - self.moveX + self.boss_blue_rx
                 self.setJump_start_pos = self.RealCX
@@ -304,8 +314,9 @@ class Boss_Blue_Two_Phase:
         pass
 
     def render(self):
-        if self.LR is True:
-            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0, self.now_state_tuple[2][int(self.frame)].w,
+        if self.LR is True: # 왼쪽
+            self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0,
+                                                                         self.now_state_tuple[2][int(self.frame)].w,
                                                                          self.now_state_tuple[2][int(self.frame)].h,
                                                                          0,
                                                                          'h',
@@ -359,11 +370,11 @@ class Boss_Blue_Two_Phase:
 
             if self.frame >= self.now_state_tuple[0]:
                 if self.now_state_tuple == self.Die:
-                    self.this_delete = True
-                elif self.now_state_tuple == self.Question_player_item and len(object_manager.world[object_manager.player_skill_item_num]) > 2:
-                    self.frame = 35
+                    #self.this_delete = True
+                    self.frame = 0
+                    pass
                 elif self.now_state_tuple == self.jump and self.jumping:
-                    self.frame = 18
+                    self.frame = 21
                 else:
                     self.frame = 0
                     if self.CX - self.boss_blue_rx > object_manager.world[2][0].CX:
@@ -373,10 +384,6 @@ class Boss_Blue_Two_Phase:
                     next_state = random.randint(0, 1)
                     self.now_state_tuple = self.All_State[next_state]
                     self.all_skill_num += 1
-
-                    if self.all_skill_num is 2: # 몇 번 스킬을 사용하고 아이템 주는걸로 넘어갈 건지?
-                        self.now_state_tuple = self.Question_player_item
-                        self.all_skill_num = 0
                     #self.now_state_tuple = self.jump  # 일단은 반복
 
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
@@ -404,14 +411,14 @@ class Boss_Blue_Two_Phase:
     def get_punch_collision_size(self):
         # left, top ,right, bottom
         if self.LR is True:
-            return self.CX - self.boss_blue_rx * 2, self.CY + self.boss_blue_ry * 4, self.CX + self.boss_blue_rx * 4, self.CY + self.boss_blue_ry * 1
+            return self.CX - self.boss_blue_rx * 2, self.CY + self.boss_blue_ry * 2, self.CX + self.boss_blue_rx * 2, self.CY + self.boss_blue_ry * 0.5
         else:
-            return self.CX - self.boss_blue_rx * 6, self.CY + self.boss_blue_ry * 4, self.CX, self.CY + self.boss_blue_ry * 1
+            return self.CX - self.boss_blue_rx * 4, self.CY + self.boss_blue_ry * 2, self.CX, self.CY + self.boss_blue_ry * 0.5
 
 
     def skill_punch(self):
         if self.now_state_tuple == self.Punch:
-            if self.frame >= 9 and self.frame <= 12:
+            if self.frame >= 15 and self.frame <= 19:
                 if Collision.box_collision(Collision,self.get_punch_collision_size(),object_manager.world[object_manager.player_list_num][0].get_collision_size()) is True:
                     object_manager.world[object_manager.player_list_num][0].hit_bool = True
                     print('good')

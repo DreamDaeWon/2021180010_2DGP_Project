@@ -14,6 +14,8 @@ from Game.BossPotato.boss_potato import Boss_Potato
 
 from Game.Boss_Bule.boss_blue_one_phase import Boss_Blue_One_Phase
 
+from Game.Boss_Bule.boss_blue_two_phase import Boss_Blue_Two_Phase
+
 from Game.UI.ui_black_circle import Ui_Black_Circle
 
 from Game.collision import World_collision
@@ -412,6 +414,7 @@ class CupheadBanging:
 
             elif self.now_stage is 2 and len(object_manager.world[1]) == 0:
                 object_manager.world[1].append(Boss_Blue_One_Phase())
+                #object_manager.world[1].append(Boss_Blue_Two_Phase())
                 World_collision.get_boss(object_manager.world[1][0])
 
         else:

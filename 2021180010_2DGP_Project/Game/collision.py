@@ -75,7 +75,9 @@ class Collision:
 
         if self.boss != None:
             if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
-                if not self.player.normal_attaking:
+                if self.boss.hp <= 0:
+                    pass
+                elif not self.player.normal_attaking:
                     self.player.hit_bool = True
 
 
@@ -116,12 +118,17 @@ class Collision:
 
     def player_skill_collision(self): # 보스가 맞는 거임 # 이거 수정하고 추가해야 함
         for o in object_manager.world[object_manager.player_skill_list_num]:
-            if o.CX + o.get_collision_size()[0] < 0:
+            if o.get_collision_size()[0] < -600:
+                o.this_delete = True
+            elif o.get_collision_size()[0] > 1600:
                 o.this_delete = True
 
-            elif self.box_collision(self.boss.get_collision_size(),o.get_collision_size()):
-                self.boss.hit_bool = True
+            if self.boss is None:
+                return
+
+            if self.box_collision(self.boss.get_collision_size(),o.get_collision_size()):
                 if o.bool_hit is False:
+                    self.boss.hit_bool = True
                     o.bool_hit = True
                     effect = player_hand_hit_effect.Player_hand_hit_effect()
                     if o.LR is True:
