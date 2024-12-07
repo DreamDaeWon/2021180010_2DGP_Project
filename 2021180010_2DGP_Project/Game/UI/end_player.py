@@ -3,6 +3,8 @@ import math
 import pico2d
 from pico2d import*
 
+import time
+
 import os
 import sys
 
@@ -24,11 +26,14 @@ class UI_End:
         self.x = 1400 * 0.5
         self.y = 700 * 0.5
 
-        self.bgm = load_music('Resources/music/sound_effect/cuphead-a-knockout-sound.mp3')
+        self.bgm = load_music('Resources/music/last_map.mp3')
 
-        self.bgm.set_volume(128)
+        self.bgm.set_volume(20)
 
         self.bgm.play(1)
+
+
+
 
         self.back_ground_image = load_image('Resources/UiResources/black.png')
 
@@ -47,12 +52,28 @@ class UI_End:
 
         self.bool_cookie = False
 
+        self.end_bool = False
+
         self.moveX = 0.0
         self.moveY = 0.0
 
         self.story_font = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 50)
 
         self.story_font_Two = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 30)
+
+
+        # 최종
+
+        self.current_time = 0
+
+        self.song_bool = False
+
+        self.end_song = load_music('Resources/music/Our_Love.mp3')
+        self.up_speed = 30
+
+        self.end_font_line = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 100)
+
+        self.end_font = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 450)
 
 
 
@@ -77,7 +98,13 @@ class UI_End:
             self.frame = 0
         else:
             if self.frame >= self.max_frame_drop_cookie:
-                self.frame = 0
+                if self.end_bool is False:
+                    self.end_bool = True
+                    self.bgm.stop()
+                    self.current_time = time.time()
+
+                self.frame = self.max_frame_drop_cookie - 1
+
 
 
         pass
@@ -88,21 +115,58 @@ class UI_End:
 
     def render(self):
 
-        self.back_ground_image.draw(0,0)
+        self.back_ground_image.draw(550,350)
+
+        if self.end_bool is True and time.time() - self.current_time >= 2.0:
+            if self.song_bool is False:
+                self.end_song.set_volume(50)
+                self.end_song.play(1)
+                self.song_bool = True
+
+        if self.end_bool is True and time.time() - self.current_time >= 5.0:
+            self.moveY += frametime.frame_time * self.up_speed
+
+
+        if self.end_bool is True and time.time() - self.current_time >= 3.65:
+
+            end_color = 255 - self.moveY
+
+            if end_color <= 100:
+                end_color = 100
+
+            self.end_font.draw(25,370,'END',(int(end_color),int(end_color),int(end_color)))
+
+            self.end_font_line.draw(100,-100 + self.moveY,'CupHeadBanging',(255,255,255))
+
+            self.story_font.draw(150,-300 + self.moveY,'Made By Park Dae Won',(255,255,255))
+
+            self.story_font.draw(200,-400 + self.moveY,'Thanks for playing',(255,255,255))
+            self.story_font.draw(300,-500 + self.moveY,'I Want A+',(255,255,255))
+
+            self.story_font.draw(400,-600 + self.moveY,'Thank You',(255,255,255))
+
+            self.story_font.draw(450,-700 + self.moveY,'Have a good day',(255,255,255))
+
+            self.story_font.draw(700,-800 + self.moveY,'Bye Bye',(255,255,255))
+            return
 
         self.image_drop_cookie[int(self.frame)].clip_composite_draw(0,0, self.image_drop_cookie[int(self.frame)].w,
                                                            self.image_drop_cookie[int(self.frame)].h,
-                                                              0,'',550,100)
+                                                              0,'',550,200)
 
         if self.bool_cookie is False:
-            self.story_font.draw(100,600,'Finally we made cookies!',(255,255,255))
-            self.story_font.draw(150,500,'Then, should I try it?',(255,255,255))
+            self.story_font.draw(250,600,'Finally we made cookies!',(255,255,255))
+            self.story_font.draw(300,500,'Then, should I try it?',(255,255,255))
             self.story_font_Two.draw(300,400,'push b',(255,255,255))
+
+        if self.end_bool is True:
+            self.story_font.draw(400,500,'Oh......',(255,255,255))
 
 
         pass
     def key_input_down(self, Key):
         if Key == SDLK_b:
+            #self.bgm.stop()
             self.bool_cookie = True
         pass
 
