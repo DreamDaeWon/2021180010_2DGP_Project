@@ -29,6 +29,7 @@ parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경
 sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
 import object_manager
+import stage_manager
 
 
 
@@ -350,6 +351,9 @@ class Boss_Blue_Two_Phase:
 
 
     def key_input_down(self, Key):
+        if Key == SDLK_RETURN:
+            if self.hp <= 0:
+                stage_manager.change_stage(2)
         pass
 
     def key_input_up(self, Key):
