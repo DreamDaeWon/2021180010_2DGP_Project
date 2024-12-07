@@ -72,6 +72,10 @@ class CupheadBanging:
 
         self.font = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 25)
 
+        self.story_font = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 50)
+
+        self.story_font_Two = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 30)
+
         self.frame = 0.0
 
         self.skill_number = 0  # 스킬 개수
@@ -499,6 +503,18 @@ class CupheadBanging:
                                                                          self.now_state_tuple[2][
                                                                              int(self.frame)].h * self.Player_Size)
 
+        if World_collision.boss is None and self.hp > 0:
+            if self.now_stage is 1:
+                self.story_font.draw(int(200),int(600),'We need potatoes to make cookies!')
+                self.story_font.draw(int(100),int(500),'We Can Make Cookie Yeah!')
+                self.font.draw(int (400),int(400), 'press b')
+
+            elif self.now_stage is 2:
+                self.story_font_Two.draw(int(100), int(600), 'Oh no! That blue man must be the owner of the potatoes!',(0,0,255))
+                self.story_font_Two.draw(int(150), int(500), 'So, without that person, there is no owner of this potato?',(255,255,255))
+                self.story_font_Two.draw(int(200), int(400), 'Great! I think I know what to do now',(255,0,0))
+                self.story_font_Two.draw(int(100), int(300), 'We Can Make Cookie Yeah!',(255,255,255))
+                self.font.draw(int(400), int(200), 'press b')
 
         self.font.draw(int(25),int(30), f'HP     {self.hp}', (255, 0,0))
         #pico2d.draw_rectangle(self.get_collision_size()[0], self.get_collision_size()[1],
