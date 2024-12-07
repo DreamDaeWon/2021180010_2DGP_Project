@@ -122,7 +122,7 @@ class Boss_potato_skill_item:
                                        self.now_state_dict['high'],0,'',self.CX,self.CY,
                                        self.now_state_dict['width'] * self.size,self.now_state_dict['high'] * self.size)
 
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
         pass
 
     def key_input_down(self, Key):
