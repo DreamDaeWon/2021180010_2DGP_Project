@@ -4,6 +4,7 @@ from pico2d import*
 
 import os
 import sys
+import time
 
 import object_manager
 
@@ -75,6 +76,9 @@ class Ui_Main_Title:
         self.frame_Move = 1
         self.cuphead_banging_size = 1.0
 
+        self.cup_head_bool = False
+        self.current_time = time.time()
+
 
     def init_image(self):
         if Ui_Main_Title.mian_image is None:
@@ -124,9 +128,9 @@ class Ui_Main_Title:
             self.banging_angle = 14400
 
 
-        if self.banging_angle == 14400:
+        if self.banging_angle == 14400 and time.time() - self.current_time >= 2.9:
             if self.dae_won_X_pos > 0:
-                self.dae_won_X_pos -= frametime.frame_time * 1000
+                self.dae_won_X_pos -= frametime.frame_time * 5000
             else:
                 self.dae_won_X_pos = 0
 
@@ -134,12 +138,16 @@ class Ui_Main_Title:
         if self.dae_won_X_pos == 0:
             self.frame += frametime.frame_time * self.frame_speed * self.frame_Move
 
-        if self.frame >= 13:
-            self.frame_Move *= -1
-            self.frame = 12
-        elif self.frame <= -1:
-            self.frame_Move *= -1
-            self.frame = 0
+        if time.time() - self.current_time >= 5.0:
+            self.cup_head_bool = True
+
+        if self.cup_head_bool is True:
+            if self.frame >= 13:
+                self.frame_Move *= -1
+                self.frame = 12
+            elif self.frame <= -1:
+                self.frame_Move *= -1
+                self.frame = 0
 
         pass
 
@@ -161,7 +169,7 @@ class Ui_Main_Title:
         self.made_by_dw.draw(480 + self.dae_won_X_pos, 350, 1244, 700)
         #self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )
 
-        if self.dae_won_X_pos == 0:
+        if self.dae_won_X_pos == 0 and self.cup_head_bool is True:
             self.main_cuphead_banging[int(self.frame)].clip_composite_draw(0,0, self.main_cuphead_banging[int(self.frame)].w, self.main_cuphead_banging[int(self.frame)].h,
                                                                            0,'',300,300,
                                                                            self.main_cuphead_banging[int(self.frame)].w * self.cuphead_banging_size,

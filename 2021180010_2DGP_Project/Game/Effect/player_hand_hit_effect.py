@@ -31,6 +31,8 @@ class Player_hand_hit_effect:
         self.LR = True # True면 오른쪽
 
 
+
+
         self.frame = 0.0
 
 

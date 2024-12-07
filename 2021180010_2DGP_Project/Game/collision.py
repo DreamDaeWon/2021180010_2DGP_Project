@@ -173,6 +173,8 @@ class Collision:
         for o in object_manager.world[object_manager.player_skill_item_num]:
             if o.CX + o.get_collision_size()[0] < 0:
                 o.this_delete = True
+            if o.get_collision_size()[1] > 1000:
+                o.this_delete = True
 
             elif self.box_collision(self.player.get_collision_size(),o.get_collision_size()):
                 if self.player.skill_number < 3:
