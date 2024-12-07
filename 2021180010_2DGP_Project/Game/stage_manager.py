@@ -10,6 +10,8 @@ from Game.UI.Title.ui_main_title import Ui_Main_Title
 def change_stage(want_level_num):
     object_manager.delete_all()
 
+    World_collision.boss = None
+
     if want_level_num == 0:
         object_manager.world[object_manager.back_ground_list_num].append(Ui_Main_Title())
 
