@@ -26,6 +26,12 @@ class Back_Ground_Farm:
 
         self.now_image = 0
 
+        self.bgm = load_music('Resources/music/Cuphead OST - Botanic Panic [Music].mp3')
+
+        self.bgm.set_volume(35)
+
+        self.bgm.repeat_play()
+
         self.init_image()
 
     def init_image(self):

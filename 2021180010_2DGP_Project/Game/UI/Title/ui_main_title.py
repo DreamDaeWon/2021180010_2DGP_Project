@@ -27,12 +27,19 @@ class Ui_Main_Title:
     made_by_dw = None
     main_cuphead_banging = None
 
+    main_menu_sound = None
+
     def __init__(self):
         self.this_delete = False
 
         self.x = 1100 * 0.5
         self.y = 700 * 0.5
 
+        self.bgm = load_music('Resources/music/Cuphead Opening Theme.mp3')
+
+        self.bgm.set_volume(100)
+
+        self.bgm.repeat_play()
 
         self.image_width = 6600
         self.image_height = 4200
@@ -64,7 +71,7 @@ class Ui_Main_Title:
 
         #컵헤드 뱅잉 관련변수
         self.frame = 0.0
-        self.frame_speed = 20
+        self.frame_speed = 15
         self.frame_Move = 1
         self.cuphead_banging_size = 1.0
 
@@ -111,15 +118,15 @@ class Ui_Main_Title:
         else:
             self.bRender_Restart_Message_UI = True
 
-        if self.banging_angle < 720:
-            self.banging_angle += 750.0 * frametime.frame_time
+        if self.banging_angle < 14400:
+            self.banging_angle += 8000.0 * frametime.frame_time
         else:
-            self.banging_angle = 720
+            self.banging_angle = 14400
 
 
-        if self.banging_angle == 720:
+        if self.banging_angle == 14400:
             if self.dae_won_X_pos > 0:
-                self.dae_won_X_pos -= frametime.frame_time * 500
+                self.dae_won_X_pos -= frametime.frame_time * 1000
             else:
                 self.dae_won_X_pos = 0
 
@@ -149,7 +156,7 @@ class Ui_Main_Title:
 
         self.mian_image.draw(570,350,1244,700)
 
-        self.banging.clip_composite_draw(0,0, self.banging.w, self.banging.h,self.banging_angle * Rad,'',550,350,self.banging.w * self.banging_angle / 720, self.banging.h * self.banging_angle / 720)
+        self.banging.clip_composite_draw(0,0, self.banging.w, self.banging.h,self.banging_angle * Rad,'',550,350,self.banging.w * self.banging_angle / 14400, self.banging.h * self.banging_angle / 14400)
 
         self.made_by_dw.draw(480 + self.dae_won_X_pos, 350, 1244, 700)
         #self.now_image.clip_composite_draw(0,0,self.image_width,self.image_height,0,'',self.x,self.y,self.image_width * self.now_size ,self.image_height *  self.now_size )

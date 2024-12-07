@@ -32,6 +32,12 @@ class Ui_Black_Circle:
 
         self.now_size = 5.0
 
+        self.bgm = load_music('Resources/music/die_music.mp3')
+
+        self.bgm.set_volume(50)
+
+        self.bgm.repeat_play()
+
 
         self.bRender_Restart_Message_UI = False
 

@@ -27,6 +27,12 @@ class Back_Ground_Forest:
         self.x = 1400 * 0.5
         self.y = 700 * 0.5
 
+        self.bgm = load_music('Resources/music/blue_boss.mp3')
+
+        self.bgm.set_volume(35)
+
+        self.bgm.repeat_play()
+
         self.image_width = 1100
         self.image_height = 700
 
