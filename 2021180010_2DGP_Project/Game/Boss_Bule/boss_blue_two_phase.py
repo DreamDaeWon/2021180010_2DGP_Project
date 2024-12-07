@@ -19,6 +19,8 @@ from pygame.pypm import FALSE
 
 from Game.Boss_Bule.boss_blue_player_item import Boss_Blue_Player_Item
 
+from Game.UI.ui_ko import UI_Ko
+
 from Game.collision import World_collision, Collision
 
 # 현재 파일의 절대 경로를 가져옵니다
@@ -255,8 +257,7 @@ class Boss_Blue_Two_Phase:
     def boss_hit(self):
         if self.hit_bool is True:
             if self.hp == 1:
-                self.die_sound.set_volume(128)
-                self.die_sound.play(1)
+                object_manager.world[object_manager.UI_list_num].append(UI_Ko())
             self.hp -= 1
             self.hit_bool = False
         pass

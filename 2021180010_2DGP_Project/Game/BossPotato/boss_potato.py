@@ -14,6 +14,8 @@ from Game.BossPotato.boss_potato_skill import Boss_potato_skill
 
 from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
 
+from Game.UI.ui_ko import UI_Ko
+
 from Game.collision import World_collision
 
 import stage_manager
@@ -212,8 +214,7 @@ class Boss_Potato:
         if self.hit_bool is True:
             if self.hp > 0:
                 if self.hp == 1:
-                    self.die_sound.set_volume(128)
-                    self.die_sound.play(1)
+                    object_manager.world[object_manager.UI_list_num].append(UI_Ko())
                 self.hp -= 1
             self.hit_bool = False
 
