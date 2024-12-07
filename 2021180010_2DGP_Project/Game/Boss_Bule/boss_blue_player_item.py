@@ -1,3 +1,5 @@
+from math import radians
+
 from pico2d import*
 
 import os
@@ -13,9 +15,11 @@ import frametime
 
 class Boss_Blue_Player_Item:
     image = None
-    def __init__(self):
+    def __init__(self, angle):
 
         self.this_delete = False # 이 객체를 지워야 하는지?
+
+        self.angle = angle
 
         self.CX = 0.0
         self.CY = 0.0
@@ -27,58 +31,70 @@ class Boss_Blue_Player_Item:
 
         self.frame = 0.0
 
-        self.now_state_dict = 0
+        self.now_state_tuple = 0
 
+        self.image_question = 0
 
-        self.attack_dict = {}
-
+        self.want_move_vec_X = 0
+        self.want_move_vec_Y = 1
 
         self.in_put_resources()
 
-        self.now_state_dict = self.attack_dict
+        # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
+        self.attack_tuple = [7,15,image_question]
+
+        self.now_state_tuple = self.attack_tuple
+
+        self.before_state_tuple = 0
 
         self.size = 0.7
 
+        self.rotate_point(self.want_move_vec_X,self.want_move_vec_Y,self.angle)
+
 
         pass
 
+    def rotate_point(self, x, y, angle_degrees):
+        # 각도를 라디안으로 변환
+        angle_radians = math.radians(angle_degrees)
+        # 회전 변환 공식 적용
+        self.want_move_vec_X = x * math.cos(angle_radians) - y * math.sin(angle_radians)
+        self.want_move_vec_X = x * math.sin(angle_radians) + y * math.cos(angle_radians)
+        return
 
     def in_put_resources(self):
-        # 리소스 기본상태
-        path = 'Resources/PotatoResource/player_item.png'  # main.py 기준임
-        if Boss_Blue_Player_Item.image is None:
-            Boss_Blue_Player_Item.image = load_image(path)
-        # 한 사진당
-        # 0 가로크기, 1 세로크기, 2 총 몇 프레임인지?, 3 가로 프레임 몇 개인지?, 4 세로 프레임 몇 개인지?, 5 마지막 줄 가로 프레임,
-        # 6 x값 어디서부터 시작하는지?, 7 y값 어디서부터 시작하는지?, 8 x값 얼마만큼 떨어지는지? , 9 y값 얼마만큼 떨어지는지?
-
-        # 여기에 이미지 관련 정보 set 함수 적기
-        # 보스 intro 모션
-        self.set_player_tiem_image()
-
-
-        # 보스 일반 공격 모션
-
-    def set_player_tiem_image(self):
-        
+        self.set_player_item_image()
         pass
+
+    def set_player_item_image(self):
+        if Boss_Blue_Player_Item.image is None:
+            Boss_Blue_Player_Item.image = []
+
+            path = 'Resources/Blue_Boss/Phase 1/Transition To Ph2/Question Marks/c_slime_question_mark_000'  # main.py 기준임
+
+            for a in range(1, 7 + 1):
+                finalPath = path + str(a) + '.png'
+                Boss_Blue_Player_Item.image.append(load_image(finalPath))
+
+        self.image_question = []
+        self.image_question = Boss_Blue_Player_Item.image
+        pass
+
 
     def boss_skill_state_update(self):
 
         pass
 
     def boss_skill_resource_state(self):
-        self.before_state_dict = self.now_state_dict
+        self.before_state_tuple = self.now_state_tuple
 
 
-        if self.before_state_dict == self.now_state_dict:
-            self.frame += 1 * self.now_state_dict['frame_speed'] * frametime.frame_time
-            self.row_frame = int(self.frame / self.now_state_dict['column_frame'])
+        if self.before_state_tuple == self.now_state_tuple:
+            self.frame += 1 * self.now_state_tuple[1] * frametime.frame_time
 
 
-            if self.frame >= self.now_state_dict['frame']:
+            if self.frame >= self.now_state_tuple[0]:
                 self.frame = 0
-                self.row_frame = 0
         else:
             self.boss_skill_state_update()
             print('in this')
@@ -90,8 +106,8 @@ class Boss_Blue_Player_Item:
 
         self.boss_skill_move()
 
-        self.rx =  self.now_state_dict['width'] * 0.5 * self.size
-        self.ry = self.now_state_dict['high'] * 0.5 * self.size
+        self.rx = self.now_state_tuple[2][int(self.frame)].w * 0.5 * self.size
+        self.ry = self.now_state_tuple[2][int(self.frame)].h * 0.5 * self.size
 
 
         pass
@@ -102,11 +118,15 @@ class Boss_Blue_Player_Item:
 
     def render(self):
 
-        self.image.clip_composite_draw(int(self.now_state_dict['left'] + (self.now_state_dict['go_right'] * int(int(self.frame) % self.now_state_dict['column_frame']))),
-                                       int(self.now_state_dict['bottom'] - (self.now_state_dict['go_down'] * self.row_frame)),
-                                       self.now_state_dict['width'],
-                                       self.now_state_dict['high'],0,'',self.CX,self.CY,
-                                       self.now_state_dict['width'] * self.size,self.now_state_dict['high'] * self.size)
+        self.now_state_tuple[2][int(self.frame)].clip_composite_draw(0, 0, self.now_state_tuple[2][int(self.frame)].w,
+                                                                     self.now_state_tuple[2][int(self.frame)].h,
+                                                                     radians(self.angle),
+                                                                     '',
+                                                                     self.CX - self.rx,
+                                                                     self.CY - self.ry,
+                                                                     self.rx * 2,
+                                                                     self.ry * 2
+                                                                     )
 
         pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
         pass
