@@ -358,9 +358,9 @@ class Boss_Blue_One_Phase:
                     self.now_state_tuple = self.All_State[next_state]
                     self.all_skill_num += 1
 
-                    #if self.all_skill_num is 4:
-                        #self.now_state_tuple = self.Question_player_item
-                        #self.all_skill_num = 0
+                    if self.all_skill_num is 8:
+                        self.now_state_tuple = self.Question_player_item
+                        self.all_skill_num = 0
                     #self.now_state_tuple = self.jump  # 일단은 반복
 
                 # 여기서 처음모션에서 아이들 모션으로 바꾸어 줌 # 인트로 때만 동작
