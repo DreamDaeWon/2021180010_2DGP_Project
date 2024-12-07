@@ -496,8 +496,8 @@ class CupheadBanging:
                                                                          self.now_state_tuple[2][
                                                                              int(self.frame)].h * self.Player_Size)
 
-        pico2d.draw_rectangle(self.get_collision_size()[0], self.get_collision_size()[1],
-                              self.get_collision_size()[2], self.get_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_collision_size()[0], self.get_collision_size()[1],
+         #                     self.get_collision_size()[2], self.get_collision_size()[3])
 
         pass
 
