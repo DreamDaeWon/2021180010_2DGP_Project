@@ -11,18 +11,27 @@ current_dir = os.path.dirname(os.path.abspath(__file__)) # 현재 파일의 한 
 parent_dir = os.path.dirname(current_dir) # 부모 디렉터리를 시스템 경로에 추가합니다
 sys.path.append(parent_dir) # 이제 'frametime' 모듈을 가져올 수 있습니다
 import frametime
+import object_manager
 
 
 class Boss_Blue_Player_Item:
     image = None
-    def __init__(self, angle):
+    def __init__(self, angle, dir):
 
         self.this_delete = False # 이 객체를 지워야 하는지?
 
         self.angle = angle
 
-        self.CX = 0.0
-        self.CY = 0.0
+        self.dir = dir
+
+        self.CX = 0
+        self.CY = object_manager.world[object_manager.boss_list_num][0].CY
+
+        self.moveX = 0
+
+        self.RealCX = object_manager.world[object_manager.boss_list_num][0].RealCX
+
+
 
         self.rx = 0.0
         self.ry = 0.0
@@ -41,7 +50,7 @@ class Boss_Blue_Player_Item:
         self.in_put_resources()
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
-        self.attack_tuple = [7,15,image_question]
+        self.attack_tuple = [7,15,self.image_question]
 
         self.now_state_tuple = self.attack_tuple
 
@@ -50,6 +59,7 @@ class Boss_Blue_Player_Item:
         self.size = 0.7
 
         self.rotate_point(self.want_move_vec_X,self.want_move_vec_Y,self.angle)
+
 
 
         pass
@@ -102,9 +112,15 @@ class Boss_Blue_Player_Item:
 
     def update(self):
 
+        self.moveX = object_manager.world[object_manager.back_ground_list_num][0].moveX
+
+
+
         self.boss_skill_resource_state()
 
         self.boss_skill_move()
+        self.CX = self.RealCX + self.moveX
+
 
         self.rx = self.now_state_tuple[2][int(self.frame)].w * 0.5 * self.size
         self.ry = self.now_state_tuple[2][int(self.frame)].h * 0.5 * self.size
@@ -138,7 +154,8 @@ class Boss_Blue_Player_Item:
         pass
 
     def boss_skill_move(self):
-        self.CX -= self.move_speed * frametime.frame_time
+        self.RealCX += self.move_speed * self.want_move_vec_X * frametime.frame_time * self.dir
+        self.CY += self.move_speed * self.want_move_vec_Y * frametime.frame_time
         pass
 
     def get_collision_size(self):

@@ -15,9 +15,9 @@ import random
 
 import math
 
-#from Game.BossPotato.boss_potato_skill import Boss_potato_skill
+from pygame.pypm import FALSE
 
-#from Game.BossPotato.boss_potato_skill_item import Boss_potato_skill_item
+from Game.Boss_Bule.boss_blue_player_item import Boss_Blue_Player_Item
 
 from Game.collision import World_collision, Collision
 
@@ -54,6 +54,9 @@ class Boss_Blue_One_Phase:
         self.Boss_Size = 1.0
 
         self.jump_up = 3.0
+
+
+        self.shoot_bool = False # 물음표 마크를 쐈는지?
 
 
         self.boss_blue_rx = 100.0
@@ -229,6 +232,19 @@ class Boss_Blue_One_Phase:
 
     def boss_move(self):
         self.boss_jump()
+        self.boss_shoot_skill()
+
+        pass
+
+    def boss_shoot_skill(self):
+        if self.now_state_tuple == self.Question_player_item and self.frame >= 34:
+            if self.shoot_bool is False:
+                self.shoot_skill()
+                self.shoot_bool = True
+
+        else:
+            self.shoot_bool = False
+
 
 
         pass
@@ -358,7 +374,7 @@ class Boss_Blue_One_Phase:
                     self.now_state_tuple = self.All_State[next_state]
                     self.all_skill_num += 1
 
-                    if self.all_skill_num is 8:
+                    if self.all_skill_num is 2:
                         self.now_state_tuple = self.Question_player_item
                         self.all_skill_num = 0
                     #self.now_state_tuple = self.jump  # 일단은 반복
@@ -400,14 +416,11 @@ class Boss_Blue_One_Phase:
                     object_manager.world[object_manager.player_list_num][0].hit_bool = True
                     print('good')
 
-    def skill_punch(self):
-        if Collision.box_collision(Collision, self.get_collision_size(),
-                                   object_manager.world[object_manager.player_list_num][
-                                       0].get_collision_size()) is True:
-            object_manager.world[object_manager.player_list_num][0].hit_bool = True
-            print('good')
         pass
 
+
     def shoot_skill(self):
+        for a in range(3):
+            object_manager.world[object_manager.player_skill_item_num].append(Boss_Blue_Player_Item(-45 + 45 * a,1 - a))
 
         pass
