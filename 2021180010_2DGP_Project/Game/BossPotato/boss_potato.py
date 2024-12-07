@@ -52,7 +52,7 @@ class Boss_Potato:
 
         self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
 
-        self.hp = 1
+        self.hp = 7
 
         self.hit_bool = False
 
