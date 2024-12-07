@@ -25,7 +25,7 @@ class Boss_Blue_Player_Item:
         self.dir = dir
 
         self.CX = 0
-        self.CY = object_manager.world[object_manager.boss_list_num][0].CY + object_manager.world[object_manager.boss_list_num][0].boss_blue_ry * 2
+        self.CY = object_manager.world[object_manager.boss_list_num][0].CY + object_manager.world[object_manager.boss_list_num][0].boss_blue_ry * 1
 
         self.moveX = 0
 
@@ -36,7 +36,7 @@ class Boss_Blue_Player_Item:
         self.rx = 0.0
         self.ry = 0.0
 
-        self.move_speed = 50.0
+        self.move_speed = 300.0
 
         self.frame = 0.0
 
