@@ -71,7 +71,7 @@ class Boss_Blue_One_Phase:
 
         self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
 
-        self.hp = 3
+        self.hp = 5
 
         self.hit_bool = False
 
@@ -336,8 +336,8 @@ class Boss_Blue_One_Phase:
                                                                              int(self.frame)].h * self.Boss_Size)
 
 
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
-        pico2d.draw_rectangle(self.get_punch_collision_size()[0],self.get_punch_collision_size()[1],self.get_punch_collision_size()[2],self.get_punch_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_punch_collision_size()[0],self.get_punch_collision_size()[1],self.get_punch_collision_size()[2],self.get_punch_collision_size()[3])
         pass
 
 
@@ -388,7 +388,7 @@ class Boss_Blue_One_Phase:
                     self.now_state_tuple = self.All_State[next_state]
                     self.all_skill_num += 1
 
-                    if self.all_skill_num is 2: # 몇 번 스킬을 사용하고 아이템 주는걸로 넘어갈 건지?
+                    if self.all_skill_num is 5: # 몇 번 스킬을 사용하고 아이템 주는걸로 넘어갈 건지?
                         self.now_state_tuple = self.Question_player_item
                         self.all_skill_num = 0
                     #self.now_state_tuple = self.jump  # 일단은 반복

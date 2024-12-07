@@ -69,7 +69,9 @@ class Boss_Blue_Two_Phase:
 
         self.frame_move = 1 # 프레임 진행방향 1 이면 그냥 재생, -1 이면 역재생
 
-        self.hp = 5
+        self.hp = 7
+
+        self.die_sound = load_music('Resources/music/sound_effect/cuphead-a-knockout-sound.mp3')
 
         self.hit_bool = False
 
@@ -252,6 +254,9 @@ class Boss_Blue_Two_Phase:
 
     def boss_hit(self):
         if self.hit_bool is True:
+            if self.hp == 1:
+                self.die_sound.set_volume(128)
+                self.die_sound.play(1)
             self.hp -= 1
             self.hit_bool = False
         pass
@@ -338,8 +343,8 @@ class Boss_Blue_Two_Phase:
                                                                              int(self.frame)].h * self.Boss_Size)
 
 
-        pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
-        pico2d.draw_rectangle(self.get_punch_collision_size()[0],self.get_punch_collision_size()[1],self.get_punch_collision_size()[2],self.get_punch_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_collision_size()[0],self.get_collision_size()[1],self.get_collision_size()[2],self.get_collision_size()[3])
+        #pico2d.draw_rectangle(self.get_punch_collision_size()[0],self.get_punch_collision_size()[1],self.get_punch_collision_size()[2],self.get_punch_collision_size()[3])
         pass
 
 

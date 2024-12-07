@@ -37,7 +37,7 @@ class Ui_Main_Title:
 
         self.bgm = load_music('Resources/music/Cuphead Opening Theme.mp3')
 
-        self.bgm.set_volume(100)
+        self.bgm.set_volume(75)
 
         self.bgm.repeat_play()
 

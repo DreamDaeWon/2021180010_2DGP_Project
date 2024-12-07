@@ -97,6 +97,7 @@ class Ui_Black_Circle:
     def key_input_down(self, Key):
         if Key == SDLK_r:
             if self.bRender_Restart_Message_UI:
+
                 stage_manager.change_stage(self.now_stage)
         pass
 

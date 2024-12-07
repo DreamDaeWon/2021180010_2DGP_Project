@@ -74,6 +74,10 @@ class Boss_Potato:
 
         self.player = object_manager.world[2][0]
 
+        self.die_sound = load_music('Resources/music/sound_effect/cuphead-a-knockout-sound.mp3')
+
+
+
 
         # 상태에 따른 딕셔너리
         self.Idle = []
@@ -207,6 +211,9 @@ class Boss_Potato:
 
         if self.hit_bool is True:
             if self.hp > 0:
+                if self.hp == 1:
+                    self.die_sound.set_volume(128)
+                    self.die_sound.play(1)
                 self.hp -= 1
             self.hit_bool = False
 

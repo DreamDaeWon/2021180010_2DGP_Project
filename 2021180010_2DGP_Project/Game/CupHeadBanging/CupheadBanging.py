@@ -70,6 +70,8 @@ class CupheadBanging:
 
         self.player_ry = 0.0
 
+        self.font = load_font('Resources/Font/cuphead_font_by_ripoof_dept3h3.ttf', 25)
+
         self.frame = 0.0
 
         self.skill_number = 0  # 스킬 개수
@@ -106,7 +108,7 @@ class CupheadBanging:
         self.skill_freeze_time = 0.0 # 2초동안 가만히
 
         # 체력
-        self.hp = 5
+        self.hp = 3
 
 
         # 각 상태에 대한 구조체 정의 [프레임 개수, 프레임 속도, 이미지 배열]
@@ -325,6 +327,7 @@ class CupheadBanging:
         # 죽었다면?
         if self.hp <= 0:
             self.now_state_tuple = self.die
+            World_collision.get_boss(None)
 
         if self.frame >= self.now_state_tuple[0]:
             self.frame = 0.0
@@ -496,6 +499,8 @@ class CupheadBanging:
                                                                          self.now_state_tuple[2][
                                                                              int(self.frame)].h * self.Player_Size)
 
+
+        self.font.draw(int(25),int(30), f'HP     {self.hp}', (255, 0,0))
         #pico2d.draw_rectangle(self.get_collision_size()[0], self.get_collision_size()[1],
          #                     self.get_collision_size()[2], self.get_collision_size()[3])
 

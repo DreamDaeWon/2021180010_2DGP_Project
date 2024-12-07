@@ -29,7 +29,7 @@ class Back_Ground_Forest:
 
         self.bgm = load_music('Resources/music/blue_boss.mp3')
 
-        self.bgm.set_volume(35)
+        self.bgm.set_volume(25)
 
         self.bgm.repeat_play()
 
