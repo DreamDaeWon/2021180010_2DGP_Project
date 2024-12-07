@@ -299,7 +299,7 @@ class Boss_Blue_One_Phase:
 
     def late_update(self):
         World_collision.boss_blue_collision()
-        #World_collision.player_skill_collision()
+        World_collision.player_skill_collision()
         self.skill_punch()
         pass
 
@@ -360,7 +360,7 @@ class Boss_Blue_One_Phase:
             if self.frame >= self.now_state_tuple[0]:
                 if self.now_state_tuple == self.Die:
                     self.this_delete = True
-                elif self.now_state_tuple == self.Question_player_item:
+                elif self.now_state_tuple == self.Question_player_item and len(object_manager.world[object_manager.player_skill_item_num]) > 2:
                     self.frame = 35
                 elif self.now_state_tuple == self.jump and self.jumping:
                     self.frame = 18
@@ -374,7 +374,7 @@ class Boss_Blue_One_Phase:
                     self.now_state_tuple = self.All_State[next_state]
                     self.all_skill_num += 1
 
-                    if self.all_skill_num is 2:
+                    if self.all_skill_num is 2: # 몇 번 스킬을 사용하고 아이템 주는걸로 넘어갈 건지?
                         self.now_state_tuple = self.Question_player_item
                         self.all_skill_num = 0
                     #self.now_state_tuple = self.jump  # 일단은 반복

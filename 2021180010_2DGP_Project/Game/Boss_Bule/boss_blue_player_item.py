@@ -25,18 +25,18 @@ class Boss_Blue_Player_Item:
         self.dir = dir
 
         self.CX = 0
-        self.CY = object_manager.world[object_manager.boss_list_num][0].CY
+        self.CY = object_manager.world[object_manager.boss_list_num][0].CY + object_manager.world[object_manager.boss_list_num][0].boss_blue_ry * 2
 
         self.moveX = 0
 
-        self.RealCX = object_manager.world[object_manager.boss_list_num][0].RealCX
+        self.RealCX = object_manager.world[object_manager.boss_list_num][0].RealCX - object_manager.world[object_manager.boss_list_num][0].boss_blue_rx
 
 
 
         self.rx = 0.0
         self.ry = 0.0
 
-        self.move_speed = 500.0
+        self.move_speed = 50.0
 
         self.frame = 0.0
 
@@ -160,4 +160,4 @@ class Boss_Blue_Player_Item:
 
     def get_collision_size(self):
         # left, top ,right, bottom
-        return self.CX - self.rx, self.CY + self.ry, self.CX + self.rx, self.CY - self.ry
+        return self.CX - self.rx * 2, self.CY, self.CX, self.CY - self.ry * 2

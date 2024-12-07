@@ -75,7 +75,7 @@ class Collision:
 
         if self.boss != None:
             if self.box_collision(self.player.get_collision_size(),self.boss.get_collision_size()):
-                if not self.player.normal_attaking and self.boss.shoot == True:
+                if not self.player.normal_attaking:
                     self.player.hit_bool = True
 
 

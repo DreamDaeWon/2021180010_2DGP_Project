@@ -409,6 +409,7 @@ class CupheadBanging:
             if self.now_stage is 1 and len(object_manager.world[1]) == 0:
                 object_manager.world[1].append(Boss_Potato())
                 World_collision.get_boss(object_manager.world[1][0])
+
             elif self.now_stage is 2 and len(object_manager.world[1]) == 0:
                 object_manager.world[1].append(Boss_Blue_One_Phase())
                 World_collision.get_boss(object_manager.world[1][0])
