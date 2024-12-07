@@ -353,7 +353,7 @@ class Boss_Blue_Two_Phase:
     def key_input_down(self, Key):
         if Key == SDLK_RETURN:
             if self.hp <= 0:
-                stage_manager.change_stage(2)
+                stage_manager.change_stage(3)
         pass
 
     def key_input_up(self, Key):
