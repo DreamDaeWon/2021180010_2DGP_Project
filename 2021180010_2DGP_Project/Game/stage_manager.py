@@ -4,6 +4,7 @@ from Game.UI.back_ground_Farm import Back_Ground_Farm
 from Game.UI.back_ground_forest import Back_Ground_Forest
 from Game.collision import World_collision
 from Game.UI.Title.ui_main_title import Ui_Main_Title
+from Game.UI.end_player import UI_End
 
 
 
@@ -27,6 +28,10 @@ def change_stage(want_level_num):
         object_manager.world[object_manager.back_ground_list_num].append(Back_Ground_Forest())
         object_manager.world[2].append(CupheadBanging(2))
         World_collision.get_player(object_manager.world[2][0])
+        pass
+
+    if want_level_num == 3:
+        object_manager.world[object_manager.back_ground_list_num].append(UI_End())
         pass
 
     pass
